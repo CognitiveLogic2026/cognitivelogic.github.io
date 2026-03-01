@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QEN Report — CognitiveLogic</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:      #0D2240;
+    --navy-mid:  #1B3A6B;
+    --gold:      #C9A84C;
+    --gold-pale: #F5EDD6;
+    --gold-dim:  rgba(201,168,76,0.15);
+    --teal:      #2E86AB;
+    --teal-light:#D6EEF7;
+    --white:     #FAFAF8;
+    --offwhite:  #F2EFE9;
+    --grey:      #8899AA;
+    --text:      #1A202C;
+    --green:     #276749;
+    --amber:     #92620A;
+    --red:       #C53030;
+  }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+background: var(–navy);
+color: var(–white);
+font-family: ‘Instrument Sans’, sans-serif;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.04’/%3E%3C/svg%3E”);
+pointer-events: none;
+z-index: 0;
+opacity: 0.4;
+}
+
+/* ── UPLOAD SCREEN */
+#upload-screen {
+position: fixed;
+inset: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+z-index: 100;
+background: var(–navy);
+transition: opacity 0.8s ease, transform 0.8s ease;
+}
+#upload-screen.hidden {
+opacity: 0;
+transform: translateY(-20px);
+pointer-events: none;
+}
+
+.upload-logo {
+font-family: ‘DM Mono’, monospace;
+font-size: 10px;
+letter-spacing: 0.3em;
+color: var(–gold);
+text-transform: uppercase;
+margin-bottom: 48px;
+opacity: 0;
+animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.upload-title {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: clamp(36px, 6vw, 72px);
+font-weight: 300;
+line-height: 1.1;
+text-align: center;
+margin-bottom: 16px;
+opacity: 0;
+animation: fadeUp 0.8s 0.4s forwards;
+}
+.upload-title em {
+color: var(–gold);
+font-style: italic;
+}
+
+.upload-sub {
+font-family: ‘Instrument Sans’, sans-serif;
+font-size: 14px;
+color: var(–grey);
+text-align: center;
+margin-bottom: 56px;
+opacity: 0;
+animation: fadeUp 0.8s 0.6s forwards;
+}
+
+.drop-zone {
+width: min(480px, 90vw);
+border: 1px solid rgba(201,168,76,0.3);
+border-radius: 2px;
+padding: 48px 32px;
+text-align: center;
+cursor: pointer;
+position: relative;
+transition: border-color 0.3s, background 0.3s;
+opacity: 0;
+animation: fadeUp 0.8s 0.8s forwards;
+}
+.drop-zone::before {
+content: ‘’;
+position: absolute;
+inset: 6px;
+border: 1px solid rgba(201,168,76,0.1);
+border-radius: 1px;
+pointer-events: none;
+}
+.drop-zone:hover, .drop-zone.drag-over {
+border-color: var(–gold);
+background: var(–gold-dim);
+}
+
+.drop-icon {
+font-size: 32px;
+margin-bottom: 16px;
+display: block;
+}
+
+.drop-text {
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+letter-spacing: 0.15em;
+color: var(–gold);
+text-transform: uppercase;
+margin-bottom: 8px;
+}
+
+.drop-sub {
+font-size: 12px;
+color: var(–grey);
+}
+
+#file-input { display: none; }
+
+.demo-btn {
+margin-top: 24px;
+font-family: ‘DM Mono’, monospace;
+font-size: 10px;
+letter-spacing: 0.2em;
+color: var(–grey);
+text-transform: uppercase;
+background: none;
+border: none;
+cursor: pointer;
+text-decoration: underline;
+text-underline-offset: 3px;
+opacity: 0;
+animation: fadeUp 0.8s 1s forwards;
+transition: color 0.2s;
+}
+.demo-btn:hover { color: var(–gold); }
+
+/* ── MAIN DASHBOARD */
+#dashboard {
+display: none;
+position: relative;
+z-index: 1;
+min-height: 100vh;
+}
+#dashboard.visible { display: block; }
+
+/* ── HEADER */
+.header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 20px 48px;
+border-bottom: 1px solid rgba(201,168,76,0.2);
+position: sticky;
+top: 0;
+background: rgba(13,34,64,0.95);
+backdrop-filter: blur(12px);
+z-index: 50;
+}
+
+.header-brand {
+font-family: ‘DM Mono’, monospace;
+font-size: 10px;
+letter-spacing: 0.3em;
+color: var(–gold);
+text-transform: uppercase;
+}
+
+.header-cliente {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 16px;
+font-weight: 400;
+color: var(–white);
+opacity: 0.7;
+}
+
+.header-data {
+font-family: ‘DM Mono’, monospace;
+font-size: 10px;
+color: var(–grey);
+letter-spacing: 0.1em;
+}
+
+/* ── HERO SCORE */
+.hero {
+display: grid;
+grid-template-columns: 1fr 1fr;
+min-height: 80vh;
+align-items: center;
+padding: 80px 48px;
+gap: 80px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.hero-left {
+opacity: 0;
+animation: fadeUp 1s 0.3s forwards;
+}
+
+.hero-eyebrow {
+font-family: ‘DM Mono’, monospace;
+font-size: 10px;
+letter-spacing: 0.3em;
+color: var(–gold);
+text-transform: uppercase;
+margin-bottom: 24px;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.hero-eyebrow::before {
+content: ‘’;
+display: block;
+width: 32px;
+height: 1px;
+background: var(–gold);
+}
+
+.hero-cliente {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: clamp(28px, 4vw, 48px);
+font-weight: 300;
+line-height: 1.15;
+margin-bottom: 8px;
+}
+
+.hero-indirizzo {
+font-size: 13px;
+color: var(–grey);
+margin-bottom: 40px;
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+letter-spacing: 0.05em;
+}
+
+.tier-badge {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+padding: 10px 20px;
+border: 1px solid var(–gold);
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+letter-spacing: 0.2em;
+color: var(–gold);
+text-transform: uppercase;
+margin-bottom: 40px;
+}
+
+.hero-desc {
+font-size: 14px;
+line-height: 1.7;
+color: rgba(250,250,248,0.7);
+max-width: 440px;
+}
+
+/* ── SCORE CIRCLE */
+.hero-right {
+display: flex;
+justify-content: center;
+opacity: 0;
+animation: fadeUp 1s 0.5s forwards;
+}
+
+.score-circle-wrap {
+position: relative;
+width: 320px;
+height: 320px;
+}
+
+.score-svg {
+width: 100%;
+height: 100%;
+transform: rotate(-90deg);
+}
+
+.score-track {
+fill: none;
+stroke: rgba(201,168,76,0.1);
+stroke-width: 3;
+}
+
+.score-arc {
+fill: none;
+stroke: var(–gold);
+stroke-width: 3;
+stroke-linecap: round;
+stroke-dasharray: 754;
+stroke-dashoffset: 754;
+transition: stroke-dashoffset 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.score-center {
+position: absolute;
+inset: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.score-number {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 88px;
+font-weight: 300;
+line-height: 1;
+color: var(–white);
+}
+
+.score-denom {
+font-family: ‘DM Mono’, monospace;
+font-size: 12px;
+color: var(–grey);
+letter-spacing: 0.1em;
+}
+
+/* ── VECTORS ROW */
+.vectors {
+padding: 0 48px 80px;
+max-width: 1200px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 20px;
+}
+
+.vector-card {
+border: 1px solid rgba(201,168,76,0.15);
+padding: 32px;
+position: relative;
+overflow: hidden;
+opacity: 0;
+transform: translateY(20px);
+transition: border-color 0.3s;
+}
+.vector-card:hover { border-color: rgba(201,168,76,0.4); }
+.vector-card::after {
+content: ‘’;
+position: absolute;
+bottom: 0; left: 0; right: 0;
+height: 2px;
+background: var(–gold);
+transform: scaleX(0);
+transform-origin: left;
+transition: transform 0.5s ease;
+}
+.vector-card:hover::after { transform: scaleX(1); }
+
+.vector-label {
+font-family: ‘DM Mono’, monospace;
+font-size: 9px;
+letter-spacing: 0.3em;
+color: var(–gold);
+text-transform: uppercase;
+margin-bottom: 8px;
+}
+
+.vector-name {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 22px;
+font-weight: 300;
+margin-bottom: 4px;
+}
+
+.vector-name-en {
+font-size: 11px;
+color: var(–grey);
+font-style: italic;
+margin-bottom: 24px;
+}
+
+.vector-score-row {
+display: flex;
+align-items: baseline;
+gap: 6px;
+margin-bottom: 16px;
+}
+
+.vector-score-big {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 52px;
+font-weight: 300;
+line-height: 1;
+}
+
+.vector-score-denom {
+font-family: ‘DM Mono’, monospace;
+font-size: 12px;
+color: var(–grey);
+}
+
+.vector-bar-bg {
+height: 3px;
+background: rgba(255,255,255,0.08);
+border-radius: 2px;
+overflow: hidden;
+margin-bottom: 8px;
+}
+
+.vector-bar-fill {
+height: 100%;
+background: var(–gold);
+border-radius: 2px;
+width: 0%;
+transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vector-peso {
+font-family: ‘DM Mono’, monospace;
+font-size: 10px;
+color: var(–grey);
+letter-spacing: 0.1em;
+}
+
+/* ── DIVIDER */
+.section-divider {
+padding: 0 48px;
+max-width: 1200px;
+margin: 0 auto 60px;
+}
+.section-divider-line {
+height: 1px;
+background: linear-gradient(90deg, var(–gold) 0%, rgba(201,168,76,0.1) 100%);
+}
+.section-divider-label {
+font-family: ‘DM Mono’, monospace;
+font-size: 9px;
+letter-spacing: 0.3em;
+color: var(–gold);
+text-transform: uppercase;
+margin-top: 12px;
+}
+
+/* ── INDICATORI */
+.indicatori {
+padding: 0 48px 80px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.indicatori-title {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 36px;
+font-weight: 300;
+margin-bottom: 8px;
+}
+.indicatori-sub {
+font-size: 13px;
+color: var(–grey);
+margin-bottom: 48px;
+font-style: italic;
+}
+
+.indicatori-grid {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: 12px;
+}
+
+.ind-card {
+background: rgba(255,255,255,0.02);
+border: 1px solid rgba(255,255,255,0.06);
+padding: 24px;
+position: relative;
+opacity: 0;
+transform: translateY(16px);
+}
+
+.ind-vector-tag {
+font-family: ‘DM Mono’, monospace;
+font-size: 8px;
+letter-spacing: 0.2em;
+padding: 3px 8px;
+margin-bottom: 16px;
+display: inline-block;
+}
+
+.ind-name {
+font-size: 13px;
+font-weight: 500;
+margin-bottom: 4px;
+}
+.ind-name-en {
+font-size: 11px;
+color: var(–grey);
+font-style: italic;
+margin-bottom: 20px;
+}
+
+.ind-dato {
+font-family: ‘DM Mono’, monospace;
+font-size: 10px;
+color: rgba(250,250,248,0.6);
+margin-bottom: 16px;
+line-height: 1.5;
+}
+
+.ind-score-row {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 8px;
+}
+
+.ind-pts {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 28px;
+font-weight: 300;
+}
+
+.ind-status {
+font-family: ‘DM Mono’, monospace;
+font-size: 9px;
+letter-spacing: 0.15em;
+padding: 4px 10px;
+text-transform: uppercase;
+}
+
+.ind-bar-bg {
+height: 2px;
+background: rgba(255,255,255,0.06);
+border-radius: 1px;
+overflow: hidden;
+}
+.ind-bar-fill {
+height: 100%;
+border-radius: 1px;
+width: 0%;
+transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── MIGLIORAMENTI */
+.miglioramenti {
+padding: 0 48px 80px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.mgl-title {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 36px;
+font-weight: 300;
+margin-bottom: 8px;
+}
+.mgl-sub {
+font-size: 13px;
+color: var(–grey);
+font-style: italic;
+margin-bottom: 40px;
+}
+
+.mgl-table {
+width: 100%;
+border-collapse: collapse;
+}
+.mgl-table th {
+font-family: ‘DM Mono’, monospace;
+font-size: 9px;
+letter-spacing: 0.2em;
+color: var(–gold);
+text-transform: uppercase;
+text-align: left;
+padding: 12px 16px;
+border-bottom: 1px solid rgba(201,168,76,0.3);
+}
+.mgl-table td {
+padding: 20px 16px;
+font-size: 13px;
+border-bottom: 1px solid rgba(255,255,255,0.05);
+vertical-align: top;
+}
+.mgl-table tr:hover td { background: rgba(201,168,76,0.04); }
+
+.mgl-area {
+font-weight: 500;
+line-height: 1.4;
+}
+.mgl-area-en {
+font-size: 11px;
+color: var(–grey);
+font-style: italic;
+}
+.mgl-attuale {
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+color: var(–grey);
+}
+.mgl-target {
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+color: var(–white);
+}
+.mgl-impatto {
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+color: #68D391;
+font-weight: 500;
+}
+
+/* ── CVO NOTE */
+.cvo-section {
+padding: 0 48px 80px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.cvo-box {
+border: 1px solid rgba(201,168,76,0.3);
+border-left: 4px solid var(–gold);
+padding: 48px;
+position: relative;
+background: rgba(201,168,76,0.03);
+}
+
+.cvo-eyebrow {
+font-family: ‘DM Mono’, monospace;
+font-size: 9px;
+letter-spacing: 0.3em;
+color: var(–gold);
+text-transform: uppercase;
+margin-bottom: 32px;
+}
+
+.cvo-text {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 20px;
+font-weight: 300;
+line-height: 1.7;
+color: var(–white);
+margin-bottom: 40px;
+font-style: italic;
+}
+
+.cvo-firma {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding-top: 24px;
+border-top: 1px solid rgba(201,168,76,0.2);
+}
+
+.cvo-nome {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 18px;
+font-weight: 600;
+margin-bottom: 4px;
+}
+.cvo-titolo {
+font-size: 12px;
+color: var(–grey);
+}
+.cvo-data {
+font-family: ‘DM Mono’, monospace;
+font-size: 11px;
+color: var(–grey);
+}
+
+/* ── DISCLAIMER */
+.disclaimer {
+padding: 40px 48px;
+border-top: 1px solid rgba(255,255,255,0.06);
+max-width: 1200px;
+margin: 0 auto;
+font-family: ‘DM Mono’, monospace;
+font-size: 10px;
+color: var(–grey);
+line-height: 1.6;
+letter-spacing: 0.02em;
+}
+
+.footer {
+text-align: center;
+padding: 24px 48px 40px;
+font-family: ‘DM Mono’, monospace;
+font-size: 10px;
+color: rgba(136,153,170,0.5);
+letter-spacing: 0.1em;
+}
+
+/* ── ANIMATIONS */
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(20px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+animation: fadeUp 0.7s forwards;
+}
+
+/* ── STATUS COLORS */
+.status-eccellente { color: var(–gold); background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); }
+.status-conforme   { color: var(–teal); background: rgba(46,134,171,0.1); border: 1px solid rgba(46,134,171,0.3); }
+.status-parziale   { color: var(–amber); background: rgba(146,98,10,0.1); border: 1px solid rgba(146,98,10,0.3); }
+.status-migliorare { color: var(–red); background: rgba(197,48,48,0.1); border: 1px solid rgba(197,48,48,0.3); }
+
+.tag-vs { color: #68D391; background: rgba(104,211,145,0.1); border: 1px solid rgba(104,211,145,0.25); }
+.tag-va { color: var(–teal); background: rgba(46,134,171,0.1); border: 1px solid rgba(46,134,171,0.25); }
+.tag-vt { color: #F6AD55; background: rgba(246,173,85,0.1); border: 1px solid rgba(246,173,85,0.25); }
+
+@media (max-width: 900px) {
+.hero { grid-template-columns: 1fr; gap: 40px; padding: 40px 24px; }
+.vectors { grid-template-columns: 1fr; padding: 0 24px 40px; }
+.indicatori-grid { grid-template-columns: 1fr; }
+.header { padding: 16px 24px; }
+.indicatori, .miglioramenti, .cvo-section { padding: 0 24px 60px; }
+.hero-right { display: none; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- UPLOAD SCREEN -->
+
+<div id="upload-screen">
+  <div class="upload-logo">CognitiveLogic — QEN Framework</div>
+  <h1 class="upload-title">Quantificazione<br>dell'<em>Etica Naturale</em></h1>
+  <p class="upload-sub">Carica il file Excel QEN compilato per visualizzare il report</p>
+  <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
+    <span class="drop-icon">⬡</span>
+    <div class="drop-text">Trascina qui il file Excel</div>
+    <div class="drop-sub">oppure clicca per selezionare · .xlsx</div>
+    <input type="file" id="file-input" accept=".xlsx">
+  </div>
+  <button class="demo-btn" onclick="loadDemo()">Carica dati demo →</button>
+</div>
+
+<!-- DASHBOARD -->
+
+<div id="dashboard">
+  <header class="header">
+    <div class="header-brand">CognitiveLogic · QEN v1.0</div>
+    <div class="header-cliente" id="h-cliente"></div>
+    <div class="header-data" id="h-data"></div>
+  </header>
+
+  <!-- HERO -->
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Report QEN · Natural Ethics Quantification</div>
+      <h2 class="hero-cliente" id="hero-cliente"></h2>
+      <p class="hero-indirizzo" id="hero-indirizzo"></p>
+      <div class="tier-badge" id="tier-badge"></div>
+      <p class="hero-desc" id="hero-desc"></p>
+    </div>
+    <div class="hero-right">
+      <div class="score-circle-wrap">
+        <svg class="score-svg" viewBox="0 0 240 240">
+          <circle class="score-track" cx="120" cy="120" r="110"/>
+          <circle class="score-arc" cx="120" cy="120" r="110" id="score-arc"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-number" id="score-number">0</div>
+          <div class="score-denom">/ 100</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VECTORS -->
+
+  <section class="vectors" id="vectors-row"></section>
+
+  <!-- DIVIDER -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <div class="section-divider-label">Analisi degli Indicatori · Detailed Indicator Analysis</div>
+  </div>
+
+  <!-- INDICATORI -->
+
+  <section class="indicatori">
+    <h3 class="indicatori-title">Indicatori di Performance</h3>
+    <p class="indicatori-sub">Performance Indicators — tutti i 9 parametri documentati</p>
+    <div class="indicatori-grid" id="indicatori-grid"></div>
+  </section>
+
+  <!-- DIVIDER -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <div class="section-divider-label">Aree di Miglioramento · Priority Improvement Areas</div>
+  </div>
+
+  <!-- MIGLIORAMENTI -->
+
+  <section class="miglioramenti">
+    <h3 class="mgl-title">Percorso di Miglioramento</h3>
+    <p class="mgl-sub">Improvement Roadmap — leve prioritarie per il prossimo rating</p>
+    <table class="mgl-table">
+      <thead>
+        <tr>
+          <th>Area</th>
+          <th>Attuale</th>
+          <th>Target</th>
+          <th>Impatto QEN</th>
+        </tr>
+      </thead>
+      <tbody id="mgl-tbody"></tbody>
+    </table>
+  </section>
+
+  <!-- DIVIDER -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <div class="section-divider-label">Nota CVO · Chief Visionary Officer Note</div>
+  </div>
+
+  <!-- CVO NOTE -->
+
+  <section class="cvo-section">
+    <div class="cvo-box">
+      <div class="cvo-eyebrow">Valutazione Qualitativa · Qualitative Assessment</div>
+      <div class="cvo-text" id="cvo-text"></div>
+      <div class="cvo-firma">
+        <div>
+          <div class="cvo-nome">Roberto Bob Malini</div>
+          <div class="cvo-titolo">Chief Visionary Officer — CognitiveLogic</div>
+        </div>
+        <div class="cvo-data" id="cvo-data"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+
+  <div class="disclaimer">
+    Il QEN Score è calcolato tramite il framework proprietario QEN v1.0 (CognitiveLogic). Non costituisce certificazione legale accreditata da enti terzi (ISO, Accredia o equivalenti). I punteggi si basano sui dati forniti dall'impresa, verificabili attraverso documentazione allegata. Il report supporta la conformità alla Direttiva Green Claim ma non la garantisce in modo autonomo — si raccomanda affiancamento con consulenza legale per utilizzi in comunicazioni esterne. | The QEN Score is calculated using the proprietary QEN v1.0 framework. It does not constitute legal certification accredited by third-party bodies. Scores are based on company-provided data. Legal advice is recommended for use in external communications. All rights reserved CognitiveLogic © 2026.
+  </div>
+  <div class="footer">CognitiveLogic · info@cognitivelogic.it · www.cognitivelogic.it · QEN © 2026</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script>
+// ── SCORING
+const THRESHOLDS = {
+  vs1: [[1,0],[6,25],[16,60],[null,100]],
+  vs2: [[50,0],[71,40],[86,75],[null,100]],
+  vs3: [[1,0],[9,30],[21,70],[null,100]],
+  va1: [[1,0],[26,25],[61,60],[null,100]],
+  va2: [[1,0],[31,30],[61,65],[null,100]],
+  va3: [[1,0],[31,30],[71,65],[null,100]],
+  vt1: [[1,0],[21,25],[51,60],[null,100]],
+  vt2: [[1,0],[3,30],[6,70],[null,100]],
+  vt3: [[1,0],[2,40],[3,70],[null,100]],
+};
+
+function score(key, value) {
+  if (value === null || value === undefined) return 0;
+  for (const [thr, pts] of THRESHOLDS[key]) {
+    if (thr === null || value < thr) return pts;
+  }
+  return 0;
+}
+
+function getStatus(pts) {
+  if (pts >= 75) return { label: 'ECCELLENTE', cls: 'status-eccellente', color: '#C9A84C', bar: '#C9A84C' };
+  if (pts >= 50) return { label: 'CONFORME',   cls: 'status-conforme',   color: '#2E86AB', bar: '#2E86AB' };
+  if (pts >= 25) return { label: 'PARZIALE',   cls: 'status-parziale',   color: '#92620A', bar: '#F6AD55' };
+  return           { label: 'DA MIGLIORARE', cls: 'status-migliorare', color: '#C53030', bar: '#FC8181' };
+}
+
+function getTier(s) {
+  if (s >= 75) return { label: '🥇 ORO / GOLD',      sub: 'Impresa eccellente: modello di riferimento per il settore' };
+  if (s >= 50) return { label: '🥈 ARGENTO / SILVER', sub: 'Impresa con solida base etica e impatto verificabile' };
+  if (s >= 25) return { label: '🥉 BRONZO / BRONZE',  sub: 'Impresa con comportamenti etici parziali e documentati' };
+  return               { label: '⬜ BASE',             sub: 'Impresa in fase iniziale di transizione etica' };
+}
+
+// ── DEMO DATA
+function loadDemo() {
+  const data = {
+    cliente: 'Osteria della Piazza',
+    indirizzo: 'Via Indipendenza 12, Bologna',
+    piva: 'IT01234567890',
+    referente: 'Mario Rossi',
+    data: 'Marzo 2026',
+    nota_cvo: 'Osteria della Piazza rappresenta un esempio virtuoso nel panorama della ristorazione bolognese. La scelta di adottare cargo-bike per il 70% delle consegne è un impegno concreto e misurabile, che va ben oltre la retorica del green marketing. Il percorso verso la fascia Oro è credibile e raggiungibile entro il prossimo ciclo annuale.',
+    vs1: 8, vs2: 82, vs3: 12,
+    va1: 70, va2: 45, va3: 40,
+    vt1: 35, vt2: 4, vt3: 3,
+  };
+  renderDashboard(data);
+}
+
+// ── PARSE EXCEL
+function parseExcel(buffer) {
+  const wb = XLSX.read(buffer, { type: 'array' });
+  const ws = wb.Sheets['📋 INPUT CLIENTE'];
+  if (!ws) { alert('Foglio "📋 INPUT CLIENTE" non trovato.'); return null; }
+
+  const g = (r, c) => {
+    const cell = ws[XLSX.utils.encode_cell({r: r-1, c: c-1})];
+    if (!cell) return null;
+    const v = cell.v;
+    if (v === null || v === undefined || v === '') return null;
+    return v;
+  };
+
+  const num = (r, c) => {
+    const v = g(r, c);
+    if (v === null) return null;
+    const n = parseFloat(v);
+    return isNaN(n) ? null : n;
+  };
+
+  return {
+    cliente:   g(6,3)  || '[NOME CLIENTE]',
+    indirizzo: g(7,3)  || '',
+    piva:      g(8,3)  || '',
+    referente: g(9,3)  || '',
+    data:      g(10,3) || '2026',
+    nota_cvo:  g(33,2) || '',
+    vs1: num(15,3), vs2: num(16,3), vs3: num(17,3),
+    va1: num(21,3), va2: num(22,3), va3: num(23,3),
+    vt1: num(27,3), vt2: num(28,3), vt3: num(29,3),
+  };
+}
+
+// ── RENDER
+function renderDashboard(d) {
+  // Calcola punteggi
+  const pts = {};
+  ['vs1','vs2','vs3','va1','va2','va3','vt1','vt2','vt3'].forEach(k => {
+    pts[k] = score(k, d[k]);
+  });
+  const vsAvg = Math.round((pts.vs1 + pts.vs2 + pts.vs3) / 3);
+  const vaAvg = Math.round((pts.va1 + pts.va2 + pts.va3) / 3);
+  const vtAvg = Math.round((pts.vt1 + pts.vt2 + pts.vt3) / 3);
+  const qen   = Math.round(vaAvg*0.35 + vsAvg*0.40 + vtAvg*0.25);
+  const tier  = getTier(qen);
+
+  // Header
+  document.getElementById('h-cliente').textContent = d.cliente;
+  document.getElementById('h-data').textContent = d.data || '2026';
+
+  // Hero
+  document.getElementById('hero-cliente').textContent = d.cliente;
+  document.getElementById('hero-indirizzo').textContent = d.indirizzo;
+  document.getElementById('tier-badge').textContent = tier.label;
+  document.getElementById('hero-desc').textContent = tier.sub + ` — QEN Score ${qen}/100 · Validità 12 mesi · Framework QEN v1.0`;
+
+  // Circle
+  setTimeout(() => {
+    const arc = document.getElementById('score-arc');
+    const circumference = 2 * Math.PI * 110;
+    const offset = circumference * (1 - qen/100);
+    arc.style.strokeDashoffset = offset;
+    animateNumber(document.getElementById('score-number'), 0, qen, 2000);
+  }, 400);
+
+  // Vectors
+  const vdata = [
+    { key: 'V_s', name: 'Vettore Sociale', en: 'Social Vector', avg: vsAvg, peso: '40%' },
+    { key: 'V_a', name: 'Vettore Ambientale', en: 'Environmental Vector', avg: vaAvg, peso: '35%' },
+    { key: 'V_t', name: 'Vettore Territoriale', en: 'Territorial Vector', avg: vtAvg, peso: '25%' },
+  ];
+  const vrow = document.getElementById('vectors-row');
+  vrow.innerHTML = vdata.map((v, i) => `
+    <div class="vector-card" style="animation-delay:${0.2+i*0.15}s">
+      <div class="vector-label">${v.key} · ${v.peso}</div>
+      <div class="vector-name">${v.name}</div>
+      <div class="vector-name-en">${v.en}</div>
+      <div class="vector-score-row">
+        <div class="vector-score-big">${v.avg}</div>
+        <div class="vector-score-denom">/100</div>
+      </div>
+      <div class="vector-bar-bg">
+        <div class="vector-bar-fill" data-pct="${v.avg}" style="background:var(--gold)"></div>
+      </div>
+      <div class="vector-peso">Peso nel QEN Score: ${v.peso}</div>
+    </div>
+  `).join('');
+
+  // Indicatori
+  const indData = [
+    { vkey:'vs1', vtag:'tag-vs', vlabel:'V_s',
+      name:'Inclusione lavorativa', en:'Labour inclusion',
+      dato: `${d.vs1 ?? '—'}% personale categorie fragili`, pt: pts.vs1 },
+    { vkey:'vs2', vtag:'tag-vs', vlabel:'V_s',
+      name:'Stabilità del lavoro', en:'Employment stability',
+      dato: `Retention 12 mesi: ${d.vs2 ?? '—'}%`, pt: pts.vs2 },
+    { vkey:'vs3', vtag:'tag-vs', vlabel:'V_s',
+      name:'Formazione continua', en:'Ongoing training',
+      dato: `${d.vs3 ?? '—'} ore/dipendente/anno`, pt: pts.vs3 },
+    { vkey:'va1', vtag:'tag-va', vlabel:'V_a',
+      name:'Logistica zero emissioni', en:'Zero-emission logistics',
+      dato: `${d.va1 ?? '—'}% consegne cargo-bike / EV`, pt: pts.va1 },
+    { vkey:'va2', vtag:'tag-va', vlabel:'V_a',
+      name:'Gestione scarti alimentari', en:'Food waste management',
+      dato: `${d.va2 ?? '—'}% scarti a recupero`, pt: pts.va2 },
+    { vkey:'va3', vtag:'tag-va', vlabel:'V_a',
+      name:'Energia rinnovabile', en:'Renewable energy',
+      dato: `${d.va3 ?? '—'}% da fonti rinnovabili`, pt: pts.va3 },
+    { vkey:'vt1', vtag:'tag-vt', vlabel:'V_t',
+      name:'Approvvigionamento locale', en:'Local sourcing',
+      dato: `${d.vt1 ?? '—'}% spesa entro 50 km`, pt: pts.vt1 },
+    { vkey:'vt2', vtag:'tag-vt', vlabel:'V_t',
+      name:'Integrazione rete locale', en:'Local network',
+      dato: `${d.vt2 ?? '—'} fornitori certificati`, pt: pts.vt2 },
+    { vkey:'vt3', vtag:'tag-vt', vlabel:'V_t',
+      name:'Radicamento culturale', en:'Cultural embeddedness',
+      dato: `${d.vt3 ?? '—'} elementi patrimonio locale`, pt: pts.vt3 },
+  ];
+
+  const grid = document.getElementById('indicatori-grid');
+  grid.innerHTML = indData.map((ind, i) => {
+    const st = getStatus(ind.pt);
+    return `
+      <div class="ind-card" style="animation-delay:${i*0.07}s">
+        <div class="ind-vector-tag ${ind.vtag}">${ind.vlabel}</div>
+        <div class="ind-name">${ind.name}</div>
+        <div class="ind-name-en">${ind.en}</div>
+        <div class="ind-dato">${ind.dato}</div>
+        <div class="ind-score-row">
+          <div class="ind-pts">${ind.pt}<span style="font-size:14px;color:var(--grey)">/100</span></div>
+          <div class="ind-status ${st.cls}">${st.label}</div>
+        </div>
+        <div class="ind-bar-bg">
+          <div class="ind-bar-fill" data-pct="${ind.pt}" style="background:${st.bar}"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Miglioramenti
+  const mglData = [
+    { area:'Gestione scarti', en:'Waste Management', attuale:`${d.va2 ?? 0}% recupero`, target:'Superare 60% → 100 pt', impatto:'+12 pt V_a · +4 QEN' },
+    { area:'Energia rinnovabile', en:'Renewable Energy', attuale:`${d.va3 ?? 0}% rinnovabile`, target:'Superare 70% → 100 pt', impatto:'+12 pt V_a · +4 QEN' },
+    { area:'Acquisti locali', en:'Local Sourcing', attuale:`${d.vt1 ?? 0}% entro 50 km`, target:'Superare 50% → 100 pt', impatto:'+13 pt V_t · +3 QEN' },
+  ];
+  document.getElementById('mgl-tbody').innerHTML = mglData.map(m => `
+    <tr>
+      <td><div class="mgl-area">${m.area}</div><div class="mgl-area-en">${m.en}</div></td>
+      <td><div class="mgl-attuale">${m.attuale}</div></td>
+      <td><div class="mgl-target">${m.target}</div></td>
+      <td><div class="mgl-impatto">${m.impatto}</div></td>
+    </tr>
+  `).join('');
+
+  // CVO
+  let notaCvo = d.nota_cvo;
+  if (!notaCvo || notaCvo.startsWith('Inserisci')) {
+    notaCvo = `${d.cliente} dimostra un approccio strutturato alla sostenibilità, con performance particolarmente solida nel vettore ambientale (V_a: ${vaAvg}/100), trainata dall'eccellenza nella logistica a zero emissioni. Il percorso di miglioramento più significativo riguarda la gestione degli scarti e l'incremento della quota di energia rinnovabile, che rappresentano le leve principali per consolidare il rating nella fascia Oro nei prossimi 12 mesi.`;
+  }
+  document.getElementById('cvo-text').textContent = `"${notaCvo}"`;
+  document.getElementById('cvo-data').textContent = `Bologna, ${d.data || '2026'}`;
+
+  // Show dashboard
+  document.getElementById('upload-screen').classList.add('hidden');
+  setTimeout(() => {
+    document.getElementById('dashboard').classList.add('visible');
+    animateVectorCards();
+    setTimeout(animateBars, 600);
+    setTimeout(animateIndicators, 300);
+  }, 800);
+}
+
+function animateNumber(el, from, to, duration) {
+  const start = performance.now();
+  const update = (now) => {
+    const t = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    el.textContent = Math.round(from + (to - from) * ease);
+    if (t < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+
+function animateVectorCards() {
+  document.querySelectorAll('.vector-card').forEach((el, i) => {
+    setTimeout(() => {
+      el.style.opacity = 1;
+      el.style.transform = 'translateY(0)';
+      el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    }, i * 150);
+  });
+}
+
+function animateBars() {
+  document.querySelectorAll('.vector-bar-fill, .ind-bar-fill').forEach(el => {
+    const pct = el.dataset.pct;
+    el.style.width = pct + '%';
+  });
+}
+
+function animateIndicators() {
+  document.querySelectorAll('.ind-card').forEach((el, i) => {
+    setTimeout(() => {
+      el.style.opacity = 1;
+      el.style.transform = 'translateY(0)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    }, i * 60);
+  });
+}
+
+// ── FILE UPLOAD
+const dropZone = document.getElementById('drop-zone');
+const fileInput = document.getElementById('file-input');
+
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) processFile(file);
+});
+
+fileInput.addEventListener('change', () => {
+  if (fileInput.files[0]) processFile(fileInput.files[0]);
+});
+
+function processFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const data = parseExcel(new Uint8Array(e.target.result));
+    if (data) renderDashboard(data);
+  };
+  reader.readAsArrayBuffer(file);
+}
+</script>
+
+</body>
+</html>
