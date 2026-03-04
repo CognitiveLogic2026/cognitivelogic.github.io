@@ -1,0 +1,85 @@
+body {
+  font-family: Georgia, serif;
+  background-color: #ffffff;
+  color: #1c1c1c;
+  margin: 0;
+  padding: 0;
+  line-height: 1.7;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+
+.nav {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 20px 40px;
+}
+
+.nav-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-size: 1.1em;
+  letter-spacing: 0.5px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.9em;
+}
+
+.hero {
+  margin-bottom: 60px;
+}
+
+.hero h1 {
+  font-weight: normal;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.lead {
+  font-size: 1.1em;
+  color: #444;
+}
+
+.section {
+  margin-bottom: 60px;
+}
+
+h2 {
+  font-weight: normal;
+  font-size: 1.3em;
+  margin-bottom: 15px;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+.founder {
+  font-size: 0.95em;
+  color: #555;
+}
+
+.note {
+  font-size: 0.85em;
+  color: #777;
+}
+
+.footer {
+  border-top: 1px solid #e5e5e5;
+  text-align: center;
+  padding: 30px;
+  font-size: 0.85em;
+  color: #777;
+}
