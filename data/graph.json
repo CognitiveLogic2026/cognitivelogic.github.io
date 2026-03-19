@@ -1,6 +1,11 @@
 {
- "nodes":[
-   {"id":"qen","type":"framework"},
-   {"id":"esg","type":"concept"}
- ]
+  "nodes":[
+    {"id":"qen","type":"framework"},
+    {"id":"esg","type":"concept"},
+    {"id":"ai-act","type":"regulation"}
+  ],
+  "edges":[
+    {"from":"qen","to":"esg","type":"scoring"},
+    {"from":"qen","to":"ai-act","type":"compliance"}
+  ]
 }
