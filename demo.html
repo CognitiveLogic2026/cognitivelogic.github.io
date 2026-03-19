@@ -504,34 +504,44 @@
         `;
       }
 
-      if (q.includes("mancano") || q.includes("controlli")) {
-        return `
-          <p><strong>Controlli mancanti rilevati:</strong></p>
+      if (q.includes("conforme") || q.includes("ai act")) {
+  return `
+    <p><strong>AI Compliance Assessment — QEN Engine</strong></p>
 
-          <div class="result-boxes">
-            <div class="mini">
-              <div class="label">Gap 1</div>
-              <div class="value danger">Audit Trail</div>
-            </div>
-            <div class="mini">
-              <div class="label">Gap 2</div>
-              <div class="value warn">Human Oversight</div>
-            </div>
-            <div class="mini">
-              <div class="label">Gap 3</div>
-              <div class="value warn">Risk Monitoring</div>
-            </div>
-          </div>
+    <div class="result-boxes">
+      <div class="mini">
+        <div class="label">Compliance status</div>
+        <div class="value warn">Partially compliant</div>
+      </div>
+      <div class="mini">
+        <div class="label">Risk classification</div>
+        <div class="value warn">Medium risk (provisional)</div>
+      </div>
+      <div class="mini">
+        <div class="label">Audit readiness</div>
+        <div class="value danger">Insufficient</div>
+      </div>
+    </div>
 
-          <p><strong>Interpretazione:</strong> la struttura logica collega il sistema a requisiti non ancora coperti da evidenze operative sufficienti.</p>
+    <p><strong>Executive summary:</strong> the system shows initial alignment with regulatory requirements but lacks sufficient traceability and control coverage.</p>
 
-          <ul class="list">
-            <li>assenza di spiegazione verificabile dell’output</li>
-            <li>mancanza di controllo umano documentato</li>
-            <li>assenza di routine formalizzata per rivalutazione del rischio</li>
-          </ul>
-        `;
-      }
+    <p><strong>Missing compliance elements:</strong></p>
+    <ul class="list">
+      <li>Decision-level audit trail not implemented</li>
+      <li>Dataset governance documentation incomplete</li>
+      <li>No formal human oversight validation layer</li>
+    </ul>
+
+    <p><strong>QEN reasoning path:</strong></p>
+    <ul class="list">
+      <li>Algorithm → Recommendation Model</li>
+      <li>Dataset → Behavioral dataset</li>
+      <li>Risk → User impact classification</li>
+      <li>Control → Partial coverage</li>
+      <li>Regulation → AI Act</li>
+    </ul>
+  `;
+}
 
       if (q.includes("rischio")) {
         return `
