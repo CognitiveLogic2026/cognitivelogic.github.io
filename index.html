@@ -273,6 +273,9 @@ async function drawGraphPro() {
       group.appendChild(type);
 
       enableDrag(group, node.id, svg);
+     group.addEventListener("click", () => {
+  showNodeInfo(node.id);
+});
       svg.appendChild(group);
     });
 
