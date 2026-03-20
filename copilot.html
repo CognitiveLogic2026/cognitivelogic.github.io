@@ -356,7 +356,15 @@
         const badgeClass = riskClass(data.risk_level);
         const gaps = Array.isArray(data.gaps) ? data.gaps : [];
         const actions = Array.isArray(data.recommended_actions) ? data.recommended_actions : [];
+let decision = "";
 
+if (data.risk_level === "HIGH") {
+  decision = "❌ This system cannot be deployed without major compliance fixes.";
+} else if (data.risk_level === "MEDIUM") {
+  decision = "⚠️ Deployment possible only with mitigation measures.";
+} else {
+  decision = "✅ This system can be deployed with standard compliance controls.";
+}
         result.innerHTML = `
           <div class="result-top">
             <div class="badge ${badgeClass}">${escapeHtml(data.risk_level || "Unknown Risk")}</div>
