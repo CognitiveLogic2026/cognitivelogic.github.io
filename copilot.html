@@ -365,7 +365,29 @@ if (data.risk_level === "HIGH") {
 } else {
   decision = "✅ This system can be deployed with standard compliance controls.";
 }
-        result.innerHTML = `
+    document.getElementById("result").innerHTML = `
+  <div class="badge ${badgeClass}">
+    ${data.risk_level} RISK
+  </div>
+
+  <h3>${data.system || "AI System"}</h3>
+  <p>${data.summary}</p>
+
+  <div class="decision-box">
+    <h3>Compliance Status</h3>
+    <p>${decision}</p>
+  </div>
+
+  <div>
+    <strong>Detected gaps:</strong>
+    <ul>${gaps.map(g => `<li>${g}</li>`).join("")}</ul>
+  </div>
+
+  <div>
+    <strong>Recommended actions:</strong>
+    <ul>${actions.map(a => `<li>${a}</li>`).join("")}</ul>
+  </div>
+`;    result.innerHTML = `
           <div class="result-top">
             <div class="badge ${badgeClass}">${escapeHtml(data.risk_level || "Unknown Risk")}</div>
             <div class="score">${gaps.length} gap${gaps.length === 1 ? "" : "s"} detected</div>
