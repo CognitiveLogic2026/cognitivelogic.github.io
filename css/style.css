@@ -139,3 +139,6 @@ li {
   color: var(--muted);
   border-top: 1px solid var(--border);
 }
+.copilot-section {
+  padding: 60px 0;
+}
