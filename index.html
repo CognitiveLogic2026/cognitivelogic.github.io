@@ -714,28 +714,22 @@ async function sendMessage() {
       body: JSON.stringify(payload)
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      output.innerHTML = `Errore API: ${response.status} ${errorText}`;
-      return;
-    }
-
     const data = await response.json();
 
     output.innerHTML = `
-      <strong>${data.risk_level || "N/A"}</strong> — QEN score ${data.qen_score ?? "N/A"}<br><br>
+      <strong>${data.risk_level}</strong> — QEN score ${data.qen_score}<br><br>
 
       <strong>Controls:</strong>
-      <ul>${(data.controls || []).map(c => `<li>${c}</li>`).join("")}</ul>
+      <ul>${data.controls.map(c => `<li>${c}</li>`).join("")}</ul>
 
       <strong>Violations:</strong>
-      <ul>${(data.violations || []).map(v => `<li>${v}</li>`).join("")}</ul>
+      <ul>${data.violations.map(v => `<li>${v}</li>`).join("")}</ul>
 
       <strong>Reasoning:</strong>
-      <ul>${(data.reasoning || []).map(r => `<li>${r}</li>`).join("")}</ul>
+      <ul>${data.reasoning.map(r => `<li>${r}</li>`).join("")}</ul>
     `;
   } catch (error) {
-    output.innerHTML = `Errore connessione API: ${error.message}`;
+    output.innerHTML = "Errore connessione API";
   }
 }
 </script>
