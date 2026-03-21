@@ -702,32 +702,37 @@ async function sendMessage() {
     dataset: "user_data",
     context: "EU"
   };
+output.innerHTML = `
+  <div style="font-size:22px; font-weight:600; margin-bottom:10px;">
+    ${data.risk_level}
+  </div>
 
-  output.innerHTML = "Analisi in corso...";
+  <div style="opacity:0.7; margin-bottom:20px;">
+    QEN score: ${data.qen_score}
+  </div>
 
-  try {
-    const response = await fetch("https://api.cognitivelogic.it/qen/evaluate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
-    });
+  <div style="margin-bottom:15px;">
+    <strong>🛡 Controls richiesti</strong>
+    <ul>
+      ${(data.controls || []).map(c => `<li>${c}</li>`).join("")}
+    </ul>
+  </div>
 
-    const data = await response.json();
+  <div style="margin-bottom:15px;">
+    <strong>⚠️ Gap normativi</strong>
+    <ul>
+      ${(data.violations || []).map(v => `<li>${v}</li>`).join("")}
+    </ul>
+  </div>
 
-    output.innerHTML = `
-      <strong>${data.risk_level}</strong> — QEN score ${data.qen_score}<br><br>
-
-      <strong>Controls:</strong>
-      <ul>${data.controls.map(c => `<li>${c}</li>`).join("")}</ul>
-
-      <strong>Violations:</strong>
-      <ul>${data.violations.map(v => `<li>${v}</li>`).join("")}</ul>
-
-      <strong>Reasoning:</strong>
-      <ul>${data.reasoning.map(r => `<li>${r}</li>`).join("")}</ul>
-    `;
+  <div>
+    <strong>🧠 Reasoning</strong>
+    <ul>
+      ${(data.reasoning || []).map(r => `<li>${r}</li>`).join("")}
+    </ul>
+  </div>
+`;
+  
   } catch (error) {
     output.innerHTML = "Errore connessione API";
   }
