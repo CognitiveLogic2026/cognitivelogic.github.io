@@ -685,6 +685,7 @@
     AI Governance System · QEN Engine · Europe
   </footer>
 <script>
+<script>
 async function sendMessage() {
   const input = document.getElementById("chat-input");
   const output = document.getElementById("chat-output");
@@ -697,18 +698,15 @@ async function sendMessage() {
   }
 
   const payload = {
-    system_name: "User System",
-    use_case: text,
-    has_audit_trail: true,
-    has_human_oversight: true,
-    sensitive_data: true,
-    has_consent_tracking: false
+    system: text,
+    dataset: "user_data",
+    context: "EU"
   };
 
   output.innerHTML = "Analisi in corso...";
 
   try {
-    const response = await fetch("https://api.cognitivelogic.it/analyze", {
+    const response = await fetch("https://api.cognitivelogic.it/qen/valutare", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -725,19 +723,22 @@ async function sendMessage() {
     const data = await response.json();
 
     output.innerHTML = `
-      <strong>${data.risk_level}</strong> — score ${data.risk_score}<br><br>
-      ${data.summary}<br><br>
+      <strong>${data.risk_level || "N/A"}</strong> — QEN score ${data.qen_score ?? "N/A"}<br><br>
 
-      <strong>Gaps:</strong>
-      <ul>${(data.gaps || []).map(g => `<li>${g}</li>`).join("")}</ul>
+      <strong>Controls:</strong>
+      <ul>${(data.controls || []).map(c => `<li>${c}</li>`).join("")}</ul>
 
-      <strong>Actions:</strong>
-      <ul>${(data.recommendations || []).map(r => `<li>${r}</li>`).join("")}</ul>
+      <strong>Violations:</strong>
+      <ul>${(data.violations || []).map(v => `<li>${v}</li>`).join("")}</ul>
+
+      <strong>Reasoning:</strong>
+      <ul>${(data.reasoning || []).map(r => `<li>${r}</li>`).join("")}</ul>
     `;
   } catch (error) {
     output.innerHTML = `Errore connessione API: ${error.message}`;
   }
 }
+</script>
 </script>
 </body>
 </html>
