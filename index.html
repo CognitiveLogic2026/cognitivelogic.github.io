@@ -703,6 +703,7 @@ async function sendMessage() {
   try {
     const response = await fetch("http://46.225.86.235:8000/analyze", {
       method: "POST",
+      mode: "cors",
       headers: {
         "Content-Type": "application/json"
       },
