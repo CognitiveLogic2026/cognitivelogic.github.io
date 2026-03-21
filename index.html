@@ -686,24 +686,30 @@
   </footer>
 <script>
 async function sendMessage() {
-  const input = document.getElementById("chat-input").value;
+  const input = document.getElementById("chat-input");
   const output = document.getElementById("chat-output");
 
-  output.innerHTML = "Analyzing...";
+  const text = input.value.trim();
+
+  if (!text) {
+    output.innerHTML = "Inserisci una descrizione del sistema AI.";
+    return;
+  }
 
   const payload = {
-    system_name: "AI System",
-    use_case: input,
-    has_audit_trail: false,
+    system_name: "User System",
+    use_case: text,
+    has_audit_trail: true,
     has_human_oversight: true,
-    sensitive_data: input.toLowerCase().includes("sensibili"),
+    sensitive_data: true,
     has_consent_tracking: false
   };
+
+  output.innerHTML = "Analisi in corso...";
 
   try {
     const response = await fetch("http://46.225.86.235:8000/analyze", {
       method: "POST",
-      mode: "cors",
       headers: {
         "Content-Type": "application/json"
       },
@@ -722,7 +728,6 @@ async function sendMessage() {
       <strong>Actions:</strong>
       <ul>${data.recommendations.map(r => `<li>${r}</li>`).join("")}</ul>
     `;
-
   } catch (error) {
     output.innerHTML = "Errore connessione API";
   }
