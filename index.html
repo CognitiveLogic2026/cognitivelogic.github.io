@@ -686,23 +686,19 @@
   </footer>
 <script>
 async function sendMessage() {
-  const btn = document.getElementById("analyzeBtn");
-  const status = document.getElementById("status");
-  const result = document.getElementById("result");
+  const input = document.getElementById("chat-input").value;
+  const output = document.getElementById("chat-output");
+
+  output.innerHTML = "Analyzing...";
 
   const payload = {
-    system_name: document.getElementById("name").value || "Unnamed System",
-    use_case: document.getElementById("use_case").value,
-    has_audit_trail: document.getElementById("audit").checked,
-    has_human_oversight: document.getElementById("human").checked,
-    sensitive_data: document.getElementById("data").checked,
-    has_consent_tracking: document.getElementById("consent").checked
+    system_name: "AI System",
+    use_case: input,
+    has_audit_trail: false,
+    has_human_oversight: true,
+    sensitive_data: input.toLowerCase().includes("sensibili"),
+    has_consent_tracking: false
   };
-
-  btn.disabled = true;
-  status.textContent = "Analyzing...";
-
-  result.innerHTML = `<div class="empty">Processing live compliance analysis...</div>`;
 
   try {
     const response = await fetch("http://46.225.86.235:8000/analyze", {
@@ -715,43 +711,20 @@ async function sendMessage() {
 
     const data = await response.json();
 
-    result.innerHTML = `
-      <div class="result-card">
-        <h3>${data.system_name}</h3>
+    output.innerHTML = `
+      <strong>${data.risk_level}</strong> — score ${data.risk_score}<br><br>
+      ${data.summary}<br><br>
 
-        <p><strong>Risk level:</strong> ${data.risk_level}</p>
-        <p><strong>Score:</strong> ${data.risk_score}</p>
+      <strong>Gaps:</strong>
+      <ul>${data.gaps.map(g => `<li>${g}</li>`).join("")}</ul>
 
-        <p>${data.summary}</p>
-
-        <h4>Gaps</h4>
-        <ul>
-          ${data.gaps.map(g => `<li>${g}</li>`).join("")}
-        </ul>
-
-        <h4>Recommendations</h4>
-        <ul>
-          ${data.recommendations.map(r => `<li>${r}</li>`).join("")}
-        </ul>
-
-        <h4>Notes</h4>
-        <ul>
-          ${data.notes.map(n => `<li>${n}</li>`).join("")}
-        </ul>
-      </div>
+      <strong>Actions:</strong>
+      <ul>${data.recommendations.map(r => `<li>${r}</li>`).join("")}</ul>
     `;
 
   } catch (error) {
-    result.innerHTML = `
-      <div class="result-card error">
-        <h3>Error</h3>
-        <p>${error.message}</p>
-      </div>
-    `;
+    output.innerHTML = "Errore connessione API";
   }
-
-  btn.disabled = false;
-  status.textContent = "Ready";
 }
 </script>
 </body>
