@@ -8,7 +8,6 @@
   <meta name="description" content="Cognitive Logic trasforma la governance AI da documentazione a infrastruttura operativa con framework QEN, data architecture e copilot verticali." />
   <meta name="ai-readable" content="true" />
   <meta name="llm-optimized" content="semantic-structured-data" />
-
   <link rel="canonical" href="https://cognitivelogic.it" />
 
   <style>
@@ -239,6 +238,134 @@
       padding: 26px;
     }
 
+    .preview-live {
+      margin-top: 34px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .preview-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .preview-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .preview-head h3 {
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+    }
+
+    .preview-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(196,240,123,0.08);
+      border: 1px solid rgba(196,240,123,0.18);
+      color: var(--accent-2);
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    .preview-panel {
+      background: linear-gradient(180deg, #0f141b, #121922);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+    }
+
+    .preview-result {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .preview-score,
+    .preview-risk,
+    .preview-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .preview-score-label,
+    .preview-risk-label {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .preview-score-value {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .preview-risk-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .preview-risk-value.medium {
+      color: #ffd66b;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .preview-card h4 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .preview-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+    }
+
+    .preview-card strong {
+      font-size: 1.1rem;
+    }
+
+    .preview-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+    }
+
+    .preview-footer p {
+      color: var(--muted);
+      max-width: 700px;
+    }
+
     footer {
       padding: 34px 0 54px;
       border-top: 1px solid var(--line);
@@ -249,7 +376,9 @@
     @media (max-width: 920px) {
       .hero-grid,
       .grid-2,
-      .grid-3 {
+      .grid-3,
+      .preview-result,
+      .preview-grid {
         grid-template-columns: 1fr;
       }
 
@@ -308,7 +437,6 @@
       </div>
     </section>
 
-    <!-- 👇 QUI VA IL COPILOT -->
     <section id="copilot">
       <div class="container">
         <h2 class="section-title">QEN Copilot per HoReCa</h2>
@@ -339,6 +467,58 @@
           <a class="btn btn-primary" href="copilot.html">
             Apri QEN Copilot
           </a>
+        </div>
+
+        <div class="preview-live">
+          <div class="preview-head">
+            <div>
+              <div class="preview-kicker">Preview live</div>
+              <h3>Come appare il risultato del QEN Copilot</h3>
+            </div>
+            <span class="preview-badge">HoReCa Example</span>
+          </div>
+
+          <div class="preview-panel">
+            <div class="preview-result">
+              <div class="preview-score">
+                <div class="preview-score-label">QEN Score</div>
+                <div class="preview-score-value">78/100</div>
+              </div>
+
+              <div class="preview-risk">
+                <div class="preview-risk-label">Benchmark</div>
+                <div class="preview-risk-value medium">Buono · migliorabile</div>
+              </div>
+            </div>
+
+            <div class="preview-grid">
+              <div class="preview-card">
+                <h4>Vettore sociale</h4>
+                <p>Inclusione del personale, accessibilità, impatto sulla comunità.</p>
+                <strong>82/100</strong>
+              </div>
+
+              <div class="preview-card">
+                <h4>Vettore ambientale</h4>
+                <p>Consumi, materiali, filiera e pratiche di riduzione sprechi.</p>
+                <strong>74/100</strong>
+              </div>
+
+              <div class="preview-card">
+                <h4>Vettore territoriale</h4>
+                <p>Relazione con produttori locali, identità del luogo e filiera corta.</p>
+                <strong>79/100</strong>
+              </div>
+            </div>
+
+            <div class="preview-footer">
+              <p>
+                Output finale: score sintetico, benchmark, lettura per vettori e base pronta
+                per report operativo.
+              </p>
+              <a class="btn btn-primary" href="copilot.html">Prova il Copilot</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
