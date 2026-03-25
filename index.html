@@ -4,28 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Cognitive Logic — AI Governance Infrastructure</title>
-  <meta name="description" content="Cognitive Logic trasforma la governance AI da documentazione a infrastruttura operativa con framework QEN, data architecture e copilot verticali." />
-  <meta name="ai-readable" content="true" />
-  <meta name="llm-optimized" content="semantic-structured-data" />
+  <title>Cognitive Logic — AI-native Governance Infrastructure</title>
+  <meta name="description" content="Cognitive Logic costruisce infrastrutture AI-native per governance, compliance, knowledge architecture e sistemi decisionali verificabili." />
   <link rel="canonical" href="https://cognitivelogic.it" />
+
+  <meta property="og:title" content="Cognitive Logic — AI-native Governance Infrastructure" />
+  <meta property="og:description" content="QEN Copilot, governance AI, compliance infrastructure, knowledge architecture e sistemi decisionali verificabili." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cognitivelogic.it" />
+
+  <meta name="theme-color" content="#08111a" />
 
   <style>
     :root {
-      --bg: #0b0f14;
-      --panel: #11161d;
-      --panel-2: #151b23;
-      --text: #e8edf2;
-      --muted: #9aa6b2;
+      --bg: #071018;
+      --bg-2: #0a1420;
+      --panel: rgba(11, 21, 32, 0.9);
+      --panel-2: rgba(14, 27, 41, 0.95);
+      --panel-3: rgba(18, 33, 50, 0.96);
       --line: rgba(255,255,255,0.08);
-      --accent: #7cc6ff;
-      --accent-2: #c4f07b;
+      --line-strong: rgba(255,255,255,0.14);
+      --text: #e8eef5;
+      --muted: #9aa8b8;
+      --muted-2: #b8c4d0;
+      --accent: #8fd3ff;
+      --accent-2: #b8ffcf;
+      --accent-3: #7cc6ff;
+      --good: #8de38c;
       --warn: #ffd66b;
-      --good: #8fe388;
-      --bad: #ff8a8a;
-      --max: 1180px;
-      --radius: 18px;
-      --shadow: 0 20px 50px rgba(0,0,0,0.28);
+      --bad: #ff8e8e;
+      --shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --max: 1220px;
     }
 
     * {
@@ -39,10 +50,15 @@
     }
 
     body {
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: linear-gradient(180deg, #0b0f14 0%, #0e1319 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(90, 145, 220, 0.22), transparent 24%),
+        radial-gradient(circle at 100% 10%, rgba(88, 180, 130, 0.14), transparent 24%),
+        linear-gradient(180deg, #061019 0%, #07111a 32%, #08131d 100%);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     a {
@@ -50,115 +66,140 @@
       text-decoration: none;
     }
 
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
     .container {
-      width: min(var(--max), calc(100% - 40px));
+      width: min(var(--max), calc(100% - 32px));
       margin: 0 auto;
     }
 
-    header {
+    section {
+      scroll-margin-top: 90px;
+    }
+
+    .site-header {
       position: sticky;
       top: 0;
-      z-index: 100;
-      backdrop-filter: blur(10px);
-      background: rgba(11, 15, 20, 0.82);
+      z-index: 1000;
+      backdrop-filter: blur(14px);
+      background: rgba(6, 12, 18, 0.72);
       border-bottom: 1px solid var(--line);
     }
 
     .nav {
+      min-height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      min-height: 74px;
-      gap: 24px;
+      gap: 18px;
     }
 
     .brand {
-      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-weight: 700;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.2px;
+      color: #f1f6fb;
+      white-space: nowrap;
     }
 
-    nav {
+    .brand-mark {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 22px rgba(143, 211, 255, 0.42);
+      flex: 0 0 12px;
+    }
+
+    .nav-links {
       display: flex;
       align-items: center;
       gap: 22px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
       color: var(--muted);
-      font-size: 0.95rem;
-      transition: 0.2s ease;
+      font-size: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
-    nav a:hover {
+    .nav-links a:hover {
       color: var(--text);
     }
 
-    .btn {
+    .nav-cta {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 18px;
+      min-height: 44px;
+      padding: 0 16px;
       border-radius: 999px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(143, 211, 255, 0.22);
+      background: rgba(143, 211, 255, 0.08);
+      color: var(--text);
       font-weight: 600;
       transition: 0.2s ease;
-      cursor: pointer;
-      font: inherit;
+      white-space: nowrap;
     }
 
-    .btn:hover {
+    .nav-cta:hover {
       transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #9be7ff);
-      color: #081018;
-      border: none;
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--text);
+      background: rgba(143, 211, 255, 0.12);
     }
 
     .hero {
-      padding: 88px 0 56px;
+      position: relative;
+      padding: 86px 0 54px;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 180px;
+      background: linear-gradient(180deg, rgba(7,16,24,0), rgba(7,16,24,0.35));
+      pointer-events: none;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 36px;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 30px;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
     .eyebrow {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       margin-bottom: 18px;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(124,198,255,0.08);
-      border: 1px solid rgba(124,198,255,0.18);
+      border: 1px solid var(--line);
       color: var(--accent);
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
+      background: rgba(143, 211, 255, 0.06);
+      font-size: 13px;
+      letter-spacing: 0.03em;
     }
 
-    h1 {
-      font-size: clamp(2.4rem, 5vw, 4.4rem);
-      line-height: 1.04;
-      letter-spacing: -0.03em;
-      margin-bottom: 20px;
-      max-width: 13ch;
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 74px);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      margin-bottom: 22px;
+      max-width: 820px;
     }
 
-    .hero p {
-      font-size: 1.08rem;
-      color: var(--muted);
-      max-width: 62ch;
+    .hero .lead {
+      font-size: clamp(18px, 2.3vw, 23px);
+      color: #c5d0db;
+      max-width: 760px;
       margin-bottom: 28px;
     }
 
@@ -166,507 +207,646 @@
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
-    .hero-card {
-      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #9ad9ff, #b8ffcf);
+      color: #041019;
+      box-shadow: 0 12px 28px rgba(124, 198, 255, 0.18);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      border-color: var(--line-strong);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hero-note {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 780px;
+    }
+
+    .hero-panel {
+      position: relative;
+      background: linear-gradient(180deg, rgba(13, 25, 38, 0.94), rgba(9, 18, 28, 0.98));
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px;
+      border-radius: 26px;
+      padding: 22px;
       box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
-    .hero-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 12px;
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(143,211,255,0.22), rgba(184,255,207,0));
     }
 
-    .hero-card p {
-      margin-bottom: 0;
-      font-size: 0.98rem;
+    .hero-panel-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
     }
 
-    section {
-      padding: 64px 0;
+    .panel-title {
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
-    .section-title {
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      letter-spacing: -0.02em;
+    .panel-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(141, 227, 140, 0.22);
+      background: rgba(141, 227, 140, 0.08);
+      color: var(--good);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .mock-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
       margin-bottom: 14px;
     }
 
-    .section-lead {
+    .mock-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      min-height: 132px;
+    }
+
+    .mock-label {
       color: var(--muted);
-      font-size: 1.05rem;
-      max-width: 70ch;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .mock-value {
+      font-size: 48px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(141, 227, 140, 0.22);
+      background: rgba(141, 227, 140, 0.08);
+      color: var(--good);
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .mock-text {
+      color: #d2dbe5;
+      font-size: 16px;
+    }
+
+    .mock-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .section {
+      padding: 38px 0 28px;
+    }
+
+    .section-heading {
+      max-width: 820px;
       margin-bottom: 28px;
     }
 
-    .grid-2,
-    .grid-3 {
+    .section-heading .kicker {
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .cards-2,
+    .cards-3,
+    .cards-4 {
       display: grid;
-      gap: 20px;
+      gap: 18px;
     }
 
-    .grid-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .cards-2 {
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    .grid-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    .cards-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cards-4 {
+      grid-template-columns: repeat(4, 1fr);
     }
 
     .card {
-      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      background: linear-gradient(180deg, rgba(14, 25, 37, 0.96), rgba(10, 18, 28, 0.98));
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 24px;
+      padding: 22px;
       box-shadow: var(--shadow);
+      min-height: 100%;
     }
 
     .card h3 {
-      font-size: 1.05rem;
+      font-size: 21px;
       margin-bottom: 10px;
+      line-height: 1.15;
     }
 
     .card p {
       color: var(--muted);
-      font-size: 0.97rem;
+      font-size: 15.5px;
     }
 
-    .callout {
-      background: linear-gradient(135deg, rgba(124,198,255,0.08), rgba(196,240,123,0.05));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius);
-      padding: 26px;
+    .card ul {
+      padding-left: 18px;
+      margin-top: 12px;
+      color: var(--muted);
     }
 
-    .preview-live {
-      margin-top: 34px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    .card li + li {
+      margin-top: 8px;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .how-step {
+      position: relative;
+      padding: 24px;
+      border-radius: 22px;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px;
+      background: linear-gradient(180deg, rgba(13, 24, 36, 0.96), rgba(9, 18, 28, 0.98));
       box-shadow: var(--shadow);
     }
 
-    .preview-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
-    }
-
-    .preview-kicker {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-
-    .preview-head h3 {
-      font-size: 1.35rem;
-      letter-spacing: -0.02em;
-    }
-
-    .preview-badge {
+    .how-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
       display: inline-flex;
       align-items: center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(196,240,123,0.08);
-      border: 1px solid rgba(196,240,123,0.18);
-      color: var(--accent-2);
-      font-size: 0.84rem;
-      font-weight: 600;
+      justify-content: center;
+      margin-bottom: 14px;
+      background: rgba(143, 211, 255, 0.08);
+      border: 1px solid rgba(143, 211, 255, 0.18);
+      color: var(--accent);
+      font-weight: 800;
     }
 
-    .preview-panel {
-      background: linear-gradient(180deg, #0f141b, #121922);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 22px;
+    .how-step h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
     }
 
-    .preview-result {
+    .how-step p {
+      color: var(--muted);
+    }
+
+    .split-panel {
       display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 18px;
-      margin-bottom: 18px;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 20px;
+      align-items: stretch;
     }
 
-    .preview-score,
-    .preview-risk,
-    .preview-card {
-      background: rgba(255,255,255,0.03);
+    .metrics-panel,
+    .narrative-panel {
+      border-radius: 24px;
       border: 1px solid var(--line);
-      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(13,24,37,0.96), rgba(9,18,28,0.98));
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .metric-box {
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
       padding: 18px;
     }
 
-    .preview-score-label,
-    .preview-risk-label {
-      font-size: 0.82rem;
+    .metric-box .label {
+      font-size: 13px;
+      color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .metric-box .value {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .metric-box .desc {
+      margin-top: 10px;
       color: var(--muted);
-      margin-bottom: 8px;
+      font-size: 14px;
     }
 
-    .preview-score-value {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
+    .narrative-panel h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
     }
 
-    .preview-risk-value {
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
-    .preview-risk-value.medium {
-      color: var(--warn);
-    }
-
-    .preview-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-
-    .preview-card h4 {
-      font-size: 1rem;
-      margin-bottom: 8px;
-    }
-
-    .preview-card p {
+    .narrative-panel p {
       color: var(--muted);
-      font-size: 0.95rem;
       margin-bottom: 14px;
     }
 
-    .preview-card strong {
-      font-size: 1.1rem;
-    }
-
-    .preview-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      border-top: 1px solid var(--line);
-      padding-top: 18px;
-    }
-
-    .preview-footer p {
-      color: var(--muted);
-      max-width: 700px;
-    }
-
-    .contact-grid {
+    .copilot-wrap {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 24px;
-      margin-top: 24px;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: start;
     }
 
-    .contact-card,
-    .contact-form-card {
-      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+    .copilot-box,
+    .output-box {
+      background: linear-gradient(180deg, rgba(14,25,37,0.98), rgba(10,18,28,0.98));
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: 24px;
       padding: 24px;
       box-shadow: var(--shadow);
     }
 
-    .contact-list {
-      display: grid;
-      gap: 18px;
-    }
-
-    .contact-item strong {
-      display: block;
-      font-size: 0.9rem;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-
-    .contact-item a {
-      color: var(--accent);
-      word-break: break-word;
-    }
-
-    .contact-item a:hover {
-      text-decoration: underline;
-    }
-
-    .contact-note {
-      color: var(--muted);
-      font-size: 0.96rem;
-      margin-top: 14px;
-    }
-
-    .contact-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .contact-form-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-    }
-
-    .contact-form-card p {
-      color: var(--muted);
-      margin-bottom: 18px;
-    }
-
-    .contact-form {
-      display: grid;
-      gap: 14px;
-    }
-
-    .contact-form input,
-    .contact-form select,
-    .contact-form textarea {
-      width: 100%;
-      padding: 14px 16px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
-      font: inherit;
-    }
-
-    .contact-form option {
-      color: #081018;
-    }
-
-    .contact-form input::placeholder,
-    .contact-form textarea::placeholder {
-      color: var(--muted);
-    }
-
-    .contact-form textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
-
-    .contact-form button {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .contact-mini {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-top: 10px;
-    }
-
-    .result-box {
-      margin-top: 20px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: linear-gradient(180deg, #0f141b, #121922);
-      padding: 20px;
-    }
-
-    .result-empty {
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .result-loading {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .result-top {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    .result-score,
-    .result-status,
-    .result-panel {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 16px;
-    }
-
-    .result-label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
+    .copilot-box h3,
+    .output-box h3 {
+      font-size: 24px;
       margin-bottom: 8px;
     }
 
-    .result-score-value {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1;
-    }
-
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.86rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      border: 1px solid var(--line);
-      margin-bottom: 10px;
-    }
-
-    .status-pill.low {
-      color: var(--good);
-      background: rgba(143,227,136,0.08);
-      border-color: rgba(143,227,136,0.2);
-    }
-
-    .status-pill.medium {
-      color: var(--warn);
-      background: rgba(255,214,107,0.08);
-      border-color: rgba(255,214,107,0.2);
-    }
-
-    .status-pill.high {
-      color: var(--bad);
-      background: rgba(255,138,138,0.08);
-      border-color: rgba(255,138,138,0.2);
-    }
-
-    .status-text {
-      color: var(--text);
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    .result-summary {
-      margin-bottom: 16px;
-    }
-
-    .result-summary p {
+    .copilot-subtitle,
+    .output-subtitle {
       color: var(--muted);
-      font-size: 0.97rem;
+      margin-bottom: 18px;
+      font-size: 15px;
+    }
+
+    .field-label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #d0dbe6;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 230px;
+      resize: vertical;
+      border-radius: 16px;
+      border: 1px solid var(--line-strong);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      padding: 16px;
+      font: inherit;
+      outline: none;
+    }
+
+    textarea::placeholder {
+      color: #7f8b98;
+    }
+
+    textarea:focus {
+      border-color: rgba(143, 211, 255, 0.42);
+      box-shadow: 0 0 0 4px rgba(143, 211, 255, 0.08);
+    }
+
+    .copilot-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .status-inline {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .output-state {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px dashed var(--line-strong);
+      background: rgba(255,255,255,0.02);
+      color: var(--muted);
     }
 
     .result-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 14px;
       margin-bottom: 16px;
     }
 
-    .result-panel h4 {
-      font-size: 0.98rem;
+    .result-metric {
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+      padding: 18px;
+    }
+
+    .result-metric .label {
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .result-metric .value {
+      font-size: 48px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+
+    .decision-box {
+      margin: 12px 0 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .result-section {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .result-section h4 {
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
       margin-bottom: 10px;
     }
 
-    .result-panel ul {
-      list-style: none;
+    .result-section p,
+    .result-section ul {
+      color: #d5dee8;
+    }
+
+    .result-section ul {
+      padding-left: 18px;
+    }
+
+    .result-section li + li {
+      margin-top: 8px;
+    }
+
+    .use-case-card {
+      min-height: 240px;
+    }
+
+    .pilot-grid {
       display: grid;
-      gap: 10px;
-      padding-left: 0;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 20px;
     }
 
-    .result-panel li {
+    .pilot-box {
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(12,24,37,0.96), rgba(9,18,28,0.98));
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+
+    .pilot-box h3 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .pilot-box p {
       color: var(--muted);
-      font-size: 0.95rem;
-      padding-left: 14px;
-      position: relative;
+      margin-bottom: 16px;
     }
 
-    .result-panel li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
+    .pilot-points {
+      display: grid;
+      gap: 12px;
     }
 
-    .result-footer {
-      border-top: 1px solid var(--line);
-      padding-top: 14px;
+    .pilot-point {
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: #d3dce6;
     }
 
-    .result-footer strong {
-      display: block;
+    .final-cta {
+      padding: 18px 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(143, 211, 255, 0.18);
+      background: linear-gradient(180deg, rgba(143, 211, 255, 0.06), rgba(184, 255, 207, 0.04));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .final-cta h3 {
+      font-size: 24px;
       margin-bottom: 6px;
-      font-size: 0.9rem;
     }
 
-    .result-footer p {
+    .final-cta p {
       color: var(--muted);
-      font-size: 0.95rem;
+      max-width: 700px;
     }
 
-    .error-box {
-      margin-top: 20px;
-      padding: 16px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,138,138,0.18);
-      background: rgba(255,138,138,0.06);
-      color: var(--bad);
+    .footer {
+      padding: 40px 0 60px;
+      color: var(--muted);
     }
 
-    footer {
-      padding: 34px 0 54px;
+    .footer-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
       border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 0.95rem;
+      padding-top: 24px;
+      flex-wrap: wrap;
     }
 
-    @media (max-width: 920px) {
+    .footer-brand strong {
+      color: #e6eef6;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 1100px) {
       .hero-grid,
-      .grid-2,
-      .grid-3,
-      .preview-result,
-      .preview-grid,
-      .contact-grid,
-      .result-top,
-      .result-grid {
+      .copilot-wrap,
+      .pilot-grid,
+      .split-panel,
+      .cards-4,
+      .cards-3,
+      .cards-2,
+      .how-grid {
         grid-template-columns: 1fr;
       }
+    }
 
-      nav {
+    @media (max-width: 760px) {
+      .nav {
+        padding: 14px 0;
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
         gap: 14px;
       }
 
-      h1 {
-        max-width: 100%;
+      .hero {
+        padding-top: 56px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .mock-grid,
+      .mock-row,
+      .result-grid,
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel,
+      .copilot-box,
+      .output-box,
+      .pilot-box,
+      .card,
+      .metrics-panel,
+      .narrative-panel,
+      .how-step {
+        padding: 20px;
       }
     }
   </style>
 </head>
 <body>
 
-  <header>
+  <header class="site-header">
     <div class="container nav">
-      <a href="#" class="brand">Cognitive Logic</a>
+      <a href="#" class="brand">
+        <span class="brand-mark"></span>
+        <span>Cognitive Logic</span>
+      </a>
 
-      <nav>
-        <a href="#solution">Soluzione</a>
-        <a href="#copilot">Copilot</a>
-        <a href="#framework">Framework</a>
+      <nav class="nav-links">
+        <a href="#architecture">Architecture</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#copilot">QEN Copilot</a>
+        <a href="#use-cases">Use Cases</a>
         <a href="#pilot">Pilot Program</a>
-        <a href="#contact">Assessment</a>
       </nav>
+
+      <a class="nav-cta" href="#copilot">Apri il Copilot</a>
     </div>
   </header>
 
@@ -674,291 +854,383 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow">Pilot Program · AI Governance Infrastructure</div>
-          <h1>Porta la governance AI da documentazione a infrastruttura operativa.</h1>
+          <div class="eyebrow">AI-native governance · explainable reasoning · operational compliance</div>
 
-          <p>
-            Cognitive Logic costruisce infrastrutture semantiche, framework verificabili
-            e copilot verticali per trasformare compliance, etica e controllo AI
-            in sistemi realmente operativi.
+          <h1>La governance AI non deve essere un documento. Deve diventare infrastruttura.</h1>
+
+          <p class="lead">
+            Cognitive Logic costruisce una base strutturale in cui rischio, controlli, tracciabilità,
+            verificabilità e decisione operativa non vengono aggiunti alla fine, ma fanno parte
+            dell’architettura stessa del sistema.
           </p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#contact">Start Assessment</a>
-            <a class="btn btn-secondary" href="#framework">Esplora il framework</a>
+            <a href="#copilot" class="btn btn-primary">Testa QEN Copilot</a>
+            <a href="#architecture" class="btn btn-secondary">Esplora l’architettura</a>
+          </div>
+
+          <div class="hero-note">
+            Pensato per organizzazioni che vogliono trasformare compliance, governance e controllo AI
+            in un asset operativo stabile, leggibile e scalabile.
           </div>
         </div>
 
-        <aside class="hero-card">
-          <h3>AI-native governance stack</h3>
+        <div class="hero-panel">
+          <div class="hero-panel-top">
+            <div class="panel-title">Live Output Preview</div>
+            <div class="panel-badge">QEN Engine online</div>
+          </div>
+
+          <div class="mock-grid">
+            <div class="mock-card">
+              <div class="mock-label">Risk Score</div>
+              <div class="mock-value">20</div>
+            </div>
+
+            <div class="mock-card">
+              <div class="mock-label">Compliance Status</div>
+              <div class="status-chip">LOW</div>
+              <div class="mock-text">
+                Sistema in area più gestibile: la priorità è consolidare tracciabilità,
+                monitoraggio e verificabilità.
+              </div>
+            </div>
+          </div>
+
+          <div class="mock-row">
+            <div class="mock-card">
+              <div class="mock-label">Gap rilevati</div>
+              <div class="mock-text">Nessun gap critico rilevato.</div>
+            </div>
+
+            <div class="mock-card">
+              <div class="mock-label">Raccomandazioni</div>
+              <div class="mock-text">Monitoraggio base consigliato.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <div class="kicker">Architecture</div>
+          <h2>Una struttura AI-native per sistemi comprensibili, verificabili e governabili.</h2>
           <p>
-            Knowledge architecture, motore QEN, score strutturati, benchmark e output
-            leggibili sia da umani sia da agenti AI.
+            Il valore non è solo produrre un output di compliance, ma costruire un’infrastruttura
+            capace di organizzare conoscenza, regole, contesto e decisioni in modo leggibile
+            sia per esseri umani sia per agenti intelligenti.
           </p>
-        </aside>
-      </div>
-    </section>
-
-    <section id="copilot">
-      <div class="container">
-        <h2 class="section-title">QEN Copilot per HoReCa</h2>
-
-        <p class="section-lead">
-          Prima applicazione verticale del framework QEN: valutazione etica,
-          ambientale e territoriale per attività HoReCa con score e benchmark.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>3 vettori</h3>
-            <p>Sociale, ambientale, territoriale con pesi strutturati.</p>
-          </div>
-
-          <div class="card">
-            <h3>9 KPI</h3>
-            <p>Indicatori misurabili per valutazione reale.</p>
-          </div>
-
-          <div class="card">
-            <h3>Output</h3>
-            <p>Score, benchmark e report pronti per uso operativo.</p>
-          </div>
         </div>
 
-        <div style="margin-top:24px;">
-          <a class="btn btn-primary" href="copilot.html">Apri QEN Copilot</a>
-        </div>
-
-        <div class="preview-live">
-          <div class="preview-head">
-            <div>
-              <div class="preview-kicker">Preview live</div>
-              <h3>Come appare il risultato del QEN Copilot</h3>
-            </div>
-            <span class="preview-badge">HoReCa Example</span>
-          </div>
-
-          <div class="preview-panel">
-            <div class="preview-result">
-              <div class="preview-score">
-                <div class="preview-score-label">QEN Score</div>
-                <div class="preview-score-value">78/100</div>
-              </div>
-
-              <div class="preview-risk">
-                <div class="preview-risk-label">Benchmark</div>
-                <div class="preview-risk-value medium">Buono · migliorabile</div>
-              </div>
-            </div>
-
-            <div class="preview-grid">
-              <div class="preview-card">
-                <h4>Vettore sociale</h4>
-                <p>Inclusione del personale, accessibilità, impatto sulla comunità.</p>
-                <strong>82/100</strong>
-              </div>
-
-              <div class="preview-card">
-                <h4>Vettore ambientale</h4>
-                <p>Consumi, materiali, filiera e pratiche di riduzione sprechi.</p>
-                <strong>74/100</strong>
-              </div>
-
-              <div class="preview-card">
-                <h4>Vettore territoriale</h4>
-                <p>Relazione con produttori locali, identità del luogo e filiera corta.</p>
-                <strong>79/100</strong>
-              </div>
-            </div>
-
-            <div class="preview-footer">
-              <p>
-                Output finale: score sintetico, benchmark, lettura per vettori e base pronta
-                per report operativo.
-              </p>
-              <a class="btn btn-primary" href="copilot.html">Prova il Copilot</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="solution">
-      <div class="container">
-        <h2 class="section-title">La compliance AI oggi è troppo fragile</h2>
-        <p class="section-lead">
-          Audit manuali, documentazione frammentata e controlli non strutturati
-          non bastano quando un sistema AI deve essere compreso, classificato
-          e governato in modo coerente.
-        </p>
-
-        <div class="grid-2">
+        <div class="cards-4">
           <article class="card">
-            <h3>Problema</h3>
+            <div class="tag">Knowledge Layer</div>
+            <h3>Knowledge Graph Core</h3>
             <p>
-              La maggior parte delle organizzazioni gestisce la governance AI come
-              un insieme di documenti, checklist e processi non integrati.
+              Organizza sistemi, principi, vincoli, controlli, relazioni e contesto in una struttura
+              semantica leggibile e riusabile.
             </p>
           </article>
 
           <article class="card">
-            <h3>Risposta</h3>
+            <div class="tag">Reasoning Layer</div>
+            <h3>QEN Engine</h3>
             <p>
-              Cognitive Logic trasforma la compliance in una struttura computabile,
-              leggibile, verificabile e pronta per workflow operativi.
+              Trasforma descrizioni e segnali di sistema in risk level, score, gap, raccomandazioni
+              e priorità operative.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="tag">Trust Layer</div>
+            <h3>Traceability & Verification</h3>
+            <p>
+              Rende controlli, passaggi decisionali e risultati più stabili, osservabili e verificabili
+              nel tempo.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="tag">Interface Layer</div>
+            <h3>Copilot & Decision Interface</h3>
+            <p>
+              Converte la valutazione in una lettura operativa: monitor, action required, critical,
+              con indicazioni chiare per il passo successivo.
             </p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="framework">
+    <section id="how-it-works" class="section">
       <div class="container">
-        <h2 class="section-title">Framework QEN</h2>
-        <p class="section-lead">
-          Un framework per rendere etica, vincoli, controllo e verificabilità
-          elementi strutturali del sistema, non solo dichiarazioni esterne.
-        </p>
-
-        <div class="grid-3">
-          <article class="card">
-            <h3>Quantificazione</h3>
-            <p>
-              KPI, vettori, score e benchmark per trasformare principi in misure operative.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Verificabilità</h3>
-            <p>
-              Tracciabilità, regole e output chiari per audit, governance e miglioramento continuo.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Verticalizzazione</h3>
-            <p>
-              Lo stesso motore può generare copilot specifici per settore, use case e territorio.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="pilot">
-      <div class="container">
-        <div class="callout">
-          <h2 class="section-title">Pilot Program</h2>
-          <p class="section-lead" style="margin-bottom:18px;">
-            Per aziende e organizzazioni che vogliono costruire compliance AI
-            come infrastruttura, non come semplice documentazione.
+        <div class="section-heading">
+          <div class="kicker">How it works</div>
+          <h2>Dal testo alla governance operativa in tre passaggi.</h2>
+          <p>
+            Il flusso è progettato per partire semplice, ma crescere verso una piattaforma che accumula
+            conoscenza, confronta sistemi e costruisce benchmark interni.
           </p>
-          <a class="btn btn-primary" href="#contact">Parliamone</a>
+        </div>
+
+        <div class="how-grid">
+          <article class="how-step">
+            <div class="how-number">01</div>
+            <h3>Input del sistema</h3>
+            <p>
+              L’utente descrive il sistema AI: caso d’uso, dati, supervisione, impatto decisionale,
+              criticità e grado di controllo.
+            </p>
+          </article>
+
+          <article class="how-step">
+            <div class="how-number">02</div>
+            <h3>Analisi strutturale</h3>
+            <p>
+              Il QEN Engine interpreta il testo, applica logiche di classificazione e restituisce
+              una prima lettura di rischio, gap e controlli prioritari.
+            </p>
+          </article>
+
+          <article class="how-step">
+            <div class="how-number">03</div>
+            <h3>Decisione operativa</h3>
+            <p>
+              L’output diventa una direzione concreta: monitorare, intervenire o bloccare,
+              aprendo un percorso di governance più strutturato.
+            </p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="contact">
+    <section id="capabilities" class="section">
       <div class="container">
-        <h2 class="section-title">Start AI Compliance Assessment</h2>
-        <p class="section-lead">
-          Inserisci use case e descrizione del sistema. Il risultato mostra livello di rischio,
-          score preliminare, gap rilevati e azioni raccomandate.
-        </p>
+        <div class="section-heading">
+          <div class="kicker">Capabilities</div>
+          <h2>Non solo valutazione. Una base per accumulare conoscenza operativa.</h2>
+          <p>
+            Il Copilot è il primo punto di contatto. La piattaforma cresce quando ogni analisi
+            diventa un nodo, uno storico, un confronto, un benchmark.
+          </p>
+        </div>
 
-        <div class="contact-grid">
-          <div class="contact-card">
-            <div class="contact-list">
-              <div class="contact-item">
-                <strong>Email</strong>
-                <a href="mailto:info@cognitivelogic.it">info@cognitivelogic.it</a>
+        <div class="split-panel">
+          <div class="metrics-panel">
+            <div class="metrics-grid">
+              <div class="metric-box">
+                <div class="label">Risk Classification</div>
+                <div class="value">Live</div>
+                <div class="desc">Valutazione immediata del livello di rischio e del punteggio complessivo.</div>
               </div>
 
-              <div class="contact-item">
-                <strong>LinkedIn Founder</strong>
-                <a href="https://www.linkedin.com/in/robertobobmalini/" target="_blank" rel="noopener noreferrer">
-                  linkedin.com/in/robertobobmalini
-                </a>
+              <div class="metric-box">
+                <div class="label">Gap Detection</div>
+                <div class="value">Actionable</div>
+                <div class="desc">Identificazione delle aree che richiedono interventi di controllo o consolidamento.</div>
               </div>
 
-              <div class="contact-item">
-                <strong>LinkedIn Company</strong>
-                <a href="https://www.linkedin.com/company/cognitivelogic/" target="_blank" rel="noopener noreferrer">
-                  linkedin.com/company/cognitivelogic
-                </a>
+              <div class="metric-box">
+                <div class="label">Decision Layer</div>
+                <div class="value">Ready</div>
+                <div class="desc">Traduzione del risultato in una lettura operativa per governance e compliance.</div>
               </div>
 
-              <div class="contact-item">
-                <strong>Editorial / Archive</strong>
-                <a href="https://fuorimenu.substack.com" target="_blank" rel="noopener noreferrer">
-                  fuorimenu.substack.com
-                </a>
+              <div class="metric-box">
+                <div class="label">Future Platform</div>
+                <div class="value">Nodes</div>
+                <div class="desc">Ogni analisi può diventare nodo salvato, storico verificabile e benchmark interno.</div>
               </div>
-            </div>
-
-            <p class="contact-note">
-              Canale diretto per richieste su pilot, partnership, framework QEN e use case verticali.
-            </p>
-
-            <div class="contact-actions">
-              <a class="btn btn-primary" href="mailto:info@cognitivelogic.it?subject=Pilot%20Program%20Cognitive%20Logic">
-                Scrivi una email
-              </a>
-              <a class="btn btn-secondary" href="https://www.linkedin.com/company/cognitivelogic/" target="_blank" rel="noopener noreferrer">
-                Apri LinkedIn
-              </a>
             </div>
           </div>
 
-          <div class="contact-form-card">
-            <h3>Assessment Engine</h3>
+          <div class="narrative-panel">
+            <h3>Da tool a infrastruttura</h3>
             <p>
-              Compila il form e avvia una valutazione preliminare direttamente dal sito.
+              Un tool risponde. Un’infrastruttura trattiene valore. La differenza è che un’infrastruttura
+              può accumulare storico, creare continuità, rendere confrontabili i sistemi analizzati
+              e trasformare la governance in un vantaggio reale.
             </p>
+            <p>
+              Questo è il punto centrale di Cognitive Logic: costruire sistemi in cui la lettura
+              del rischio non sia un episodio isolato, ma una funzione permanente dell’architettura.
+            </p>
+            <p>
+              QEN Copilot è l’interfaccia iniziale. Il passo successivo naturale è il salvataggio dei nodi,
+              la dashboard, la distribuzione dei rischi e l’emersione dei gap più frequenti.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <form class="contact-form" onsubmit="sendAssessment(event)">
-              <input id="name" type="text" placeholder="Nome" required />
-              <input id="email" type="email" placeholder="Email" required />
+    <section id="copilot" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <div class="kicker">QEN Copilot</div>
+          <h2>Prova una prima lettura operativa del tuo sistema AI.</h2>
+          <p>
+            Inserisci una descrizione del sistema. Il motore restituisce una valutazione preliminare
+            con score, livello di rischio, gap rilevati, raccomandazioni e direzione operativa.
+          </p>
+        </div>
 
-              <select id="use_case" required>
-                <option value="">Seleziona use case</option>
-                <option value="ai-governance">AI Governance Infrastructure</option>
-                <option value="horeca">HoReCa AI</option>
-                <option value="fintech">Fintech AI</option>
-                <option value="healthcare">Healthcare AI</option>
-                <option value="recommender">Recommendation System</option>
-                <option value="other">Altro</option>
-              </select>
-
-              <textarea id="message" placeholder="Descrivi il tuo sistema AI, il contesto e i principali rischi o obiettivi." required></textarea>
-
-              <button id="analyze-btn" type="submit" class="btn btn-primary">Analizza</button>
-            </form>
-
-            <div class="contact-mini">
-              Output previsto: risk level, score, sintesi, gap e raccomandazioni.
+        <div class="copilot-wrap">
+          <div class="copilot-box">
+            <h3>AI Governance Copilot</h3>
+            <div class="copilot-subtitle">
+              Esempio: raccomandazione, scoring, classificazione, supporto decisionale, profiling,
+              automazione o sistemi che interagiscono con dati sensibili.
             </div>
 
-            <div id="result-box" class="result-box">
-              <div class="result-empty">
-                Inserisci i dati e avvia l’analisi. Il risultato verrà mostrato qui.
-              </div>
+            <label class="field-label" for="chat-input">Descrizione del sistema</label>
+            <textarea id="chat-input" placeholder="Esempio: sistema AI di raccomandazione per servizi finanziari con dati sensibili, supervisione umana limitata e audit trail parziale."></textarea>
+
+            <div class="copilot-actions">
+              <button class="btn btn-primary" id="analyze-btn" onclick="sendMessage()">Analizza</button>
+              <div class="status-inline" id="copilot-status">Pronto per l’analisi.</div>
             </div>
           </div>
+
+          <div class="output-box">
+            <h3>Output operativo</h3>
+            <div class="output-subtitle">
+              Risk level, score, sintesi, gap, raccomandazioni e decisione operativa.
+            </div>
+
+            <div id="result" class="output-state">
+              Scrivi una descrizione del sistema AI e avvia l’analisi.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="use-cases" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <div class="kicker">Use Cases</div>
+          <h2>Dove questa infrastruttura crea valore subito.</h2>
+          <p>
+            La logica è trasversale: il punto non è il singolo settore, ma la necessità di rendere
+            i sistemi AI più leggibili, verificabili e governabili.
+          </p>
+        </div>
+
+        <div class="cards-3">
+          <article class="card use-case-card">
+            <div class="tag">Financial & Decision Systems</div>
+            <h3>Scoring, profiling, raccomandazione</h3>
+            <p>
+              Utile quando il sistema influenza decisioni, priorità, accesso a servizi o suggerimenti
+              con impatto reale su utenti e processi.
+            </p>
+          </article>
+
+          <article class="card use-case-card">
+            <div class="tag">Operational AI</div>
+            <h3>Automazione e supporto decisionale</h3>
+            <p>
+              Per sistemi che assistono operatori, filtrano casi, classificano eventi o guidano
+              azioni che richiedono supervisione, coerenza e controllo.
+            </p>
+          </article>
+
+          <article class="card use-case-card">
+            <div class="tag">Enterprise Governance</div>
+            <h3>Compliance come infrastruttura</h3>
+            <p>
+              Per organizzazioni che vogliono una base strutturale su cui costruire politiche,
+              evidenze, processi di audit e tracciabilità continuativa.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pilot" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <div class="kicker">Pilot Program</div>
+          <h2>I primi pilot per trasformare la compliance AI in asset operativo.</h2>
+          <p>
+            Cognitive Logic apre i primi pilot con organizzazioni che vogliono andare oltre
+            la documentazione e costruire un’infrastruttura di governance reale.
+          </p>
+        </div>
+
+        <div class="pilot-grid">
+          <div class="pilot-box">
+            <h3>Cosa include il pilot</h3>
+            <p>
+              Un percorso iniziale orientato a capire come leggere i sistemi esistenti, evidenziare
+              i gap principali e avviare una struttura di governance più stabile.
+            </p>
+
+            <div class="pilot-points">
+              <div class="pilot-point">Valutazione preliminare di sistemi AI già attivi o in progettazione.</div>
+              <div class="pilot-point">Traduzione di controlli, regole e criteri in una logica operativa leggibile.</div>
+              <div class="pilot-point">Impostazione iniziale di storico analisi, nodi e benchmark interni.</div>
+              <div class="pilot-point">Base per una futura dashboard di monitoraggio e prioritizzazione.</div>
+            </div>
+          </div>
+
+          <div class="pilot-box">
+            <h3>Per chi è pensato</h3>
+            <p>
+              Team innovazione, governance, compliance, piattaforme AI, data leadership
+              e organizzazioni che devono rendere comprensibili sistemi sempre più complessi.
+            </p>
+
+            <div class="pilot-points">
+              <div class="pilot-point">Sistemi AI ad alta visibilità o ad alto impatto.</div>
+              <div class="pilot-point">Contesti in cui audit, verificabilità e supervisione contano davvero.</div>
+              <div class="pilot-point">Organizzazioni che vogliono trasformare il controllo in vantaggio competitivo.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="final-cta">
+          <div>
+            <h3>Da homepage a piattaforma</h3>
+            <p>
+              Il passo successivo è semplice: salvare le analisi come nodi, costruire una dashboard
+              e far emergere distribuzione dei rischi, gap ricorrenti e benchmark.
+            </p>
+          </div>
+
+          <a href="#copilot" class="btn btn-primary">Inizia dal Copilot</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      © 2026 Cognitive Logic — AI Governance Infrastructure
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <strong>Cognitive Logic</strong><br />
+        AI-native governance infrastructure.
+      </div>
+
+      <div class="footer-links">
+        <a href="#architecture">Architecture</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#copilot">QEN Copilot</a>
+        <a href="#use-cases">Use Cases</a>
+        <a href="#pilot">Pilot Program</a>
+      </div>
     </div>
   </footer>
 
   <script>
     function escapeHtml(value) {
-      if (value === null || value === undefined) return "";
       return String(value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -967,72 +1239,43 @@
         .replace(/'/g, "&#039;");
     }
 
-    function normalizeArray(value) {
-      if (Array.isArray(value)) return value;
-      if (!value) return [];
-      return [value];
-    }
-
-    function renderList(items, emptyText) {
-      const safeItems = normalizeArray(items).filter(Boolean);
-      if (safeItems.length === 0) {
-        return `<ul><li>${escapeHtml(emptyText)}</li></ul>`;
+    function renderList(items, emptyMessage) {
+      if (!Array.isArray(items) || items.length === 0) {
+        return "<ul><li>" + escapeHtml(emptyMessage) + "</li></ul>";
       }
-      return `
-        <ul>
-          ${safeItems.map(item => `<li>${escapeHtml(item)}</li>`).join("")}
-        </ul>
-      `;
+      return "<ul>" + items.map(function(item) {
+        return "<li>" + escapeHtml(item) + "</li>";
+      }).join("") + "</ul>";
     }
 
-    function getStatusClass(level) {
-      const normalized = String(level || "").toLowerCase();
-      if (normalized.includes("high")) return "high";
-      if (normalized.includes("medium")) return "medium";
-      if (normalized.includes("low")) return "low";
-      return "medium";
-    }
-
-    function getComplianceMessage(level) {
-      const normalized = String(level || "").toLowerCase();
-      if (normalized.includes("high")) {
-        return "Sistema da approfondire subito: servono controlli, governance e mitigazioni prima della messa a scala.";
+    function getDecisionMessage(riskLevel) {
+      if (riskLevel === "HIGH") {
+        return "🔴 CRITICAL — intervento immediato richiesto";
       }
-      if (normalized.includes("low")) {
-        return "Sistema in area più gestibile: la priorità è consolidare tracciabilità, monitoraggio e verificabilità.";
+      if (riskLevel === "MEDIUM") {
+        return "🟠 ACTION REQUIRED — implementare controlli mancanti";
       }
-      return "Sistema con profilo intermedio: servono raffinamento dei controlli e strutturazione più forte della governance.";
+      return "🟢 MONITOR — sistema gestibile con controlli base";
     }
 
-    async function sendAssessment(event) {
-      event.preventDefault();
+    async function sendMessage() {
+      const input = document.getElementById("chat-input");
+      const result = document.getElementById("result");
+      const status = document.getElementById("copilot-status");
+      const button = document.getElementById("analyze-btn");
 
-      const resultBox = document.getElementById("result-box");
-      const analyzeBtn = document.getElementById("analyze-btn");
+      const text = input.value.trim();
 
-      const payload = {
-        name: document.getElementById("name").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        use_case: document.getElementById("use_case").value,
-        system: document.getElementById("message").value.trim(),
-        context: "website_assessment"
-      };
-
-      if (!payload.system || !payload.use_case) {
-        resultBox.innerHTML = `
-          <div class="error-box">
-            Inserisci almeno use case e descrizione del sistema AI.
-          </div>
-        `;
+      if (!text) {
+        result.innerHTML = "Inserisci una descrizione del sistema AI.";
+        status.textContent = "Manca la descrizione.";
         return;
       }
 
-      analyzeBtn.disabled = true;
-      analyzeBtn.textContent = "Analisi in corso...";
-
-      resultBox.innerHTML = `
-        <div class="result-loading">Analisi in corso...</div>
-      `;
+      button.disabled = true;
+      button.style.opacity = "0.7";
+      status.textContent = "Analisi in corso...";
+      result.innerHTML = "Elaborazione live dell’analisi...";
 
       try {
         const response = await fetch("https://api.cognitivelogic.it/analyze", {
@@ -1040,7 +1283,10 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({
+            system: text,
+            context: "EU"
+          })
         });
 
         if (!response.ok) {
@@ -1049,62 +1295,62 @@
 
         const data = await response.json();
 
-        const riskLevel = data.risk_level || data.level || "MEDIUM";
-        const riskScore = data.risk_score ?? data.qen_score ?? data.score ?? "N/D";
-        const summary = data.summary || data.message || "Nessuna sintesi disponibile.";
-        const gaps = data.gaps || data.missing_controls || [];
-        const recommendations = data.recommendations || data.actions || [];
-        const statusClass = getStatusClass(riskLevel);
-        const complianceMessage = getComplianceMessage(riskLevel);
+        const riskLevel = data.risk_level || "LOW";
+        const riskScore = data.risk_score ?? data.qen_score ?? "-";
+        const summary = data.summary || "Valutazione generata dal QEN Engine.";
+        const decision = getDecisionMessage(riskLevel);
 
-        resultBox.innerHTML = `
-          <div class="result-top">
-            <div class="result-score">
-              <div class="result-label">Risk Score</div>
-              <div class="result-score-value">${escapeHtml(riskScore)}</div>
+        result.innerHTML = `
+          <div class="result-grid">
+            <div class="result-metric">
+              <div class="label">Risk Score</div>
+              <div class="value">${escapeHtml(riskScore)}</div>
             </div>
 
-            <div class="result-status">
-              <div class="result-label">Compliance Status</div>
-              <div class="status-pill ${statusClass}">${escapeHtml(riskLevel)}</div>
-              <div class="status-text">${escapeHtml(complianceMessage)}</div>
+            <div class="result-metric">
+              <div class="label">Compliance Status</div>
+              <div class="value" style="font-size:34px;">${escapeHtml(riskLevel)}</div>
             </div>
           </div>
 
-          <div class="result-summary">
-            <div class="result-label">Summary</div>
+          <div id="decision-box" class="decision-box">${escapeHtml(decision)}</div>
+
+          <div class="result-section">
+            <h4>Summary</h4>
             <p>${escapeHtml(summary)}</p>
           </div>
 
-          <div class="result-grid">
-            <div class="result-panel">
-              <h4>Gap rilevati</h4>
-              ${renderList(gaps, "Nessun gap esplicito restituito dall'engine.")}
-            </div>
-
-            <div class="result-panel">
-              <h4>Raccomandazioni</h4>
-              ${renderList(recommendations, "Nessuna raccomandazione esplicita restituita dall'engine.")}
-            </div>
+          <div class="result-section">
+            <h4>Gap rilevati</h4>
+            ${renderList(data.gaps, "Nessun gap critico rilevato")}
           </div>
 
-          <div class="result-footer">
-            <strong>Valutazione preliminare</strong>
+          <div class="result-section">
+            <h4>Raccomandazioni</h4>
+            ${renderList(data.recommendations, "Monitoraggio base consigliato")}
+          </div>
+
+          <div class="result-section">
+            <h4>Valutazione preliminare</h4>
             <p>
               Questo output è una prima lettura operativa utile per classificazione,
               prioritizzazione dei controlli e avvio di un percorso di governance strutturata.
             </p>
           </div>
         `;
+
+        status.textContent = "Analisi completata.";
       } catch (error) {
-        resultBox.innerHTML = `
-          <div class="error-box">
-            Errore di connessione con l'API oppure risposta non valida.
+        result.innerHTML = `
+          <div class="result-section">
+            <h4>Errore</h4>
+            <p>Connessione API non riuscita o risposta non valida.</p>
           </div>
         `;
+        status.textContent = "Errore di connessione.";
       } finally {
-        analyzeBtn.disabled = false;
-        analyzeBtn.textContent = "Analizza";
+        button.disabled = false;
+        button.style.opacity = "1";
       }
     }
   </script>
