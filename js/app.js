@@ -1,5 +1,5 @@
-const API_URL = "https://api.cognitivelogic.it/analizzare";
-const PDF_URL = "https://api.cognitivelogic.it/esporta-pdf";
+const API_URL = "https://api.cognitivelogic.it/analyze";
+const PDF_URL = "https://api.cognitivelogic.it/export-pdf";
 
 const inputEl = document.getElementById("chat-input");
 const analyzeBtn = document.getElementById("analyze-btn");
@@ -38,22 +38,6 @@ function setList(element, items) {
     .join("");
 }
 
-function renderArticles(articles) {
-  const container = document.getElementById("eu-articles");
-
-  if (!articles || articles.length === 0) {
-    container.innerHTML = "Nessun mapping disponibile";
-    return;
-  }
-
-  container.innerHTML = articles.map(a => `
-    <div class="article-item">
-      <div class="article-code">${escapeHtml(a.article || "")}</div>
-      <div>${escapeHtml(a.title || "")}</div>
-    </div>
-  `).join("");
-}
-
 function setDecisionUI(level, fallbackText = "") {
   decisionBox.classList.remove("decision-high", "decision-medium", "decision-low");
 
@@ -80,10 +64,16 @@ function resetOutput() {
 
   gapsListEl.innerHTML = "<li>—</li>";
   recommendationsListEl.innerHTML = "<li>—</li>";
-  document.getElementById("eu-obligations").innerHTML = "<li>—</li>";
-  document.getElementById("eu-controls").innerHTML = "<li>—</li>";
-  document.getElementById("eu-regulatory-obligations").innerHTML = "<li>—</li>";
-  document.getElementById("eu-articles").innerHTML = "—";
+
+  const euObligations = document.getElementById("eu-obligations");
+  const euControls = document.getElementById("eu-controls");
+  const euRegulatoryObligations = document.getElementById("eu-regulatory-obligations");
+  const euArticles = document.getElementById("eu-articles");
+
+  if (euObligations) euObligations.innerHTML = "<li>—</li>";
+  if (euControls) euControls.innerHTML = "<li>—</li>";
+  if (euRegulatoryObligations) euRegulatoryObligations.innerHTML = "<li>—</li>";
+  if (euArticles) euArticles.innerHTML = "—";
 
   rawOutputEl.textContent = "In attesa di risposta backend.";
   statusLine.textContent = "Scrivi una descrizione e avvia l’analisi.";
@@ -109,20 +99,10 @@ async function sendMessage() {
   whyEl.textContent = "Il backend sta elaborando i segnali rilevati.";
   impactEl.textContent = "Valutazione impatto in corso.";
   summaryEl.textContent = "Il backend sta elaborando la richiesta.";
-  euClassificationEl.textContent = "...";
-
+  euClassificationEl.textContent = "N/A";
   gapsListEl.innerHTML = "<li>Analisi in corso...</li>";
   recommendationsListEl.innerHTML = "<li>Analisi in corso...</li>";
-  document.getElementById("eu-obligations").innerHTML = "<li>Analisi in corso...</li>";
-  document.getElementById("eu-controls").innerHTML = "<li>Analisi in corso...</li>";
-  document.getElementById("eu-regulatory-obligations").innerHTML = "<li>Analisi in corso...</li>";
-  document.getElementById("eu-articles").innerHTML = "Analisi in corso...";
   rawOutputEl.textContent = "Richiesta inviata a " + API_URL;
-
-  const payload = {
-    system: text,
-    context: "EU"
-  };
 
   try {
     const response = await fetch(API_URL, {
@@ -130,7 +110,10 @@ async function sendMessage() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({
+        system: text,
+        context: "EU"
+      })
     });
 
     const data = await response.json();
@@ -139,21 +122,42 @@ async function sendMessage() {
       throw new Error(data.detail || data.error || "Errore backend");
     }
 
-    const riskLevel = data.risk_level || "UNKNOWN";
-    const riskScore = data.risk_score ?? "N/A";
+    const riskLevel = data.risk_level || "LOW";
+    const riskScore = data.risk_score ?? "—";
     const summary = data.summary || "Analisi completata.";
-    const why = data.why || "Nessuna motivazione disponibile.";
-    const impact = data.impact || "Nessun impatto specificato.";
-    const decision = data.decision || "";
     const gaps = Array.isArray(data.gaps) ? data.gaps : [];
     const recommendations = Array.isArray(data.recommendations) ? data.recommendations : [];
-    const euClass = data.eu_classification || "—";
-    const euObligations = Array.isArray(data.eu_obligations) ? data.eu_obligations : [];
-    const euControls = Array.isArray(data.eu_controls) ? data.eu_controls : [];
-    const euRegulatoryObligations = Array.isArray(data.eu_regulatory_obligations)
-      ? data.eu_regulatory_obligations
-      : [];
-    const euArticles = Array.isArray(data.eu_articles) ? data.eu_articles : [];
+
+    let why = data.why;
+    if (!why) {
+      if (gaps.length > 0) {
+        why = "Il sistema presenta segnali di rischio legati ai controlli o ai dati indicati.";
+      } else {
+        why = "Non sono emersi gap significativi nella descrizione fornita.";
+      }
+    }
+
+    let impact = data.impact;
+    if (!impact) {
+      if (riskLevel === "HIGH") {
+        impact = "Il sistema richiede interventi rapidi prima di essere presentato come iniziativa conforme.";
+      } else if (riskLevel === "MEDIUM") {
+        impact = "Il sistema può evolvere con controlli aggiuntivi e maggiore tracciabilità.";
+      } else {
+        impact = "Il sistema appare gestibile, con monitoraggio e controlli di base.";
+      }
+    }
+
+    let decision = data.decision;
+    if (!decision) {
+      if (riskLevel === "HIGH") {
+        decision = "🔴 CRITICAL — intervento immediato richiesto";
+      } else if (riskLevel === "MEDIUM") {
+        decision = "🟠 ACTION REQUIRED — controlli mancanti";
+      } else {
+        decision = "🟢 MONITOR — rischio contenuto";
+      }
+    }
 
     setDecisionUI(riskLevel, decision);
     riskLevelEl.textContent = String(riskLevel).toUpperCase();
@@ -161,14 +165,10 @@ async function sendMessage() {
     whyEl.textContent = why;
     impactEl.textContent = impact;
     summaryEl.textContent = summary;
-    euClassificationEl.textContent = euClass;
+    euClassificationEl.textContent = data.eu_classification || "Non disponibile";
 
     setList(gapsListEl, gaps);
     setList(recommendationsListEl, recommendations);
-    setList(document.getElementById("eu-obligations"), euObligations);
-    setList(document.getElementById("eu-controls"), euControls);
-    setList(document.getElementById("eu-regulatory-obligations"), euRegulatoryObligations);
-    renderArticles(euArticles);
 
     rawOutputEl.textContent = JSON.stringify(data, null, 2);
     statusLine.textContent = "Analisi completata.";
@@ -180,15 +180,8 @@ async function sendMessage() {
     impactEl.textContent = "Analisi interrotta per errore backend o di rete.";
     summaryEl.textContent = "Non è stato possibile ottenere una risposta valida dal backend.";
     euClassificationEl.textContent = "—";
-
     gapsListEl.innerHTML = "<li>Controlla endpoint, CORS o risposta API.</li>";
-    recommendationsListEl.innerHTML =
-      "<li>Verifica che /analyze sia attivo e raggiungibile.</li>";
-    document.getElementById("eu-obligations").innerHTML = "<li>—</li>";
-    document.getElementById("eu-controls").innerHTML = "<li>—</li>";
-    document.getElementById("eu-regulatory-obligations").innerHTML = "<li>—</li>";
-    document.getElementById("eu-articles").innerHTML = "Nessun mapping disponibile";
-
+    recommendationsListEl.innerHTML = "<li>Verifica che /analyze sia attivo e raggiungibile.</li>";
     rawOutputEl.textContent = String(error);
     statusLine.textContent = "Errore: " + error.message;
   } finally {
