@@ -1,5 +1,5 @@
-const API_URL = "https://api.cognitivelogic.it/analyze";
-const PDF_URL = "https://api.cognitivelogic.it/export-pdf";
+const API_URL = "https://api.cognitivelogic.it/analizzare";
+const PDF_URL = "https://api.cognitivelogic.it/esporta-pdf";
 
 const inputEl = document.getElementById("chat-input");
 const analyzeBtn = document.getElementById("analyze-btn");
