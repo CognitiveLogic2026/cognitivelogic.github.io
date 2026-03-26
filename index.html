@@ -252,8 +252,8 @@
             <h2>Analizza un sistema AI e ottieni una valutazione immediata.</h2>
             <p>
               Inserisci una descrizione del sistema. Il Copilot invierà la richiesta al backend
-              e restituirà un’analisi sintetica con livello di rischio, score, gap, raccomandazioni
-              e mapping regolatorio EU AI Act.
+              e restituirà un’analisi sintetica con livello di rischio, gap operativi,
+              raccomandazioni e una base di verificabilità.
             </p>
           </div>
 
@@ -261,7 +261,7 @@
             <label for="chat-input" class="input-label">Descrizione del sistema AI</label>
             <textarea
               id="chat-input"
-              placeholder="Esempio: sistema di scoring automatico per credito con dati finanziari sensibili, profilazione e supervisione umana limitata."
+              placeholder="Esempio: sistema di scoring automatico per credito con dati finanziari sensibili e supervisione umana limitata."
             ></textarea>
 
             <div class="copilot-actions">
@@ -318,31 +318,6 @@
               <div class="result-box full">
                 <span class="result-label">Summary</span>
                 <div id="summary" class="result-text">—</div>
-              </div>
-
-              <div class="result-box full">
-                <span class="result-label">EU AI Act Classification</span>
-                <div id="eu-classification" class="result-value">—</div>
-              </div>
-
-              <div class="result-box half">
-                <span class="result-label">EU Obligations</span>
-                <ul id="eu-obligations" class="result-list"></ul>
-              </div>
-
-              <div class="result-box half">
-                <span class="result-label">Required Controls</span>
-                <ul id="eu-controls" class="result-list"></ul>
-              </div>
-
-              <div class="result-box full">
-                <span class="result-label">Regulatory Mapping (EU AI Act)</span>
-                <div id="eu-articles"></div>
-              </div>
-
-              <div class="result-box full">
-                <span class="result-label">Regulatory Obligations</span>
-                <ul id="eu-regulatory-obligations" class="result-list"></ul>
               </div>
 
               <div class="result-box half">
