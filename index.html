@@ -252,7 +252,8 @@
             <h2>Analizza un sistema AI e ottieni una valutazione immediata.</h2>
             <p>
               Inserisci una descrizione del sistema. Il Copilot invierà la richiesta al backend
-              e restituirà un’analisi sintetica con livello di rischio, score, gap e raccomandazioni.
+              e restituirà un’analisi sintetica con livello di rischio, score, gap, raccomandazioni
+              e mapping regolatorio EU AI Act.
             </p>
           </div>
 
@@ -260,7 +261,7 @@
             <label for="chat-input" class="input-label">Descrizione del sistema AI</label>
             <textarea
               id="chat-input"
-              placeholder="Esempio: sistema di raccomandazione per servizi finanziari che usa dati personali, scoring automatico e supervisione umana limitata."
+              placeholder="Esempio: sistema di scoring automatico per credito con dati finanziari sensibili, profilazione e supervisione umana limitata."
             ></textarea>
 
             <div class="copilot-actions">
@@ -269,6 +270,9 @@
               </button>
               <button id="clear-btn" class="btn btn-secondary" type="button">
                 Pulisci
+              </button>
+              <button id="pdf-btn" class="btn btn-secondary" type="button">
+                Export PDF
               </button>
             </div>
 
@@ -287,8 +291,8 @@
 
             <div class="result-grid">
               <div class="result-box highlight">
-                <span class="result-label">Compliance Status</span>
-                <div id="decision-box" class="decision-box">In attesa di analisi</div>
+                <span class="result-label">Decision</span>
+                <div id="decision-box" class="decision-box">—</div>
               </div>
 
               <div class="result-box">
@@ -302,24 +306,53 @@
               </div>
 
               <div class="result-box full">
+                <span class="result-label">Why</span>
+                <div id="why" class="result-text">—</div>
+              </div>
+
+              <div class="result-box full">
+                <span class="result-label">Impact</span>
+                <div id="impact" class="result-text">—</div>
+              </div>
+
+              <div class="result-box full">
                 <span class="result-label">Summary</span>
-                <div id="summary" class="result-text">
-                  Nessuna analisi ancora eseguita.
-                </div>
+                <div id="summary" class="result-text">—</div>
+              </div>
+
+              <div class="result-box full">
+                <span class="result-label">EU AI Act Classification</span>
+                <div id="eu-classification" class="result-value">—</div>
+              </div>
+
+              <div class="result-box half">
+                <span class="result-label">EU Obligations</span>
+                <ul id="eu-obligations" class="result-list"></ul>
+              </div>
+
+              <div class="result-box half">
+                <span class="result-label">Required Controls</span>
+                <ul id="eu-controls" class="result-list"></ul>
+              </div>
+
+              <div class="result-box full">
+                <span class="result-label">Regulatory Mapping (EU AI Act)</span>
+                <div id="eu-articles"></div>
+              </div>
+
+              <div class="result-box full">
+                <span class="result-label">Regulatory Obligations</span>
+                <ul id="eu-regulatory-obligations" class="result-list"></ul>
               </div>
 
               <div class="result-box half">
                 <span class="result-label">Detected Gaps</span>
-                <ul id="gaps-list" class="result-list">
-                  <li>—</li>
-                </ul>
+                <ul id="gaps-list" class="result-list"></ul>
               </div>
 
               <div class="result-box half">
-                <span class="result-label">Recommendations</span>
-                <ul id="recommendations-list" class="result-list">
-                  <li>—</li>
-                </ul>
+                <span class="result-label">Recommended Actions</span>
+                <ul id="recommendations-list" class="result-list"></ul>
               </div>
 
               <div class="result-box full">
