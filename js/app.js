@@ -259,3 +259,4 @@ inputEl.addEventListener("keydown", (event) => {
 });
 
 resetOutput();
+window.sendMessage = sendMessage;
