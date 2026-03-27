@@ -9,64 +9,104 @@
         placeholder="Descrivi il sistema AI..."></textarea>
 
       <div style="margin-top:15px;">
-        <button id="analyze-btn">Analizza</button>
-        <button id="clear-btn">Reset</button>
+        <button id="analyze-btn" onclick="sendMessage()">Analizza</button>
+        <button id="clear-btn" onclick="document.getElementById('chat-input').value=''; document.getElementById('chat-output').innerHTML=''; document.getElementById('status-text').textContent='In attesa di input.';">Reset</button>
         <button id="pdf-btn">Export PDF</button>
       </div>
 
-      <div id="status-line" style="margin-top:10px; color:#9aa6b2;">
+      <div id="status-text" style="margin-top:10px; color:#9aa6b2;">
         In attesa di input.
       </div>
 
       <hr style="margin:25px 0; opacity:0.1;">
 
-      <!-- OUTPUT -->
-
-      <div>
-        <h3>Decision</h3>
-        <div id="decision-box">—</div>
-      </div>
-
-      <div>
-        <h3>Risk Level</h3>
-        <div id="risk-level">—</div>
-      </div>
-
-      <div>
-        <h3>Risk Score</h3>
-        <div id="risk-score">—</div>
-      </div>
-
-      <div>
-        <h3>Why</h3>
-        <div id="why">—</div>
-      </div>
-
-      <div>
-        <h3>Impact</h3>
-        <div id="impact">—</div>
-      </div>
-
-      <div>
-        <h3>Summary</h3>
-        <div id="summary">—</div>
-      </div>
-
-      <div>
-        <h3>Gaps</h3>
-        <ul id="gaps-list"></ul>
-      </div>
-
-      <div>
-        <h3>Recommendations</h3>
-        <ul id="recommendations-list"></ul>
-      </div>
-
-      <div>
-        <h3>Raw Output</h3>
-        <pre id="raw-output"></pre>
-      </div>
+      <div id="chat-output" class="output-placeholder"></div>
 
     </div>
   </div>
 </section>
+
+<script>
+async function sendMessage() {
+  const input = document.getElementById("chat-input");
+  const output = document.getElementById("chat-output");
+  const statusText = document.getElementById("status-text");
+
+  const text = input.value.trim();
+
+  if (!text) {
+    output.className = "output-placeholder";
+    output.innerHTML = "Inserisci una descrizione del sistema AI.";
+    statusText.textContent = "Manca la descrizione del sistema.";
+    return;
+  }
+
+  statusText.textContent = "Analisi in corso...";
+  output.className = "output-placeholder";
+  output.innerHTML = "Sto analizzando il sistema...";
+
+  const payload = { system: text, context: "EU" };
+
+  try {
+    const response = await fetch("https://api.cognitivelogic.it/analyze", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || "Errore API");
+    }
+
+    const data = await response.json();
+
+    const riskLevel = data.risk_level || "UNKNOWN";
+    const riskScore = data.risk_score ?? data.qen_score ?? "-";
+    const summary = data.summary || "Nessuna sintesi disponibile.";
+    const gaps = Array.isArray(data.gaps) ? data.gaps : [];
+    const recommendations = Array.isArray(data.recommendations) ? data.recommendations : [];
+
+    let decision = "";
+    if (riskLevel === "HIGH") {
+      decision = "🔴 BLOCK — intervento immediato richiesto";
+    } else if (riskLevel === "MEDIUM") {
+      decision = "🟠 ACTION REQUIRED — implementare controlli mancanti";
+    } else if (riskLevel === "LOW") {
+      decision = "🟢 MONITOR — sistema gestibile con controlli base";
+    } else {
+      decision = "⚪ REVIEW — classificazione da verificare";
+    }
+
+    output.className = "output-result";
+    output.innerHTML = `
+      <div class="result-top">
+        <div class="result-risk">${riskLevel}</div>
+        <div class="result-score">Risk score: ${riskScore}</div>
+      </div>
+      <div class="result-section">
+        <h4>Sintesi</h4>
+        <p>${summary}</p>
+      </div>
+      <div class="result-section">
+        <h4>Decisione operativa</h4>
+        <p>${decision}</p>
+      </div>
+      <div class="result-section">
+        <h4>Gap rilevati</h4>
+        ${gaps.length ? `<ul>${gaps.map(i => `<li>${i}</li>`).join("")}</ul>` : `<p>Nessun gap rilevato.</p>`}
+      </div>
+      <div class="result-section">
+        <h4>Raccomandazioni</h4>
+        ${recommendations.length ? `<ul>${recommendations.map(i => `<li>${i}</li>`).join("")}</ul>` : `<p>Nessuna raccomandazione disponibile.</p>`}
+      </div>
+    `;
+
+    statusText.textContent = "Analisi completata.";
+  } catch (error) {
+    output.className = "output-placeholder";
+    output.innerHTML = `Errore durante l'analisi: ${error.message}`;
+    statusText.textContent = "Errore di connessione o risposta non valida.";
+  }
+}
+</script>
