@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cognitive Logic — AI Governance System</title>
+  <meta
+    name="description"
+    content="Cognitive Logic trasforma la compliance AI da documentazione a sistema operativo: computabile, auditabile, operativa."
+  />
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #0b0f14;
+      --panel: rgba(255,255,255,0.03);
+      --panel-2: rgba(255,255,255,0.05);
+      --text: #e6e8eb;
+      --muted: #a0a6ad;
+      --border: rgba(255,255,255,0.08);
+      --accent: #6ee7ff;
+      --accent-2: #8b5cf6;
+      --max: 1120px;
+      --content: 760px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(110,231,255,0.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(139,92,246,0.08), transparent 26%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-width {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .container {
+      max-width: var(--content);
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 8%;
+      background: rgba(11, 15, 20, 0.82);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .navbar a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .navbar a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 92px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(110,231,255,0.08);
+      border: 1px solid rgba(110,231,255,0.18);
+      color: var(--accent);
+      font-size: 0.84rem;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      margin-bottom: 18px;
+      max-width: 10ch;
+    }
+
+    .subtitle {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 62ch;
+      margin-bottom: 28px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #7cb8ff);
+      color: #051018;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .hero-card {
+      padding: 28px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 14px;
+      font-size: 1.05rem;
+    }
+
+    .hero-card ul {
+      list-style: none;
+      margin: 0;
+    }
+
+    .hero-card li {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .hero-card li:last-child {
+      border-bottom: 0;
+    }
+
+    .hero-card strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    section {
+      margin-top: 80px;
+    }
+
+    section h2 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+
+    section h3 {
+      font-size: 1.18rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    section p {
+      margin-bottom: 18px;
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-top: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 24px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .flow-step {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .flow-step span {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .flow-step p {
+      margin-bottom: 0;
+      font-size: 0.95rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-bottom: 12px;
+    }
+
+    .demo-box,
+    .pilot-box,
+    .positioning-box,
+    .contact-box {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 24px;
+      padding: 32px;
+    }
+
+    .demo-mock {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .mock-panel {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.025);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .mock-label {
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .mock-panel ul,
+    .pilot-box ul {
+      margin: 0 0 0 18px;
+      color: var(--muted);
+    }
+
+    .pilot-box li,
+    .mock-panel li {
+      margin-bottom: 10px;
+    }
+
+    .copilot-section {
+      padding: 32px 24px 8px;
+    }
+
+    .chat-box {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      backdrop-filter: blur(12px);
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+    }
+
+    .chat-box h2 {
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .chat-box .copilot-subtitle {
+      max-width: 700px;
+      margin: 0 auto 20px;
+      color: var(--muted);
+    }
+
+    #chat-output {
+      min-height: 120px;
+      white-space: pre-wrap;
+      text-align: left;
+      margin: 0 auto 20px;
+      color: #e2e8f0;
+      background: rgba(2, 6, 23, 0.82);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 18px;
+      max-width: 760px;
+    }
+
+    #chat-input {
+      width: 100%;
+      max-width: 760px;
+      height: 130px;
+      background: #020617;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+      font-size: 15px;
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    .chat-box button {
+      background: linear-gradient(135deg, #00f0ff, #7c3aed);
+      border: none;
+      padding: 14px 26px;
+      border-radius: 12px;
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .footer {
+      margin-top: 120px;
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .grid-2,
+      .grid-3,
+      .flow,
+      .demo-mock {
+        grid-template-columns: 1fr;
+      }
+
+      .navbar {
+        padding: 18px 24px;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .nav-links {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand">Cognitive <span>Logic</span></div>
+    <nav class="nav-links">
+      <a href="#solution">Soluzione</a>
+      <a href="#how">Come funziona</a>
+      <a href="#use-cases">Applicazioni</a>
+      <a href="#demo">Demo</a>
+      <a href="#pilot">Pilot</a>
+      <a href="framework.html">Framework</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="site-width hero-grid">
+        <div>
+          <div class="eyebrow">AI Governance System</div>
+          <h1>AI Governance. Computabile. Auditabile. Operativa.</h1>
+          <p class="subtitle">
+            Cognitive Logic trasforma la compliance AI da documentazione a sistema operativo.
+            Struttura norme, rischi e controlli in una logica eseguibile, pronta per audit,
+            classificazione del rischio e output verificabili.
+          </p>
+
+          <div class="cta-row">
+            <a href="#demo" class="btn-primary">Vedi Demo</a>
+            <a href="#pilot" class="btn-secondary">Avvia Pilot</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h3>Perché ora</h3>
+          <ul>
+            <li>
+              <strong>Compliance AI non più solo documentale</strong>
+              Policy e PDF non bastano per sistemi dinamici.
+            </li>
+            <li>
+              <strong>Risk classification più rapida</strong>
+              Dal sistema AI ai controlli richiesti in un flusso unico.
+            </li>
+            <li>
+              <strong>Output auditabili</strong>
+              Risultati leggibili via API, report e governance layer.
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="copilot-section">
+      <div class="chat-box">
+        <h2>Testa il tuo sistema AI</h2>
+        <p class="copilot-subtitle">
+          Ricevi una valutazione immediata di rischio e controlli richiesti.
+        </p>
+
+        <div id="chat-output">Scrivi una descrizione del tuo sistema AI e avvia l’analisi.</div>
+
+        <textarea id="chat-input" placeholder="Esempio: sistema fintech di raccomandazione con dati sensibili e supervisione umana."></textarea>
+        <button onclick="sendMessage()">Analizza</button>
+      </div>
+    </section>
+
+    <div class="container">
+      <section id="solution">
+        <h2>La compliance AI oggi è troppo fragile</h2>
+        <p>
+          Audit manuali, documentazione frammentata e controlli non strutturati non sono sufficienti
+          quando un sistema AI deve essere compreso, classificato e governato in modo coerente.
+        </p>
+
+        <div class="grid-2">
+          <article class="card">
+            <h3>Il problema</h3>
+            <p>
+              Oggi la governance AI è spesso distribuita tra policy statiche, fogli di controllo e verifiche manuali.
+              Questo rallenta il processo decisionale e rende la compliance difficile da mantenere nel tempo.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>La soluzione</h3>
+            <p>
+              Cognitive Logic trasforma norme, rischi e controlli in una struttura computabile.
+              Il risultato non è solo documentazione: è un layer operativo che supporta analisi, audit e decisioni coerenti.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="how">
+        <h2>Come funziona</h2>
+        <p>
+          Dal profilo del sistema AI fino all’output finale: classificazione del rischio,
+          mappatura dei controlli e risultati pronti da leggere o integrare.
+        </p>
+
+        <div class="flow">
+          <article class="flow-step">
+            <span>Step 1</span>
+            <h3>Input AI System</h3>
+            <p>Descrizione del sistema, use case, dataset, finalità e impatto operativo.</p>
+          </article>
+
+          <article class="flow-step">
+            <span>Step 2</span>
+            <h3>QEN Engine</h3>
+            <p>Il motore struttura gli elementi di governance in una logica coerente.</p>
+          </article>
+
+          <article class="flow-step">
+            <span>Step 3</span>
+            <h3>Risk Classification</h3>
+            <p>Il sistema produce una prima lettura del rischio applicabile.</p>
+          </article>
+
+          <article class="flow-step">
+            <span>Step 4</span>
+            <h3>Control Mapping</h3>
+            <p>Vengono associati i controlli e i punti di verifica richiesti.</p>
+          </article>
+
+          <article class="flow-step">
+            <span>Step 5</span>
+            <h3>Audit Output</h3>
+            <p>Output leggibili via API, report PDF o integrazione in dashboard.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="use-cases">
+        <h2>Applicazioni</h2>
+        <p>
+          Pensato per contesti in cui la governance AI deve essere concreta, verificabile e integrabile in processi reali.
+        </p>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="tag">Fintech</div>
+            <h3>Valutazione rischio AI</h3>
+            <p>
+              Supporto alla classificazione di sistemi decisionali, motori di scoring e processi
+              dove la compliance non può restare astratta.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="tag">Assicurazioni</div>
+            <h3>Audit dei modelli</h3>
+            <p>
+              Struttura controlli e punti di verifica per modelli utilizzati in flussi operativi
+              e decisionali ad alta sensibilità.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="tag">AI Startup</div>
+            <h3>Compliance-by-design</h3>
+            <p>
+              Inserisce governance e logica di controllo già nella fase di costruzione del prodotto,
+              non solo dopo il rilascio.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="demo">
+        <div class="demo-box">
+          <h2>Live Demo</h2>
+          <p>
+            Inserisci un sistema AI e ottieni una prima lettura strutturata:
+            classificazione del rischio, controlli richiesti e output pronti per audit.
+          </p>
+
+          <div class="demo-mock">
+            <div class="mock-panel">
+              <div class="mock-label">Input esempio</div>
+              <ul>
+                <li>System: Recommendation Engine</li>
+                <li>Domain: Fintech</li>
+                <li>Use case: Ranking di offerte finanziarie</li>
+                <li>Data: Profili utenti + comportamento storico</li>
+              </ul>
+            </div>
+
+            <div class="mock-panel">
+              <div class="mock-label">Output esempio</div>
+              <ul>
+                <li>Risk level: Valutazione guidata</li>
+                <li>Controls: logging, explainability, review</li>
+                <li>Format: API response / PDF audit</li>
+                <li>Status: pronto per pilot</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="cta-row" style="margin-top: 24px;">
+            <a href="demo.html" class="btn-primary">Apri Demo</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="pilot">
+        <div class="pilot-box">
+          <h2>Pilot Program</h2>
+          <p>
+            Stiamo attivando i primi pilot con aziende che vogliono trasformare la compliance AI
+            in infrastruttura operativa, non solo in documentazione.
+          </p>
+
+          <ul>
+            <li>Analisi di sistemi AI e use case operativi.</li>
+            <li>Mappatura del rischio e dei controlli richiesti.</li>
+            <li>Output leggibili per audit, API e governance interna.</li>
+          </ul>
+
+          <div class="cta-row" style="margin-top: 24px;">
+            <a href="#contact" class="btn-secondary">Richiedi accesso</a>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="positioning-box">
+          <h2>Non è un tool. È un layer infrastrutturale.</h2>
+          <p>
+            Cognitive Logic non si limita a documentare la compliance AI.
+            La rende eseguibile, leggibile e integrabile in un sistema di governance.
+          </p>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="contact-box">
+          <h2>Parliamone</h2>
+          <p>
+            Stiamo lavorando con early adopters su sistemi AI reali e contesti dove
+            la compliance deve diventare operativa, auditabile e presentabile.
+          </p>
+
+          <div class="cta-row">
+            <a href="mailto:info@cognitivelogic.it" class="btn-primary">Contattaci</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    © 2026 Cognitive Logic<br />
+    AI Governance System · QEN Engine · Europe
+  </footer>
+  
+<script>
+async function sendMessage() {
+  const input = document.getElementById("chat-input");
+  const output = document.getElementById("chat-output");
+
+  const text = input.value.trim();
+
+  if (!text) {
+    output.innerHTML = "Inserisci una descrizione del sistema AI.";
+    return;
+  }
+
+  const payload = {
+    system: text,
+    dataset: "user_data",
+    context: "EU"
+  };
+output.innerHTML = "Analisi in corso...";
+
+try {
+  const response = await fetch("http://46.225.86.235:8000/validate", {
+    method: "GET"
+  });
+
+  const data = await response.json();
+
+  output.innerHTML = `
+    <div style="font-size:22px; font-weight:600; margin-bottom:10px;">
+      ${data.status}
+    </div>
+  `;
+} catch (error) {
+  output.innerHTML = "Errore connessione API";
+}
+output.innerHTML = `
+  <div style="font-size:22px; font-weight:600; margin-bottom:10px;">
+    ${data.risk_level}
+  </div>
+
+    QEN score: ${data.qen_score}
+  </div>
+
+  <div style="margin-bottom:15px;">
+    <strong>🛡 Controls richiesti</strong>
+    <ul>
+      ${(data.controls || []).map(c => `<li>${c}</li>`).join("")}
+    </ul>
+  </div>
+
+  <div style="margin-bottom:15px;">
+    <strong>⚠️ Gap normativi</strong>
+    <ul>
+      ${(data.violations || []).map(v => `<li>${v}</li>`).join("")}
+    </ul>
+  </div>
+
+  <div>
+    <strong>🧠 Reasoning</strong>
+    <ul>
+      ${(data.reasoning || []).map(r => `<li>${r}</li>`).join("")}
+    </ul>
+  </div>
+`;
+  
+  } catch (error) {
+    output.innerHTML = "Errore connessione API";
+  }
+}
+</script>
+  
+</body>
+</html>
