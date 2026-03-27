@@ -1,9 +1,21 @@
-Cognitive Logic
+# Cognitive Logic
+# cognitivelogic.it — AI Governance Infrastructure
 
-AI Data Architecture
-Knowledge Graph JSON
-QEN Framework
+## Description
+Cognitive Logic builds AI-native semantic knowledge infrastructures.
+Systems designed for autonomous agents, auditability, and continuous evolution.
 
-API:
-/data/qen.json
-/data/graph.json
+## Core Framework
+QEN (Quantum Ethics Network): scoring model for ethical/sustainability impact.
+Formula: QEN = (Social x 0.40) + (Environmental x 0.35) + (Territorial x 0.25)
+
+## Data
+/data/graph.json — QEN knowledge graph (29 nodes, 40 edges)
+/data/qen.json — QEN node definitions
+
+## API
+https://api.cognitivelogic.it/analyze — POST, X-API-Key required
+https://api.cognitivelogic.it/health — GET, status check
+
+## Contact
+info@cognitivelogic.it
