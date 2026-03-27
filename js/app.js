@@ -8,120 +8,101 @@ const pdfBtn = document.getElementById("pdf-btn");
 const statusLine = document.getElementById("status-line");
 
 const decisionBox = document.getElementById("decision-box");
-const riskLevelBox = document.getElementById("risk-level");
-const riskScoreBox = document.getElementById("risk-score");
-const whyBox = document.getElementById("why");
-const impactBox = document.getElementById("impact");
-const summaryBox = document.getElementById("summary");
-const gapsList = document.getElementById("gaps-list");
-const recommendationsList = document.getElementById("recommendations-list");
-const rawOutput = document.getElementById("raw-output");
+const riskLevelEl = document.getElementById("risk-level");
+const riskScoreEl = document.getElementById("risk-score");
+const whyEl = document.getElementById("why");
+const impactEl = document.getElementById("impact");
+const summaryEl = document.getElementById("summary");
+const euClassificationEl = document.getElementById("eu-classification");
+const gapsListEl = document.getElementById("gaps-list");
+const recommendationsListEl = document.getElementById("recommendations-list");
+const rawOutputEl = document.getElementById("raw-output");
 
-function setLoadingState(isLoading) {
-  if (analyzeBtn) analyzeBtn.disabled = isLoading;
-  if (clearBtn) clearBtn.disabled = isLoading;
-  if (pdfBtn) pdfBtn.disabled = isLoading;
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
-function clearLists() {
-  if (gapsList) gapsList.innerHTML = "";
-  if (recommendationsList) recommendationsList.innerHTML = "";
-}
-
-function renderList(listEl, items) {
-  if (!listEl) return;
-
-  listEl.innerHTML = "";
-
-  if (!items || !Array.isArray(items) || items.length === 0) {
-    const li = document.createElement("li");
-    li.textContent = "—";
-    listEl.appendChild(li);
+function setList(element, items) {
+  if (!Array.isArray(items) || items.length === 0) {
+    element.innerHTML = "<li>Nessun elemento rilevato.</li>";
     return;
   }
 
-  items.forEach((item) => {
-    const li = document.createElement("li");
-    li.textContent = item;
-    listEl.appendChild(li);
-  });
+  element.innerHTML = items
+    .map(item => `<li>${escapeHtml(String(item))}</li>`)
+    .join("");
 }
 
-function getDecisionFromRisk(riskLevel) {
-  if (riskLevel === "HIGH") {
-    return "🔴 CRITICAL — intervento immediato richiesto";
-  }
-  if (riskLevel === "MEDIUM") {
-    return "🟠 ACTION REQUIRED — implementare controlli mancanti";
-  }
-  if (riskLevel === "LOW") {
-    return "🟢 MONITOR — sistema gestibile con controlli base";
-  }
-  return "—";
-}
+function setDecisionUI(level, fallbackText = "") {
+  decisionBox.classList.remove("decision-high", "decision-medium", "decision-low");
 
-function getWhyFromData(data) {
-  if (data.why) return data.why;
-
-  if (Array.isArray(data.gaps) && data.gaps.length > 0) {
-    return `Segnali rilevati: ${data.gaps.join(", ")}.`;
+  if (level === "HIGH") {
+    decisionBox.classList.add("decision-high");
+    decisionBox.innerText = fallbackText || "🔴 CRITICAL — intervento immediato richiesto";
+  } else if (level === "MEDIUM") {
+    decisionBox.classList.add("decision-medium");
+    decisionBox.innerText = fallbackText || "🟠 ACTION REQUIRED — controlli mancanti";
+  } else {
+    decisionBox.classList.add("decision-low");
+    decisionBox.innerText = fallbackText || "🟢 MONITOR — rischio contenuto";
   }
-
-  return "Nessuna motivazione dettagliata restituita dal backend.";
-}
-
-function getImpactFromRisk(riskLevel) {
-  if (riskLevel === "HIGH") {
-    return "Impatto elevato: servono controlli formali, verifica normativa e supervisione immediata.";
-  }
-  if (riskLevel === "MEDIUM") {
-    return "Impatto medio: servono misure di trasparenza, tracciabilità e controllo operativo.";
-  }
-  if (riskLevel === "LOW") {
-    return "Impatto contenuto: sistema monitorabile con controlli base.";
-  }
-  return "Impatto non disponibile.";
 }
 
 function resetOutput() {
-  if (decisionBox) decisionBox.textContent = "—";
-  if (riskLevelBox) riskLevelBox.textContent = "—";
-  if (riskScoreBox) riskScoreBox.textContent = "—";
-  if (whyBox) whyBox.textContent = "—";
-  if (impactBox) impactBox.textContent = "—";
-  if (summaryBox) summaryBox.textContent = "—";
-  clearLists();
-  if (rawOutput) rawOutput.textContent = "In attesa di risposta backend.";
-}
+  setDecisionUI("LOW", "In attesa di analisi");
+  riskLevelEl.textContent = "—";
+  riskScoreEl.textContent = "—";
+  whyEl.textContent = "—";
+  impactEl.textContent = "—";
+  summaryEl.textContent = "Nessuna analisi ancora eseguita.";
+  euClassificationEl.textContent = "—";
 
-function showLoadingOutput() {
-  if (decisionBox) decisionBox.textContent = "Elaborazione...";
-  if (riskLevelBox) riskLevelBox.textContent = "...";
-  if (riskScoreBox) riskScoreBox.textContent = "...";
-  if (whyBox) whyBox.textContent = "Il backend sta elaborando i segnali rilevati.";
-  if (impactBox) impactBox.textContent = "Valutazione impatto in corso.";
-  if (summaryBox) summaryBox.textContent = "Il backend sta elaborando la richiesta.";
-  clearLists();
-  if (rawOutput) rawOutput.textContent = "Richiesta inviata al backend...";
+  gapsListEl.innerHTML = "<li>—</li>";
+  recommendationsListEl.innerHTML = "<li>—</li>";
+
+  const euObligations = document.getElementById("eu-obligations");
+  const euControls = document.getElementById("eu-controls");
+  const euRegulatoryObligations = document.getElementById("eu-regulatory-obligations");
+  const euArticles = document.getElementById("eu-articles");
+
+  if (euObligations) euObligations.innerHTML = "<li>—</li>";
+  if (euControls) euControls.innerHTML = "<li>—</li>";
+  if (euRegulatoryObligations) euRegulatoryObligations.innerHTML = "<li>—</li>";
+  if (euArticles) euArticles.innerHTML = "—";
+
+  rawOutputEl.textContent = "In attesa di risposta backend.";
+  statusLine.textContent = "Scrivi una descrizione e avvia l’analisi.";
 }
 
 async function sendMessage() {
-  if (!inputEl) {
-    console.error("Elemento #chat-input non trovato");
-    return;
-  }
-
   const text = inputEl.value.trim();
 
   if (!text) {
-    if (statusLine) statusLine.textContent = "Inserisci una descrizione del sistema AI.";
+    statusLine.textContent = "Inserisci una descrizione del sistema AI.";
     inputEl.focus();
     return;
   }
 
-  setLoadingState(true);
-  if (statusLine) statusLine.textContent = "Analisi in corso...";
-  showLoadingOutput();
+  analyzeBtn.disabled = true;
+  clearBtn.disabled = true;
+  pdfBtn.disabled = true;
+
+  statusLine.textContent = "Analisi in corso...";
+  decisionBox.textContent = "Elaborazione...";
+  riskLevelEl.textContent = "...";
+  riskScoreEl.textContent = "...";
+  whyEl.textContent = "Il backend sta elaborando i segnali rilevati.";
+  impactEl.textContent = "Valutazione impatto in corso.";
+  summaryEl.textContent = "Il backend sta elaborando la richiesta.";
+  euClassificationEl.textContent = "N/A";
+  gapsListEl.innerHTML = "<li>Analisi in corso...</li>";
+  recommendationsListEl.innerHTML = "<li>Analisi in corso...</li>";
+  rawOutputEl.textContent = "Richiesta inviata a " + API_URL;
 
   try {
     const response = await fetch(API_URL, {
@@ -135,73 +116,94 @@ async function sendMessage() {
       })
     });
 
-    const contentType = response.headers.get("content-type") || "";
-    let data;
-
-    if (contentType.includes("application/json")) {
-      data = await response.json();
-    } else {
-      const textResponse = await response.text();
-      throw new Error(`Risposta non JSON: ${textResponse}`);
-    }
+    const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data?.detail || `HTTP ${response.status}`);
+      throw new Error(data.detail || data.error || "Errore backend");
     }
 
-    const decision = data.decision || getDecisionFromRisk(data.risk_level);
-    const why = getWhyFromData(data);
-    const impact = data.impact || getImpactFromRisk(data.risk_level);
+    const riskLevel = data.risk_level || "LOW";
+    const riskScore = data.risk_score ?? "—";
+    const summary = data.summary || "Analisi completata.";
+    const gaps = Array.isArray(data.gaps) ? data.gaps : [];
+    const recommendations = Array.isArray(data.recommendations) ? data.recommendations : [];
 
-    if (decisionBox) decisionBox.textContent = decision;
-    if (riskLevelBox) riskLevelBox.textContent = data.risk_level || "—";
-    if (riskScoreBox) riskScoreBox.textContent = data.risk_score ?? "—";
-    if (whyBox) whyBox.textContent = why;
-    if (impactBox) impactBox.textContent = impact;
-    if (summaryBox) summaryBox.textContent = data.summary || "—";
+    let why = data.why;
+    if (!why) {
+      if (gaps.length > 0) {
+        why = "Il sistema presenta segnali di rischio legati ai controlli o ai dati indicati.";
+      } else {
+        why = "Non sono emersi gap significativi nella descrizione fornita.";
+      }
+    }
 
-    renderList(gapsList, data.gaps);
-    renderList(recommendationsList, data.recommendations);
+    let impact = data.impact;
+    if (!impact) {
+      if (riskLevel === "HIGH") {
+        impact = "Il sistema richiede interventi rapidi prima di essere presentato come iniziativa conforme.";
+      } else if (riskLevel === "MEDIUM") {
+        impact = "Il sistema può evolvere con controlli aggiuntivi e maggiore tracciabilità.";
+      } else {
+        impact = "Il sistema appare gestibile, con monitoraggio e controlli di base.";
+      }
+    }
 
-    if (rawOutput) rawOutput.textContent = JSON.stringify(data, null, 2);
-    if (statusLine) statusLine.textContent = "Analisi completata.";
+    let decision = data.decision;
+    if (!decision) {
+      if (riskLevel === "HIGH") {
+        decision = "🔴 CRITICAL — intervento immediato richiesto";
+      } else if (riskLevel === "MEDIUM") {
+        decision = "🟠 ACTION REQUIRED — controlli mancanti";
+      } else {
+        decision = "🟢 MONITOR — rischio contenuto";
+      }
+    }
+
+    setDecisionUI(riskLevel, decision);
+    riskLevelEl.textContent = String(riskLevel).toUpperCase();
+    riskScoreEl.textContent = String(riskScore);
+    whyEl.textContent = why;
+    impactEl.textContent = impact;
+    summaryEl.textContent = summary;
+    euClassificationEl.textContent = data.eu_classification || "Non disponibile";
+
+    setList(gapsListEl, gaps);
+    setList(recommendationsListEl, recommendations);
+
+    rawOutputEl.textContent = JSON.stringify(data, null, 2);
+    statusLine.textContent = "Analisi completata.";
   } catch (error) {
-    if (decisionBox) decisionBox.textContent = "Errore";
-    if (riskLevelBox) riskLevelBox.textContent = "—";
-    if (riskScoreBox) riskScoreBox.textContent = "—";
-    if (whyBox) whyBox.textContent = "La richiesta non ha ricevuto una risposta valida.";
-    if (impactBox) impactBox.textContent = "Verificare endpoint, backend e console.";
-    if (summaryBox) summaryBox.textContent = error.message || "Errore sconosciuto.";
-    clearLists();
-    if (rawOutput) rawOutput.textContent = String(error);
-    if (statusLine) statusLine.textContent = `Errore: ${error.message}`;
-    console.error("sendMessage error:", error);
+    setDecisionUI("HIGH", "Errore durante l’analisi");
+    riskLevelEl.textContent = "ERROR";
+    riskScoreEl.textContent = "—";
+    whyEl.textContent = "Non è stato possibile interpretare correttamente la richiesta.";
+    impactEl.textContent = "Analisi interrotta per errore backend o di rete.";
+    summaryEl.textContent = "Non è stato possibile ottenere una risposta valida dal backend.";
+    euClassificationEl.textContent = "—";
+    gapsListEl.innerHTML = "<li>Controlla endpoint, CORS o risposta API.</li>";
+    recommendationsListEl.innerHTML = "<li>Verifica che /analyze sia attivo e raggiungibile.</li>";
+    rawOutputEl.textContent = String(error);
+    statusLine.textContent = "Errore: " + error.message;
   } finally {
-    setLoadingState(false);
+    analyzeBtn.disabled = false;
+    clearBtn.disabled = false;
+    pdfBtn.disabled = false;
   }
 }
 
-function clearForm() {
-  if (!inputEl) return;
-  inputEl.value = "";
-  resetOutput();
-  if (statusLine) statusLine.textContent = "Campi puliti.";
-  inputEl.focus();
-}
-
 async function exportPdf() {
-  if (!inputEl) return;
-
   const text = inputEl.value.trim();
 
   if (!text) {
-    if (statusLine) statusLine.textContent = "Inserisci una descrizione prima di esportare il PDF.";
+    statusLine.textContent = "Inserisci una descrizione prima di esportare il PDF.";
     inputEl.focus();
     return;
   }
 
-  setLoadingState(true);
-  if (statusLine) statusLine.textContent = "Generazione PDF executive in corso...";
+  pdfBtn.disabled = true;
+  analyzeBtn.disabled = true;
+  clearBtn.disabled = true;
+  statusLine.textContent = "Generazione PDF executive in corso...";
 
   try {
     const response = await fetch(PDF_URL, {
@@ -216,33 +218,44 @@ async function exportPdf() {
     });
 
     if (!response.ok) {
-      const errText = await response.text();
-      throw new Error(`Export PDF fallito: ${response.status} ${errText}`);
+      throw new Error("Errore nella generazione del PDF");
     }
 
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
+
     const a = document.createElement("a");
     a.href = url;
     a.download = "cognitive-logic-executive-report.pdf";
     document.body.appendChild(a);
     a.click();
     a.remove();
-    window.URL.revokeObjectURL(url);
 
-    if (statusLine) statusLine.textContent = "PDF esportato correttamente.";
+    window.URL.revokeObjectURL(url);
+    statusLine.textContent = "PDF executive generato correttamente.";
   } catch (error) {
-    if (statusLine) statusLine.textContent = `Errore PDF: ${error.message}`;
-    console.error("exportPdf error:", error);
+    statusLine.textContent = "Errore PDF: " + error.message;
   } finally {
-    setLoadingState(false);
+    pdfBtn.disabled = false;
+    analyzeBtn.disabled = false;
+    clearBtn.disabled = false;
   }
 }
 
-if (analyzeBtn) analyzeBtn.addEventListener("click", sendMessage);
-if (clearBtn) clearBtn.addEventListener("click", clearForm);
-if (pdfBtn) pdfBtn.addEventListener("click", exportPdf);
+analyzeBtn.addEventListener("click", sendMessage);
 
-window.sendMessage = sendMessage;
+clearBtn.addEventListener("click", () => {
+  inputEl.value = "";
+  resetOutput();
+  inputEl.focus();
+});
+
+pdfBtn.addEventListener("click", exportPdf);
+
+inputEl.addEventListener("keydown", (event) => {
+  if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+    sendMessage();
+  }
+});
 
 resetOutput();
