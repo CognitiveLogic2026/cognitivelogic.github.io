@@ -116,7 +116,7 @@ safeSet(rawOutputEl, “Richiesta inviata a “ + API_URL);
 try {
 const response = await fetch(API_URL, {
 method: “POST”,
-headers: { “Content-Type”: “application/json” },
+headers: { “Content-Type”: “application/json”, “X-API-Key”: “CL-qen-2026-xK9mPvZ3nRwQ7tYbDjF” },
 body: JSON.stringify({ system: text, context: “EU” })
 });
 
@@ -220,7 +220,7 @@ safeSet(statusLine, “Generazione PDF executive in corso…”);
 try {
 const response = await fetch(PDF_URL, {
 method: “POST”,
-headers: { “Content-Type”: “application/json” },
+headers: { “Content-Type”: “application/json”, “X-API-Key”: “CL-qen-2026-xK9mPvZ3nRwQ7tYbDjF” },
 body: JSON.stringify({ system: text, context: “EU” })
 });
 
