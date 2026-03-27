@@ -1,11 +1,466 @@
 {
-  "nodes":[
-    {"id":"qen","type":"framework"},
-    {"id":"esg","type":"concept"},
-    {"id":"ai-act","type":"regulation"}
+  "nodes": [
+    {
+      "id": "business_horeca_001",
+      "type": "Business",
+      "name": "HoReCa Business",
+      "description": "Business unit under evaluation in the QEN Copilot for HoReCa."
+    },
+
+    {
+      "id": "vector_social",
+      "type": "Vector",
+      "name": "SocialVector",
+      "dimension": "social",
+      "description": "Social impact and inclusion dimension."
+    },
+    {
+      "id": "vector_environmental",
+      "type": "Vector",
+      "name": "EnvironmentalVector",
+      "dimension": "environmental",
+      "description": "Environmental sustainability dimension."
+    },
+    {
+      "id": "vector_territorial",
+      "type": "Vector",
+      "name": "TerritorialVector",
+      "dimension": "territorial",
+      "description": "Territorial identity and local ecosystem dimension."
+    },
+
+    {
+      "id": "kpi_social_accessibility",
+      "type": "KPI",
+      "name": "AccessibilityScore",
+      "dimension": "social",
+      "weight": 0.33,
+      "description": "Measures accessibility of spaces, services, and communication."
+    },
+    {
+      "id": "kpi_social_inclusion",
+      "type": "KPI",
+      "name": "StaffInclusionScore",
+      "dimension": "social",
+      "weight": 0.33,
+      "description": "Measures inclusion practices in staff management and workplace culture."
+    },
+    {
+      "id": "kpi_social_community",
+      "type": "KPI",
+      "name": "CommunityEngagementScore",
+      "dimension": "social",
+      "weight": 0.34,
+      "description": "Measures active relationship with the local community."
+    },
+
+    {
+      "id": "kpi_environmental_waste",
+      "type": "KPI",
+      "name": "WasteReductionScore",
+      "dimension": "environmental",
+      "weight": 0.34,
+      "description": "Measures waste prevention and reduction practices."
+    },
+    {
+      "id": "kpi_environmental_energy",
+      "type": "KPI",
+      "name": "EnergyEfficiencyScore",
+      "dimension": "environmental",
+      "weight": 0.33,
+      "description": "Measures energy efficiency and responsible resource usage."
+    },
+    {
+      "id": "kpi_environmental_materials",
+      "type": "KPI",
+      "name": "SustainableMaterialsScore",
+      "dimension": "environmental",
+      "weight": 0.33,
+      "description": "Measures adoption of sustainable, reusable, or low-impact materials."
+    },
+
+    {
+      "id": "kpi_territorial_local_network",
+      "type": "KPI",
+      "name": "LocalProducerIntegrationScore",
+      "dimension": "territorial",
+      "weight": 0.34,
+      "description": "Measures integration with local producers and supply ecosystem."
+    },
+    {
+      "id": "kpi_territorial_identity",
+      "type": "KPI",
+      "name": "TerritorialIdentityScore",
+      "dimension": "territorial",
+      "weight": 0.33,
+      "description": "Measures how strongly the business expresses local identity."
+    },
+    {
+      "id": "kpi_territorial_seasonality",
+      "type": "KPI",
+      "name": "SeasonalMenuScore",
+      "dimension": "territorial",
+      "weight": 0.33,
+      "description": "Measures seasonal alignment of menu and sourcing."
+    },
+
+    {
+      "id": "evidence_accessibility_policy",
+      "type": "Evidence",
+      "name": "AccessibilityPolicy",
+      "dimension": "social",
+      "input_key": "accessibility_policy",
+      "value": 0,
+      "confidence": 0.8,
+      "description": "Evidence of accessibility guidelines, facilities, or policies."
+    },
+    {
+      "id": "evidence_staff_inclusion",
+      "type": "Evidence",
+      "name": "StaffInclusionPractice",
+      "dimension": "social",
+      "input_key": "staff_inclusion_practice",
+      "value": 0,
+      "confidence": 0.8,
+      "description": "Evidence of inclusive hiring, training, or workplace practices."
+    },
+    {
+      "id": "evidence_community_engagement",
+      "type": "Evidence",
+      "name": "CommunityEngagement",
+      "dimension": "social",
+      "input_key": "community_engagement",
+      "value": 0,
+      "confidence": 0.8,
+      "description": "Evidence of partnerships, events, or social contribution to the community."
+    },
+
+    {
+      "id": "evidence_waste_reduction",
+      "type": "Evidence",
+      "name": "WasteReductionPractice",
+      "dimension": "environmental",
+      "input_key": "waste_reduction_practice",
+      "value": 0,
+      "confidence": 0.8,
+      "description": "Evidence of waste monitoring, reduction, reuse, or food recovery."
+    },
+    {
+      "id": "evidence_energy_efficiency",
+      "type": "Evidence",
+      "name": "EnergyEfficiencyPractice",
+      "dimension": "environmental",
+      "input_key": "energy_efficiency_practice",
+      "value": 0,
+      "confidence": 0.8,
+      "description": "Evidence of low-consumption equipment, energy monitoring, or efficiency measures."
+    },
+    {
+      "id": "evidence_sustainable_materials",
+      "type": "Evidence",
+      "name": "SustainableMaterialsUsage",
+      "dimension": "environmental",
+      "input_key": "sustainable_materials_usage",
+      "value": 0,
+      "confidence": 0.8,
+      "description": "Evidence of sustainable packaging, materials, or low-impact supplies."
+    },
+
+    {
+      "id": "evidence_local_producer_network",
+      "type": "Evidence",
+      "name": "LocalProducerNetwork",
+      "dimension": "territorial",
+      "input_key": "local_producer_network",
+      "value": 0,
+      "confidence": 0.8,
+      "description": "Evidence of an active network of local suppliers and producers."
+    },
+    {
+      "id": "evidence_seasonal_menu",
+      "type": "Evidence",
+      "name": "SeasonalMenuPractice",
+      "dimension": "territorial",
+      "input_key": "seasonal_menu_practice",
+      "value": 0,
+      "confidence": 0.8,
+      "description": "Evidence that menu design follows seasonality."
+    },
+    {
+      "id": "evidence_territorial_identity",
+      "type": "Evidence",
+      "name": "TerritorialIdentity",
+      "dimension": "territorial",
+      "input_key": "territorial_identity",
+      "value": 0,
+      "confidence": 0.8,
+      "description": "Evidence of local identity expressed through menu, narrative, design, or experience."
+    },
+    {
+      "id": "evidence_supply_chain_traceability",
+      "type": "Evidence",
+      "name": "SupplyChainTraceability",
+      "dimension": "territorial",
+      "input_key": "supply_chain_traceability",
+      "value": 0,
+      "confidence": 0.8,
+      "description": "Evidence of provenance and traceability in sourcing."
+    },
+
+    {
+      "id": "output_qen_score",
+      "type": "Output",
+      "name": "QENScore",
+      "description": "Overall QEN score generated by the model."
+    },
+    {
+      "id": "output_social_score",
+      "type": "Output",
+      "name": "SocialScore",
+      "description": "Aggregated score for the social vector."
+    },
+    {
+      "id": "output_environmental_score",
+      "type": "Output",
+      "name": "EnvironmentalScore",
+      "description": "Aggregated score for the environmental vector."
+    },
+    {
+      "id": "output_territorial_score",
+      "type": "Output",
+      "name": "TerritorialScore",
+      "description": "Aggregated score for the territorial vector."
+    },
+
+    {
+      "id": "benchmark_level",
+      "type": "Benchmark",
+      "name": "BenchmarkLevel",
+      "levels": {
+        "high": { "min": 80, "label": "Advanced" },
+        "medium": { "min": 60, "label": "Structured" },
+        "low": { "min": 0, "label": "Early Stage" }
+      },
+      "description": "Performance classification level of the business."
+    },
+    {
+      "id": "benchmark_improvement_priority",
+      "type": "Benchmark",
+      "name": "ImprovementPriority",
+      "levels": ["LOW", "MEDIUM", "HIGH"],
+      "description": "Priority areas for improvement suggested by the engine."
+    }
   ],
-  "edges":[
-    {"from":"qen","to":"esg","type":"scoring"},
-    {"from":"qen","to":"ai-act","type":"compliance"}
+  "edges": [
+    {
+      "source": "business_horeca_001",
+      "target": "vector_social",
+      "type": "HAS_VECTOR"
+    },
+    {
+      "source": "business_horeca_001",
+      "target": "vector_environmental",
+      "type": "HAS_VECTOR"
+    },
+    {
+      "source": "business_horeca_001",
+      "target": "vector_territorial",
+      "type": "HAS_VECTOR"
+    },
+
+    {
+      "source": "vector_social",
+      "target": "kpi_social_accessibility",
+      "type": "HAS_KPI"
+    },
+    {
+      "source": "vector_social",
+      "target": "kpi_social_inclusion",
+      "type": "HAS_KPI"
+    },
+    {
+      "source": "vector_social",
+      "target": "kpi_social_community",
+      "type": "HAS_KPI"
+    },
+
+    {
+      "source": "vector_environmental",
+      "target": "kpi_environmental_waste",
+      "type": "HAS_KPI"
+    },
+    {
+      "source": "vector_environmental",
+      "target": "kpi_environmental_energy",
+      "type": "HAS_KPI"
+    },
+    {
+      "source": "vector_environmental",
+      "target": "kpi_environmental_materials",
+      "type": "HAS_KPI"
+    },
+
+    {
+      "source": "vector_territorial",
+      "target": "kpi_territorial_local_network",
+      "type": "HAS_KPI"
+    },
+    {
+      "source": "vector_territorial",
+      "target": "kpi_territorial_identity",
+      "type": "HAS_KPI"
+    },
+    {
+      "source": "vector_territorial",
+      "target": "kpi_territorial_seasonality",
+      "type": "HAS_KPI"
+    },
+
+    {
+      "source": "business_horeca_001",
+      "target": "evidence_accessibility_policy",
+      "type": "HAS_EVIDENCE"
+    },
+    {
+      "source": "business_horeca_001",
+      "target": "evidence_staff_inclusion",
+      "type": "HAS_EVIDENCE"
+    },
+    {
+      "source": "business_horeca_001",
+      "target": "evidence_community_engagement",
+      "type": "HAS_EVIDENCE"
+    },
+    {
+      "source": "business_horeca_001",
+      "target": "evidence_waste_reduction",
+      "type": "HAS_EVIDENCE"
+    },
+    {
+      "source": "business_horeca_001",
+      "target": "evidence_energy_efficiency",
+      "type": "HAS_EVIDENCE"
+    },
+    {
+      "source": "business_horeca_001",
+      "target": "evidence_sustainable_materials",
+      "type": "HAS_EVIDENCE"
+    },
+    {
+      "source": "business_horeca_001",
+      "target": "evidence_local_producer_network",
+      "type": "HAS_EVIDENCE"
+    },
+    {
+      "source": "business_horeca_001",
+      "target": "evidence_seasonal_menu",
+      "type": "HAS_EVIDENCE"
+    },
+    {
+      "source": "business_horeca_001",
+      "target": "evidence_territorial_identity",
+      "type": "HAS_EVIDENCE"
+    },
+    {
+      "source": "business_horeca_001",
+      "target": "evidence_supply_chain_traceability",
+      "type": "HAS_EVIDENCE"
+    },
+
+    {
+      "source": "evidence_accessibility_policy",
+      "target": "kpi_social_accessibility",
+      "type": "SUPPORTS"
+    },
+    {
+      "source": "evidence_staff_inclusion",
+      "target": "kpi_social_inclusion",
+      "type": "SUPPORTS"
+    },
+    {
+      "source": "evidence_community_engagement",
+      "target": "kpi_social_community",
+      "type": "SUPPORTS"
+    },
+
+    {
+      "source": "evidence_waste_reduction",
+      "target": "kpi_environmental_waste",
+      "type": "SUPPORTS"
+    },
+    {
+      "source": "evidence_energy_efficiency",
+      "target": "kpi_environmental_energy",
+      "type": "SUPPORTS"
+    },
+    {
+      "source": "evidence_sustainable_materials",
+      "target": "kpi_environmental_materials",
+      "type": "SUPPORTS"
+    },
+
+    {
+      "source": "evidence_local_producer_network",
+      "target": "kpi_territorial_local_network",
+      "type": "SUPPORTS"
+    },
+    {
+      "source": "evidence_territorial_identity",
+      "target": "kpi_territorial_identity",
+      "type": "SUPPORTS"
+    },
+    {
+      "source": "evidence_seasonal_menu",
+      "target": "kpi_territorial_seasonality",
+      "type": "SUPPORTS"
+    },
+    {
+      "source": "evidence_supply_chain_traceability",
+      "target": "kpi_territorial_local_network",
+      "type": "SUPPORTS"
+    },
+
+    {
+      "source": "vector_social",
+      "target": "output_social_score",
+      "type": "GENERATES"
+    },
+    {
+      "source": "vector_environmental",
+      "target": "output_environmental_score",
+      "type": "GENERATES"
+    },
+    {
+      "source": "vector_territorial",
+      "target": "output_territorial_score",
+      "type": "GENERATES"
+    },
+
+    {
+      "source": "output_social_score",
+      "target": "output_qen_score",
+      "type": "CONTRIBUTES_TO"
+    },
+    {
+      "source": "output_environmental_score",
+      "target": "output_qen_score",
+      "type": "CONTRIBUTES_TO"
+    },
+    {
+      "source": "output_territorial_score",
+      "target": "output_qen_score",
+      "type": "CONTRIBUTES_TO"
+    },
+
+    {
+      "source": "output_qen_score",
+      "target": "benchmark_level",
+      "type": "HAS_BENCHMARK"
+    },
+    {
+      "source": "output_qen_score",
+      "target": "benchmark_improvement_priority",
+      "type": "HAS_BENCHMARK"
+    }
   ]
 }
