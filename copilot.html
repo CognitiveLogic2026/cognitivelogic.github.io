@@ -1,838 +1,326 @@
 <!DOCTYPE html>
+
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Copilot — Cognitive Logic</title>
-  <meta name="description" content="AI Compliance Copilot — analisi immediata del sistema AI con score, gap e raccomandazioni EU AI Act." />
+  <title>AI Compliance Copilot — Cognitive Logic</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: #080b0f; }
 
-    :root {
-      --navy:      #070D1A;
-      --navy-2:    #0D1628;
-      --navy-3:    #122035;
-      --gold:      #C9A84C;
-      --gold-2:    #E2C06A;
-      --gold-dim:  rgba(201,168,76,0.10);
-      --gold-line: rgba(201,168,76,0.22);
-      --text:      #CFC9B8;
-      --text-2:    #E8E2D4;
-      --muted:     #6A6254;
-      --line:      rgba(201,168,76,0.12);
-      --line-2:    rgba(255,255,255,0.05);
-      --danger:    #C04A42;
-      --good:      #4A9C6E;
-      --serif:     'Cormorant Garamond', serif;
-      --mono:      'DM Mono', monospace;
-    }
+```
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
 
-    html, body {
-      background: var(--navy);
-      color: var(--text);
-      font-family: var(--mono);
-      font-size: 13px;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
+body {
+  min-height: 100vh;
+  background: #080b0f;
+  color: #e8eaed;
+  font-family: 'Syne', sans-serif;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px 80px;
+  position: relative;
+  overflow-x: hidden;
+}
 
-    /* ── Nav ── */
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      padding: 0 32px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(7,13,26,0.96);
-      backdrop-filter: blur(20px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      min-height: 56px;
-    }
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 20% 10%, rgba(0,200,150,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 600px at 80% 80%, rgba(0,120,255,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
 
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-right: 24px;
-      flex-shrink: 0;
-      text-decoration: none;
-    }
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
 
-    .nav-mark {
-      width: 28px;
-      height: 28px;
-      border: 1px solid var(--gold-line);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--serif);
-      font-size: 0.7rem;
-      color: var(--gold);
-    }
+.container { width: 100%; max-width: 720px; position: relative; z-index: 1; }
 
-    .nav-name {
-      font-family: var(--serif);
-      font-size: 0.9rem;
-      color: var(--text-2);
-    }
+.header { margin-bottom: 40px; animation: fadeSlideIn 0.6s ease both; }
+.eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #00c896;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow-line { display: inline-block; width: 24px; height: 1px; background: #00c896; }
+h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; color: #fff; margin-bottom: 8px; }
+h1 span { color: #00c896; }
+.subtitle { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.6; }
 
-    .nav-links { display: flex; gap: 0; }
+.card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 4px; padding: 24px; margin-bottom: 12px; }
 
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0 14px;
-      border-left: 1px solid var(--line-2);
-      line-height: 56px;
-      transition: color 0.2s;
-    }
+.input-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: rgba(255,255,255,0.3); text-transform: uppercase; margin-bottom: 12px; }
 
-    .nav-links a:hover { color: var(--gold); }
-    .nav-spacer { flex: 1; }
+textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  color: rgba(255,255,255,0.85);
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  min-height: 120px;
+  caret-color: #00c896;
+}
+textarea::placeholder { color: rgba(255,255,255,0.2); font-style: italic; }
 
-    .nav-badge {
-      padding: 5px 14px;
-      border: 1px solid var(--gold-line);
-      color: var(--gold);
-      font-size: 0.58rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
+.input-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.05); gap: 12px; flex-wrap: wrap; }
+.btn-group { display: flex; gap: 8px; }
 
-    /* ── Layout ── */
-    .main {
-      display: grid;
-      grid-template-columns: 380px 1fr;
-      gap: 0;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 32px 28px;
-      min-height: calc(100vh - 56px - 42px);
-    }
+.btn-analyze {
+  background: #00c896; color: #080b0f; border: none;
+  padding: 10px 28px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; border-radius: 2px;
+  display: flex; align-items: center; gap: 8px;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-analyze:hover:not(:disabled) { background: #00dfa8; transform: translateY(-1px); }
+.btn-analyze:disabled { opacity: 0.45; cursor: not-allowed; }
 
-    @media (max-width: 900px) {
-      .main { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-    }
+.btn-clear {
+  background: transparent; color: rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 10px 20px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer; border-radius: 2px; transition: color 0.2s, border-color 0.2s;
+}
+.btn-clear:hover { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.2); }
 
-    /* ── Left ── */
-    .left { padding-right: 28px; }
+.shortcut { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.15); letter-spacing: 0.08em; }
 
-    .headline {
-      font-family: var(--serif);
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
-      font-weight: 300;
-      line-height: 1.1;
-      color: var(--text-2);
-      margin-bottom: 12px;
-    }
+.spinner { width: 16px; height: 16px; border: 1.5px solid rgba(0,200,150,0.2); border-top-color: #00c896; border-radius: 50%; animation: spin 0.8s linear infinite; flex-shrink: 0; }
 
-    .headline em {
-      font-style: italic;
-      color: var(--gold);
-    }
+.section-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.04); }
 
-    .subtext {
-      color: var(--muted);
-      font-size: 0.78rem;
-      line-height: 1.8;
-      margin-bottom: 24px;
-    }
+.decision-banner { border-radius: 4px; padding: 20px 24px; margin-bottom: 12px; border-left: 3px solid; animation: fadeSlideIn 0.4s ease both; }
+.decision-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+.decision-label-text { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+.decision-tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; padding: 2px 8px; border-radius: 2px; border: 1px solid; text-transform: uppercase; }
+.decision-message { font-size: 13px; color: rgba(255,255,255,0.5); }
 
-    .input-card {
-      background: var(--navy-2);
-      border: 1px solid var(--line);
-      padding: 16px;
-      margin-bottom: 12px;
-    }
+.score-track { height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; margin-top: 6px; }
+.score-fill { height: 100%; border-radius: 2px; transition: width 1.2s cubic-bezier(0.16,1,0.3,1); }
+.score-labels { display: flex; justify-content: space-between; margin-top: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.3); }
 
-    .input-label {
-      font-size: 0.58rem;
-      color: var(--muted);
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 8px;
-    }
+.metrics-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+@media (max-width: 520px) { .metrics-row { grid-template-columns: 1fr; } }
+.metric-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 8px; }
+.metric-value { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; }
 
-    textarea {
-      width: 100%;
-      min-height: 140px;
-      background: var(--navy-3);
-      border: 1px solid var(--line);
-      padding: 12px;
-      color: var(--text);
-      font-size: 0.82rem;
-      font-family: var(--mono);
-      resize: vertical;
-      outline: none;
-      line-height: 1.7;
-      transition: border-color 0.2s;
-    }
+.list-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); animation: fadeSlideIn 0.4s ease both; }
+.list-index { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.2); padding-top: 2px; min-width: 20px; }
+.list-text { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; }
 
-    textarea:focus { border-color: var(--gold-line); }
-    textarea::placeholder { color: var(--muted); }
+.error-box { background: rgba(255,59,59,0.06); border: 1px solid rgba(255,59,59,0.2); border-radius: 4px; padding: 16px 20px; color: #ff6b6b; font-size: 13px; font-family: 'IBM Plex Mono', monospace; margin-bottom: 12px; }
 
-    .btn-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.footer-note { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.12); letter-spacing: 0.08em; text-align: center; margin-top: 24px; }
+```
 
-    button {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border: 1px solid transparent;
-      padding: 9px 18px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    #analyzeBtn {
-      background: var(--gold);
-      color: var(--navy);
-      border-color: var(--gold);
-    }
-
-    #analyzeBtn:hover { background: var(--gold-2); border-color: var(--gold-2); }
-
-    #analyzeBtn:disabled {
-      background: var(--navy-3);
-      color: var(--muted);
-      border-color: var(--line);
-      cursor: not-allowed;
-    }
-
-    #clearBtn {
-      background: transparent;
-      color: var(--muted);
-      border-color: var(--line);
-    }
-
-    #clearBtn:hover { color: var(--text); border-color: var(--muted); }
-
-    #exportBtn {
-      background: transparent;
-      color: var(--gold);
-      border-color: var(--gold-line);
-    }
-
-    #exportBtn:hover { background: var(--gold-dim); }
-
-    #exportBtn:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
-
-    .status-msg {
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-      min-height: 18px;
-    }
-
-    .status-msg.error { color: var(--danger); }
-
-    /* ── Right ── */
-    .right { display: flex; flex-direction: column; gap: 8px; }
-
-    .result-card {
-      background: var(--navy-2);
-      border: 1px solid var(--line-2);
-      border-left: 2px solid var(--line-2);
-      padding: 14px 18px;
-      transition: border-left-color 0.4s;
-    }
-
-    .card-label {
-      font-size: 0.55rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 8px;
-      transition: color 0.3s;
-    }
-
-    .card-value {
-      color: var(--muted);
-      font-size: 0.75rem;
-    }
-
-    .card-content {
-      color: var(--text);
-      font-size: 0.78rem;
-      line-height: 1.7;
-      display: none;
-    }
-
-    .card-content.show { display: block; }
-
-    /* Risk score card */
-    #riskCard { padding: 18px 20px; }
-
-    .score-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .score-num {
-      font-family: var(--serif);
-      font-size: 3.8rem;
-      font-weight: 300;
-      line-height: 1;
-      color: var(--muted);
-      transition: color 0.4s;
-    }
-
-    .score-denom {
-      color: var(--muted);
-      font-size: 0.85rem;
-      display: none;
-    }
-
-    .level-badge {
-      padding: 3px 10px;
-      font-size: 0.58rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      display: none;
-      border: 1px solid transparent;
-    }
-
-    .progress-wrap {
-      flex: 1;
-      min-width: 80px;
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .progress-label {
-      font-size: 0.55rem;
-      color: var(--muted);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .progress-track {
-      background: var(--line);
-      height: 2px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      transition: width 1s cubic-bezier(0.22, 0.61, 0.36, 1);
-    }
-
-    /* Rec list */
-    .rec-list { list-style: none; display: none; }
-    .rec-list.show { display: grid; gap: 4px; }
-
-    .rec-list li {
-      font-size: 0.78rem;
-      line-height: 1.65;
-      padding: 5px 0 5px 16px;
-      position: relative;
-      color: var(--text);
-    }
-
-    .rec-list li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: var(--gold);
-      font-size: 0.65rem;
-    }
-
-    /* Loading dots */
-    @keyframes blink { 0%,80%,100%{opacity:0} 40%{opacity:1} }
-
-    .dots span {
-      animation: blink 1.2s infinite;
-      color: var(--gold);
-    }
-
-    .dots span:nth-child(2) { animation-delay: 0.2s; }
-    .dots span:nth-child(3) { animation-delay: 0.4s; }
-
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid var(--line);
-      text-align: center;
-      padding: 14px;
-      font-size: 0.6rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-    }
-
-    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: var(--gold); }
   </style>
 </head>
 <body>
+  <div class="grid-bg"></div>
+  <div class="container">
 
-<nav>
-  <a href="index.html" class="nav-brand">
-    <div class="nav-mark">CL</div>
-    <span class="nav-name">Cognitive Logic</span>
-  </a>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="framework.html">Framework</a>
-    <a href="ecosystem.html">Ecosystem</a>
-    <a href="qen-live.html">QEN Live</a>
-    <a href="ai.html">AI Engine</a>
-    <a href="identity.html">Identity</a>
-    <a href="demo.html">Demo</a>
-  </div>
-  <div class="nav-spacer"></div>
-  <div class="nav-badge">Copilot</div>
-</nav>
+```
+<div class="header">
+  <div class="eyebrow"><span class="eyebrow-line"></span>Cognitive Logic · QEN Framework</div>
+  <h1>AI Compliance <span>Copilot</span></h1>
+  <p class="subtitle">Analisi regolatoria EU AI Act 2024 + GDPR — powered by Claude</p>
+</div>
 
-<div class="main">
-
-  <!-- ── LEFT ── -->
-  <div class="left">
-    <h1 class="headline">
-      Analisi AI<br>
-      <em>immediata.</em>
-    </h1>
-    <p class="subtext">
-      Inserisci la descrizione del sistema AI. Il Copilot restituirà
-      un'analisi con livello di rischio, score, gap, raccomandazioni
-      e mapping EU AI Act in pochi secondi.
-    </p>
-
-    <div class="input-card">
-      <label class="input-label" for="systemDesc">Descrizione del sistema AI</label>
-      <textarea
-        id="systemDesc"
-        placeholder="Es: Sistema di scoring automatico per il controllo dei dati personali sensibili, con profilazione comportamentale e supervisione umana limitata..."
-      ></textarea>
+<div class="card" style="animation: fadeSlideIn 0.6s ease 0.1s both;">
+  <div class="input-label">Descrizione sistema AI</div>
+  <textarea id="input" placeholder="Es: sistema di scoring creditizio automatizzato che elabora dati reddituali e comportamentali, con supervisione umana solo su casi edge..."></textarea>
+  <div class="input-footer">
+    <div class="btn-group">
+      <button class="btn-analyze" id="btn-analyze">▶ Analizza</button>
+      <button class="btn-clear" id="btn-clear">Reset</button>
     </div>
-
-    <div class="btn-row">
-      <button id="analyzeBtn" disabled>Analizza</button>
-      <button id="clearBtn">Pulisci</button>
-      <button id="exportBtn" disabled>Export PDF</button>
-    </div>
-    <p class="status-msg" id="statusMsg">Scrivi una descrizione e avvia l'analisi.</p>
-  </div>
-
-  <!-- ── RIGHT ── -->
-  <div class="right">
-
-    <!-- Risk Score -->
-    <div class="result-card" id="riskCard">
-      <div class="card-label" id="riskLabel">Risk Score</div>
-      <div class="score-row">
-        <span class="score-num" id="scoreNum">—</span>
-        <span class="score-denom" id="scoreDenom">/100</span>
-        <span class="level-badge" id="levelBadge"></span>
-        <div class="progress-wrap" id="progressWrap">
-          <div class="progress-label">Risk Index</div>
-          <div class="progress-track">
-            <div class="progress-fill" id="progressFill"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Why -->
-    <div class="result-card" id="whyCard">
-      <div class="card-label" id="whyLabel">Why</div>
-      <div class="card-value" id="whyEmpty">—</div>
-      <div class="card-content" id="whyContent"></div>
-    </div>
-
-    <!-- Impact -->
-    <div class="result-card" id="impactCard">
-      <div class="card-label" id="impactLabel">Impact</div>
-      <div class="card-value" id="impactEmpty">—</div>
-      <div class="card-content" id="impactContent"></div>
-    </div>
-
-    <!-- Summary -->
-    <div class="result-card" id="summaryCard">
-      <div class="card-label" id="summaryLabel">Summary</div>
-      <div class="card-value" id="summaryEmpty">—</div>
-      <div class="card-content" id="summaryContent"></div>
-    </div>
-
-    <!-- EU AI Act -->
-    <div class="result-card" id="euCard">
-      <div class="card-label" id="euLabel">EU AI Act Classification</div>
-      <div class="card-value" id="euEmpty">—</div>
-      <div class="card-content" id="euContent"></div>
-    </div>
-
-    <!-- Recommendations -->
-    <div class="result-card" id="recCard">
-      <div class="card-label" id="recLabel">Recommendations</div>
-      <div class="card-value" id="recEmpty">—</div>
-      <ul class="rec-list" id="recList"></ul>
-    </div>
-
+    <span class="shortcut">⌘↵ per avviare</span>
   </div>
 </div>
 
-<footer>
-  <a href="index.html">cognitivelogic.it</a>
-  &nbsp;·&nbsp;
-  QEN = (Vs × 0.40) + (Va × 0.35) + (Vt × 0.25)
-  &nbsp;·&nbsp;
-  <a href="framework.html">EU AI Act Compliance</a>
-</footer>
+<div class="error-box" id="error-box" style="display:none;"></div>
 
-<script>
-  const textarea   = document.getElementById('systemDesc');
-  const analyzeBtn = document.getElementById('analyzeBtn');
-  const clearBtn   = document.getElementById('clearBtn');
-  const exportBtn  = document.getElementById('exportBtn');
-  const statusMsg  = document.getElementById('statusMsg');
+<div id="results" style="display:none;">
+  <div class="decision-banner" id="decision-banner">
+    <div class="decision-top">
+      <span class="decision-label-text" id="decision-label"></span>
+      <span class="decision-tag" id="decision-tag"></span>
+    </div>
+    <div class="decision-message" id="decision-message"></div>
+  </div>
 
-  const RISK_COLORS = {
-    LOW:      '#4A9C6E',
-    MEDIUM:   '#C9A84C',
-    HIGH:     '#C04A42',
-    CRITICAL: '#A03030'
-  };
+  <div class="card">
+    <div class="section-label">Risk Score</div>
+    <div class="score-track"><div class="score-fill" id="score-fill" style="width:0%"></div></div>
+    <div class="score-labels"><span>0.0</span><span id="score-value"></span><span>1.0</span></div>
+  </div>
 
-  let currentResults = null;
+  <div class="metrics-row">
+    <div class="card" style="margin-bottom:0;"><div class="metric-label">Motivazione</div><div class="metric-value" id="why"></div></div>
+    <div class="card" style="margin-bottom:0;"><div class="metric-label">Impatto</div><div class="metric-value" id="impact"></div></div>
+  </div>
 
-  textarea.addEventListener('input', () => {
-    analyzeBtn.disabled = !textarea.value.trim();
-  });
+  <div class="card">
+    <div class="section-label">Executive Summary</div>
+    <div id="summary" style="font-size:15px;font-weight:600;color:rgba(255,255,255,0.9);line-height:1.6;letter-spacing:-0.01em;"></div>
+  </div>
 
-  // ── Analyze ──────────────────────────────────────────────
-  analyzeBtn.addEventListener('click', async () => {
-    const desc = textarea.value.trim();
-    if (!desc) return;
+  <div class="card">
+    <div class="section-label">Compliance Gaps</div>
+    <div id="gaps-list"></div>
+  </div>
 
-    setLoading(true);
-    resetResults();
+  <div class="card">
+    <div class="section-label">Recommendations</div>
+    <div id="rec-list"></div>
+  </div>
 
-    try {
-      const res = await fetch('https://api.cognitivelogic.it/copilot/analyze', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          system: `Sei un esperto di AI Act EU e compliance AI. Analizza il sistema AI descritto e rispondi SOLO con un oggetto JSON valido, senza markdown, senza backtick, senza testo aggiuntivo. Struttura esatta:
-{
-  "riskScore": "numero 0-100",
-  "riskLevel": "LOW|MEDIUM|HIGH|CRITICAL",
-  "why": "spiegazione in 2-3 frasi",
-  "impact": "impatto su diritti e società in 2-3 frasi",
-  "summary": "sintesi analisi in 2-3 frasi",
-  "euClassification": "classificazione EU AI Act con articolo",
-  "recommendations": "3-5 raccomandazioni separate da ;"
-}`,
-          messages: [{ role: 'user', content: desc }]
-        })
-      });
+  <div class="footer-note">Cognitive Logic · QEN Compliance Engine · EU AI Act 2024</div>
+</div>
+```
 
-      const data = await res.json();
-      const text = (data.content || []).map(i => i.text || '').join('');
-      const clean = text.replace(/```json|```/g, '').trim();
-      const parsed = JSON.parse(clean);
+  </div>
 
-      currentResults = parsed;
-      renderResults(parsed);
-      exportBtn.disabled = false;
-      setStatus('');
-    } catch (err) {
-      setStatus('Errore nell\'analisi. Controlla la connessione e riprova.', true);
-      console.error(err);
-    } finally {
-      setLoading(false);
+  <script>
+    // ← punta al tuo FastAPI, non più ad Anthropic direttamente
+    const API_URL = "https://api.cognitivelogic.it/copilot-analyze";
+
+    const riskConfig = {
+      HIGH:   { label: "CRITICAL",        color: "#ff3b3b", bg: "rgba(255,59,59,0.08)",  border: "rgba(255,59,59,0.3)",  message: "Intervento immediato richiesto — obblighi normativi avanzati" },
+      MEDIUM: { label: "ACTION REQUIRED", color: "#ff8c00", bg: "rgba(255,140,0,0.08)",  border: "rgba(255,140,0,0.3)",  message: "Implementare controlli mancanti prima del deployment" },
+      LOW:    { label: "MONITOR",         color: "#00c896", bg: "rgba(0,200,150,0.08)",  border: "rgba(0,200,150,0.3)",  message: "Sistema gestibile con controlli base e monitoraggio continuo" },
+    };
+
+    const inputEl    = document.getElementById("input");
+    const btnAnalyze = document.getElementById("btn-analyze");
+    const btnClear   = document.getElementById("btn-clear");
+    const errorBox   = document.getElementById("error-box");
+    const resultsEl  = document.getElementById("results");
+
+    function renderList(id, items) {
+      const el = document.getElementById(id);
+      el.innerHTML = (items || []).map((t, i) => `
+        <div class="list-item" style="animation-delay:${i*0.07}s">
+          <span class="list-index">${String(i+1).padStart(2,"0")}</span>
+          <span class="list-text">${t}</span>
+        </div>`).join("");
     }
-  });
 
-  // ── Clear ─────────────────────────────────────────────────
-  clearBtn.addEventListener('click', () => {
-    textarea.value = '';
-    analyzeBtn.disabled = true;
-    exportBtn.disabled = true;
-    currentResults = null;
-    resetResults();
-    setStatus('Scrivi una descrizione e avvia l\'analisi.');
-  });
-
-  // ── Render Results ────────────────────────────────────────
-  function renderResults(r) {
-    const score = parseInt(r.riskScore) || 0;
-    const level = r.riskLevel || 'MEDIUM';
-    const col   = RISK_COLORS[level] || RISK_COLORS.MEDIUM;
-
-    const scoreNum = document.getElementById('scoreNum');
-    scoreNum.textContent = score;
-    scoreNum.style.color = col;
-
-    document.getElementById('scoreDenom').style.display = 'inline';
-
-    const badge = document.getElementById('levelBadge');
-    badge.textContent = level;
-    badge.style.display = 'inline-block';
-    badge.style.background = col + '18';
-    badge.style.color = col;
-    badge.style.borderColor = col + '44';
-
-    const pw = document.getElementById('progressWrap');
-    pw.style.display = 'flex';
-    const fill = document.getElementById('progressFill');
-    fill.style.background = col;
-    setTimeout(() => { fill.style.width = score + '%'; }, 80);
-
-    document.getElementById('riskCard').style.borderLeftColor = col;
-    document.getElementById('riskLabel').style.color = col;
-
-    setCard('why',     r.why,              col);
-    setCard('impact',  r.impact,           '#8A7A5A');
-    setCard('summary', r.summary,          '#9A8A6A');
-    setCard('eu',      r.euClassification, '#A89060');
-
-    const recs = (r.recommendations || '').split(';').map(s => s.trim()).filter(Boolean);
-    const recList = document.getElementById('recList');
-    recList.innerHTML = '';
-    recs.forEach(rec => {
-      const li = document.createElement('li');
-      li.textContent = rec;
-      recList.appendChild(li);
-    });
-    document.getElementById('recEmpty').style.display = 'none';
-    recList.classList.add('show');
-    document.getElementById('recCard').style.borderLeftColor = col;
-    document.getElementById('recLabel').style.color = col;
-  }
-
-  function setCard(id, text, color) {
-    document.getElementById(id + 'Empty').style.display = 'none';
-    const content = document.getElementById(id + 'Content');
-    content.textContent = text;
-    content.classList.add('show');
-    document.getElementById(id + 'Card').style.borderLeftColor = color;
-    document.getElementById(id + 'Label').style.color = color;
-  }
-
-  function resetResults() {
-    ['why','impact','summary','eu'].forEach(id => {
-      document.getElementById(id + 'Empty').style.display = '';
-      const c = document.getElementById(id + 'Content');
-      c.textContent = '';
-      c.classList.remove('show');
-      document.getElementById(id + 'Card').style.borderLeftColor = 'var(--line-2)';
-      document.getElementById(id + 'Label').style.color = 'var(--muted)';
-    });
-    document.getElementById('scoreNum').textContent = '—';
-    document.getElementById('scoreNum').style.color = 'var(--muted)';
-    document.getElementById('scoreDenom').style.display = 'none';
-    document.getElementById('levelBadge').style.display = 'none';
-    document.getElementById('progressWrap').style.display = 'none';
-    document.getElementById('progressFill').style.width = '0%';
-    document.getElementById('riskCard').style.borderLeftColor = 'var(--line-2)';
-    document.getElementById('riskLabel').style.color = 'var(--muted)';
-    document.getElementById('recEmpty').style.display = '';
-    document.getElementById('recList').innerHTML = '';
-    document.getElementById('recList').classList.remove('show');
-    document.getElementById('recCard').style.borderLeftColor = 'var(--line-2)';
-    document.getElementById('recLabel').style.color = 'var(--muted)';
-  }
-
-  function setLoading(on) {
-    analyzeBtn.disabled = on;
-    if (on) {
-      analyzeBtn.innerHTML = 'Analisi<span class="dots"><span>.</span><span>.</span><span>.</span></span>';
-      setStatus('Analisi in corso…');
-    } else {
-      analyzeBtn.textContent = 'Analizza';
+    function setLoading(on) {
+      btnAnalyze.disabled = on;
+      btnClear.disabled = on;
+      btnAnalyze.innerHTML = on ? '<div class="spinner"></div> Analisi...' : '▶ Analizza';
     }
-  }
 
-  function setStatus(msg, isError = false) {
-    statusMsg.textContent = msg;
-    statusMsg.className = 'status-msg' + (isError ? ' error' : '');
-  }
+    async function analyze() {
+      const text = inputEl.value.trim();
+      if (!text) { inputEl.focus(); return; }
 
-  // ── Export PDF ────────────────────────────────────────────
-  exportBtn.addEventListener('click', () => {
-    if (!currentResults) return;
-    const r    = currentResults;
-    const desc = textarea.value.trim();
+      setLoading(true);
+      errorBox.style.display = "none";
+      resultsEl.style.display = "none";
 
-    const { jsPDF } = window.jspdf;
-    const doc  = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-    const pageW = 210, pageH = 297, m = 18, cW = pageW - m * 2;
-    let y = 0;
+      try {
+        const res = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ system: text })
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.detail || `HTTP ${res.status}`);
+        }
+        const d = await res.json();
+        const cfg = riskConfig[d.risk_level] || riskConfig.LOW;
+        const scoreColor = d.risk_score > 0.7 ? "#ff3b3b" : d.risk_score > 0.45 ? "#ff8c00" : "#00c896";
 
-    const hexRgb = hex => [
-      parseInt(hex.slice(1,3),16),
-      parseInt(hex.slice(3,5),16),
-      parseInt(hex.slice(5,7),16)
-    ];
+        const banner = document.getElementById("decision-banner");
+        banner.style.cssText += `background:${cfg.bg};border-color:${cfg.border};border-left-color:${cfg.color};`;
+        document.getElementById("decision-label").textContent = cfg.label;
+        document.getElementById("decision-label").style.color = cfg.color;
+        const tag = document.getElementById("decision-tag");
+        tag.textContent = d.risk_level;
+        tag.style.color = cfg.color;
+        tag.style.borderColor = cfg.color;
+        document.getElementById("decision-message").textContent = cfg.message;
 
-    // Background
-    doc.setFillColor(7, 13, 26);
-    doc.rect(0, 0, pageW, pageH, 'F');
+        const fill = document.getElementById("score-fill");
+        const sv = document.getElementById("score-value");
+        fill.style.background = scoreColor;
+        fill.style.width = "0%";
+        sv.style.color = scoreColor;
+        sv.textContent = d.risk_score.toFixed(2);
+        requestAnimationFrame(() => requestAnimationFrame(() => { fill.style.width = (d.risk_score * 100) + "%"; }));
 
-    // Header bar
-    doc.setFillColor(13, 22, 40);
-    doc.rect(0, 0, pageW, 28, 'F');
-    doc.setDrawColor(50, 40, 20);
-    doc.setLineWidth(0.3);
-    doc.line(0, 28, pageW, 28);
+        document.getElementById("why").textContent = d.why;
+        document.getElementById("impact").textContent = d.impact;
+        document.getElementById("summary").textContent = d.summary;
+        renderList("gaps-list", d.gaps);
+        renderList("rec-list", d.recommendations);
 
-    // CL mark
-    doc.setDrawColor(100, 80, 30);
-    doc.setLineWidth(0.4);
-    doc.rect(m, 8, 12, 12);
-    doc.setTextColor(201, 168, 76);
-    doc.setFontSize(7);
-    doc.setFont('helvetica', 'bold');
-    doc.text('CL', m + 6, 15, { align: 'center' });
+        resultsEl.style.display = "block";
+        resultsEl.style.animation = "fadeSlideIn 0.5s ease both";
 
-    // Name
-    doc.setTextColor(232, 226, 212);
-    doc.setFontSize(12);
-    doc.setFont('helvetica', 'normal');
-    doc.text('Cognitive Logic', m + 17, 14, { baseline: 'middle' });
-
-    doc.setTextColor(106, 98, 84);
-    doc.setFontSize(7);
-    doc.text('AI Risk Assessment Report', m + 17, 20, { baseline: 'middle' });
-
-    doc.setTextColor(70, 60, 40);
-    doc.setFontSize(6.5);
-    doc.text(new Date().toLocaleDateString('it-IT', { day:'2-digit', month:'long', year:'numeric' }), pageW - m, 14, { align:'right', baseline:'middle' });
-
-    y = 36;
-
-    // Risk score hero
-    const score = parseInt(r.riskScore) || 0;
-    const level = r.riskLevel || 'MEDIUM';
-    const col   = ({ LOW:'#4A9C6E', MEDIUM:'#C9A84C', HIGH:'#C04A42', CRITICAL:'#A03030' })[level] || '#C9A84C';
-    const [cr, cg, cb] = hexRgb(col);
-
-    doc.setFillColor(13, 22, 40);
-    doc.rect(m, y, cW, 30, 'F');
-    doc.setDrawColor(cr, cg, cb);
-    doc.setLineWidth(0.3);
-    doc.rect(m, y, cW, 30);
-
-    doc.setTextColor(cr, cg, cb);
-    doc.setFontSize(28);
-    doc.setFont('helvetica', 'bold');
-    doc.text(`${score}`, m + 20, y + 18, { align: 'center' });
-
-    doc.setTextColor(70, 60, 40);
-    doc.setFontSize(10);
-    doc.text('/100', m + 32, y + 18);
-
-    doc.setFillColor(cr, cg, cb);
-    doc.rect(m + 50, y + 10, 28, 10, 'F');
-    doc.setTextColor(7, 13, 26);
-    doc.setFontSize(7.5);
-    doc.setFont('helvetica', 'bold');
-    doc.text(level, m + 64, y + 16, { align: 'center' });
-
-    const bx = m + 88, bw = cW - 92;
-    doc.setFillColor(20, 28, 46);
-    doc.rect(bx, y + 14, bw, 4, 'F');
-    doc.setFillColor(cr, cg, cb);
-    doc.rect(bx, y + 14, bw * score / 100, 4, 'F');
-    doc.setTextColor(70, 60, 40);
-    doc.setFontSize(5.5);
-    doc.setFont('helvetica', 'normal');
-    doc.text('RISK INDEX', bx, y + 11);
-
-    y += 38;
-
-    // System description
-    doc.setFillColor(13, 22, 40);
-    doc.rect(m, y, cW, 18, 'F');
-    doc.setTextColor(70, 60, 40);
-    doc.setFontSize(6);
-    doc.setFont('helvetica', 'bold');
-    doc.text('SISTEMA ANALIZZATO', m + 5, y + 5);
-    doc.setTextColor(150, 140, 120);
-    doc.setFontSize(7.5);
-    doc.setFont('helvetica', 'normal');
-    const dLines = doc.splitTextToSize(desc, cW - 10);
-    doc.text(dLines.slice(0, 2), m + 5, y + 11);
-    y += 24;
-
-    // Fields
-    const fields = [
-      { key: 'why',              label: 'WHY',                    col: '#4A9C6E' },
-      { key: 'impact',           label: 'IMPACT',                 col: '#8A7A5A' },
-      { key: 'summary',          label: 'SUMMARY',                col: '#9A8A6A' },
-      { key: 'euClassification', label: 'EU AI ACT',              col: '#C9A84C' },
-      { key: 'recommendations',  label: 'RECOMMENDATIONS',        col: col },
-    ];
-
-    fields.forEach(field => {
-      const val   = r[field.key] || '—';
-      const [fr, fg, fb] = hexRgb(field.col);
-      const lines = doc.splitTextToSize(val, cW - 12);
-      const cardH = Math.max(22, lines.length * 4.8 + 13);
-
-      if (y + cardH > pageH - 18) {
-        doc.addPage();
-        doc.setFillColor(7, 13, 26);
-        doc.rect(0, 0, pageW, pageH, 'F');
-        y = 18;
+      } catch (err) {
+        errorBox.textContent = "⚠ " + (err.message || "Errore di connessione al backend.");
+        errorBox.style.display = "block";
+      } finally {
+        setLoading(false);
       }
-
-      doc.setFillColor(13, 22, 40);
-      doc.rect(m, y, cW, cardH, 'F');
-      doc.setFillColor(fr, fg, fb);
-      doc.rect(m, y, 2, cardH, 'F');
-
-      doc.setTextColor(fr, fg, fb);
-      doc.setFontSize(6);
-      doc.setFont('helvetica', 'bold');
-      doc.text(field.label, m + 7, y + 6);
-
-      doc.setTextColor(150, 140, 120);
-      doc.setFontSize(7.5);
-      doc.setFont('helvetica', 'normal');
-      doc.text(lines, m + 7, y + 12);
-
-      y += cardH + 4;
-    });
-
-    // Footer all pages
-    const pages = doc.internal.getNumberOfPages();
-    for (let p = 1; p <= pages; p++) {
-      doc.setPage(p);
-      doc.setDrawColor(30, 25, 15);
-      doc.setLineWidth(0.25);
-      doc.line(m, pageH - 12, pageW - m, pageH - 12);
-      doc.setTextColor(60, 50, 30);
-      doc.setFontSize(6);
-      doc.setFont('helvetica', 'normal');
-      doc.text('cognitivelogic.it · QEN = (Vs × 0.40) + (Va × 0.35) + (Vt × 0.25)', m, pageH - 7);
-      doc.text(`${p} / ${pages}`, pageW - m, pageH - 7, { align: 'right' });
     }
 
-    doc.save(`CL_AI_Report_${new Date().toISOString().slice(0,10)}.pdf`);
-  });
-</script>
+    btnAnalyze.addEventListener("click", analyze);
+    btnClear.addEventListener("click", () => {
+      inputEl.value = "";
+      errorBox.style.display = "none";
+      resultsEl.style.display = "none";
+      inputEl.focus();
+    });
+    inputEl.addEventListener("keydown", e => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "Enter") analyze();
+    });
+  </script>
 
 </body>
 </html>
