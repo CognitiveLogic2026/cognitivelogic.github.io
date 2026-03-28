@@ -5,27 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Cognitive Logic — AI Governance Infrastructure</title>
-  <meta
-    name="description"
-    content="Cognitive Logic costruisce infrastrutture semantiche AI-native per rendere i sistemi intelligibili, verificabili e governabili."
-  />
-  <meta name="theme-color" content="#0b0f14" />
+  <meta name="description" content="Cognitive Logic costruisce infrastrutture semantiche AI-native per rendere i sistemi intelligibili, verificabili e governabili." />
+  <meta name="theme-color" content="#060a10" />
   <link rel="canonical" href="https://cognitivelogic.it/" />
 
   <meta property="og:title" content="Cognitive Logic — AI Governance Infrastructure" />
-  <meta
-    property="og:description"
-    content="AI-native knowledge infrastructure for human-AI symbiosis, explainability, governance and compliance."
-  />
+  <meta property="og:description" content="AI-native knowledge infrastructure for human-AI symbiosis, explainability, governance and compliance." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://cognitivelogic.it/" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="css/style.css" />
 
@@ -40,8 +31,11 @@
   </script>
 </head>
 <body>
-  <div class="site-bg"></div>
+  <!-- Animated background -->
+  <div class="site-bg" aria-hidden="true"></div>
+  <div class="site-bg-grid" aria-hidden="true"></div>
 
+  <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="#top" class="brand">
@@ -49,7 +43,7 @@
         <span class="brand-text">Cognitive Logic</span>
       </a>
 
-      <nav class="main-nav">
+      <nav class="main-nav" id="main-nav" role="navigation">
         <a href="#architecture">Architecture</a>
         <a href="#copilot">Copilot</a>
         <a href="#use-cases">Use Cases</a>
@@ -57,52 +51,62 @@
         <a href="#contact">Contact</a>
       </nav>
 
-      <a href="#copilot" class="btn btn-ghost">Open Copilot</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <a href="#copilot" class="btn btn-primary btn-sm header-cta">Open Copilot</a>
     </div>
   </header>
 
   <main id="top">
+
+    <!-- ─── Hero ─── -->
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy">
           <div class="eyebrow">Pilot Program · AI Governance Infrastructure</div>
 
           <h1>
-            Porta la governance AI da documentazione frammentata
-            a infrastruttura operativa.
+            Porta la governance AI da documentazione a infrastruttura operativa.
           </h1>
 
           <p class="hero-lead">
             Cognitive Logic costruisce un livello semantico AI-native per rendere i sistemi
-            più leggibili, verificabili e governabili. Non solo dashboard, ma una struttura
-            dati e logica pensata anche per agenti autonomi, auditabilità ed evoluzione continua.
+            più leggibili, verificabili e governabili — pensato anche per agenti autonomi,
+            auditabilità ed evoluzione continua.
           </p>
 
           <div class="hero-actions">
             <a href="#copilot" class="btn btn-primary">Testa il Copilot</a>
-            <a href="#architecture" class="btn btn-secondary">Esplora l’architettura</a>
+            <a href="#architecture" class="btn btn-secondary">Esplora l'architettura</a>
           </div>
 
           <div class="hero-metrics">
-            <div class="metric-card">
+            <div class="metric-card reveal reveal-delay-1">
               <span class="metric-value">AI-native</span>
               <span class="metric-label">Data architecture for autonomous systems</span>
             </div>
-            <div class="metric-card">
+            <div class="metric-card reveal reveal-delay-2">
               <span class="metric-value">Explainable</span>
               <span class="metric-label">Reasoning, traceability and structural controls</span>
             </div>
-            <div class="metric-card">
+            <div class="metric-card reveal reveal-delay-3">
               <span class="metric-value">Operational</span>
               <span class="metric-label">From compliance narrative to reusable logic</span>
             </div>
           </div>
         </div>
 
-        <div class="hero-panel">
+        <div class="hero-panel reveal">
           <div class="hero-panel-head">
-            <span class="panel-dot"></span>
-            <span>Infrastructure Preview</span>
+            <div class="hero-panel-head-left">
+              <span class="panel-dot"></span>
+              <span>Infrastructure Preview</span>
+            </div>
+            <span class="tag">Live</span>
           </div>
 
           <div class="hero-stack">
@@ -113,7 +117,6 @@
               </div>
               <span class="tag">Core</span>
             </div>
-
             <div class="stack-layer">
               <div>
                 <strong>AI Reasoning Engine</strong>
@@ -121,7 +124,6 @@
               </div>
               <span class="tag">Logic</span>
             </div>
-
             <div class="stack-layer">
               <div>
                 <strong>QEN Ethical Engine</strong>
@@ -129,15 +131,13 @@
               </div>
               <span class="tag">QEN</span>
             </div>
-
             <div class="stack-layer">
               <div>
-                <strong>Identity & Trust Layer</strong>
+                <strong>Identity &amp; Trust Layer</strong>
                 <p>DID-ready trust architecture for provenance, ownership and verification.</p>
               </div>
               <span class="tag">Trust</span>
             </div>
-
             <div class="stack-layer">
               <div>
                 <strong>Copilot Interface</strong>
@@ -150,6 +150,7 @@
       </div>
     </section>
 
+    <!-- ─── Trust strip ─── -->
     <section class="trust-strip">
       <div class="container trust-grid">
         <div class="trust-item">Semantic Governance</div>
@@ -159,28 +160,29 @@
       </div>
     </section>
 
+    <!-- ─── Architecture ─── -->
     <section id="architecture" class="section">
       <div class="container">
-        <div class="section-heading">
+        <div class="section-heading reveal">
           <div class="kicker">Architecture</div>
-          <h2>Un’architettura pensata per sistemi AI che devono restare leggibili nel tempo.</h2>
+          <h2>Un'architettura pensata per sistemi AI che restano leggibili nel tempo.</h2>
           <p>
-            La logica non è un’aggiunta finale. È il cuore del sistema. Cognitive Logic separa
+            La logica non è un'aggiunta finale. È il cuore del sistema. Cognitive Logic separa
             chiaramente il livello semantico, il motore di analisi e il punto di contatto operativo.
           </p>
         </div>
 
         <div class="architecture-grid">
-          <article class="card feature-card">
+          <article class="card feature-card reveal reveal-delay-1">
             <div class="feature-number">01</div>
             <h3>Cognitive Logic</h3>
             <p>
               Il nucleo logico e semantico. Qui vivono i modelli, i vincoli, i concetti e la struttura
-              che rende i sistemi AI leggibili anche oltre l’interfaccia.
+              che rende i sistemi AI leggibili anche oltre l'interfaccia.
             </p>
           </article>
 
-          <article class="card feature-card">
+          <article class="card feature-card reveal reveal-delay-2">
             <div class="feature-number">02</div>
             <h3>Engine</h3>
             <p>
@@ -189,11 +191,11 @@
             </p>
           </article>
 
-          <article class="card feature-card">
+          <article class="card feature-card reveal reveal-delay-3">
             <div class="feature-number">03</div>
             <h3>Copilot</h3>
             <p>
-              Il layer operativo e personalizzabile. Qui l’utente interagisce con il sistema,
+              Il layer operativo e personalizzabile. Qui l'utente interagisce con il sistema,
               riceve analisi, vede gap e ottiene raccomandazioni in una forma immediatamente utile.
             </p>
           </article>
@@ -201,22 +203,23 @@
       </div>
     </section>
 
+    <!-- ─── Dashboard Preview ─── -->
     <section class="section dashboard-preview">
       <div class="container">
-        <div class="section-heading">
+        <div class="section-heading reveal">
           <div class="kicker">Dashboard Preview</div>
           <h2>Una vista enterprise del risultato, non solo un output testuale.</h2>
           <p>
             Il Copilot può diventare una dashboard reale: analisi immediata, stato di rischio,
-            aree mancanti e indicazioni operative pronte per pilot, audit interni e demo enterprise.
+            aree mancanti e indicazioni operative per pilot, audit interni e demo enterprise.
           </p>
         </div>
 
-        <div class="dashboard-shell">
+        <div class="dashboard-shell reveal">
           <div class="dashboard-topbar">
             <div class="dashboard-title">
               <span class="dot dot-green"></span>
-              <span>Live Governance Analysis</span>
+              Live Governance Analysis
             </div>
             <div class="dashboard-badge">Pilot Interface</div>
           </div>
@@ -225,39 +228,38 @@
             <div class="dashboard-card">
               <span class="dashboard-label">Risk Level</span>
               <strong class="dashboard-value">MEDIUM</strong>
-              <p>Classificazione dinamica del sistema in base alla descrizione e ai controlli presenti.</p>
+              <p style="color:var(--muted);font-size:.88rem">Classificazione dinamica in base alla descrizione e ai controlli presenti.</p>
             </div>
-
             <div class="dashboard-card">
               <span class="dashboard-label">Traceability</span>
               <strong class="dashboard-value">72%</strong>
-              <p>Capacità del sistema di giustificare decisioni, fonti e punti di verifica.</p>
+              <p style="color:var(--muted);font-size:.88rem">Capacità del sistema di giustificare decisioni, fonti e punti di verifica.</p>
             </div>
-
             <div class="dashboard-card">
               <span class="dashboard-label">Governance Readiness</span>
               <strong class="dashboard-value">Pilot</strong>
-              <p>Stato di maturità per passare da test concettuale a infrastruttura operativa.</p>
+              <p style="color:var(--muted);font-size:.88rem">Stato di maturità per passare da test concettuale a infrastruttura operativa.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ─── Copilot ─── -->
     <section id="copilot" class="section copilot-section">
       <div class="container copilot-grid">
         <div class="copilot-left">
-          <div class="section-heading left">
+          <div class="section-heading left reveal">
             <div class="kicker">AI Compliance Copilot</div>
             <h2>Analizza un sistema AI e ottieni una valutazione immediata.</h2>
             <p>
               Inserisci una descrizione del sistema. Il Copilot invierà la richiesta al backend
-              e restituirà un’analisi sintetica con livello di rischio, score, gap,
+              e restituirà un'analisi con livello di rischio, score, gap,
               raccomandazioni e mapping regolatorio.
             </p>
           </div>
 
-          <div class="copilot-form card">
+          <div class="copilot-form card reveal">
             <label for="chat-input" class="input-label">Descrizione del sistema AI</label>
             <textarea
               id="chat-input"
@@ -265,25 +267,19 @@
             ></textarea>
 
             <div class="copilot-actions">
-              <button id="analyze-btn" class="btn btn-primary" type="button">
-                Analizza
-              </button>
-              <button id="clear-btn" class="btn btn-secondary" type="button">
-                Pulisci
-              </button>
-              <button id="pdf-btn" class="btn btn-secondary" type="button">
-                Export PDF
-              </button>
+              <button id="analyze-btn" class="btn btn-primary" type="button">Analizza</button>
+              <button id="clear-btn" class="btn btn-secondary" type="button">Pulisci</button>
+              <button id="pdf-btn" class="btn btn-secondary" type="button">Export PDF</button>
             </div>
 
             <div id="status-line" class="status-line">
-              Scrivi una descrizione e avvia l’analisi.
+              Scrivi una descrizione e avvia l'analisi.
             </div>
           </div>
         </div>
 
         <div class="copilot-right">
-          <div class="result-panel card">
+          <div class="result-panel card reveal">
             <div class="result-head">
               <h3>Result</h3>
               <span class="result-pill">Live API</span>
@@ -327,16 +323,12 @@
 
               <div class="result-box half">
                 <span class="result-label">EU Obligations</span>
-                <ul id="eu-obligations" class="result-list">
-                  <li>—</li>
-                </ul>
+                <ul id="eu-obligations" class="result-list"><li>—</li></ul>
               </div>
 
               <div class="result-box half">
                 <span class="result-label">Required Controls</span>
-                <ul id="eu-controls" class="result-list">
-                  <li>—</li>
-                </ul>
+                <ul id="eu-controls" class="result-list"><li>—</li></ul>
               </div>
 
               <div class="result-box full">
@@ -346,23 +338,17 @@
 
               <div class="result-box full">
                 <span class="result-label">Regulatory Obligations</span>
-                <ul id="eu-regulatory-obligations" class="result-list">
-                  <li>—</li>
-                </ul>
+                <ul id="eu-regulatory-obligations" class="result-list"><li>—</li></ul>
               </div>
 
               <div class="result-box half">
                 <span class="result-label">Detected Gaps</span>
-                <ul id="gaps-list" class="result-list">
-                  <li>—</li>
-                </ul>
+                <ul id="gaps-list" class="result-list"><li>—</li></ul>
               </div>
 
               <div class="result-box half">
                 <span class="result-label">Recommended Actions</span>
-                <ul id="recommendations-list" class="result-list">
-                  <li>—</li>
-                </ul>
+                <ul id="recommendations-list" class="result-list"><li>—</li></ul>
               </div>
 
               <div class="result-box full">
@@ -375,9 +361,10 @@
       </div>
     </section>
 
+    <!-- ─── Use Cases ─── -->
     <section id="use-cases" class="section">
       <div class="container">
-        <div class="section-heading">
+        <div class="section-heading reveal">
           <div class="kicker">Use Cases</div>
           <h2>Dove questa infrastruttura crea valore subito.</h2>
           <p>
@@ -387,7 +374,7 @@
         </div>
 
         <div class="use-cases-grid">
-          <article class="card use-case-card">
+          <article class="card use-case-card reveal reveal-delay-1">
             <h3>AI Compliance</h3>
             <p>
               Trasformare policy, requisiti normativi e controlli interni in logica eseguibile,
@@ -395,7 +382,7 @@
             </p>
           </article>
 
-          <article class="card use-case-card">
+          <article class="card use-case-card reveal reveal-delay-2">
             <h3>Knowledge Infrastructure</h3>
             <p>
               Costruire un backbone semantico leggibile anche per agenti, workflow automatizzati
@@ -403,31 +390,32 @@
             </p>
           </article>
 
-          <article class="card use-case-card">
+          <article class="card use-case-card reveal reveal-delay-3">
             <h3>Vertical Copilots</h3>
             <p>
               Portare la stessa logica in settori specifici con interfacce dedicate, ma senza
-              duplicare l’architettura di base.
+              duplicare l'architettura di base.
             </p>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- ─── Framework ─── -->
     <section id="framework" class="section framework-section">
       <div class="container framework-grid">
-        <div>
+        <div class="reveal">
           <div class="section-heading left">
             <div class="kicker">QEN Framework</div>
             <h2>Quantificare i vincoli etici come elementi strutturali del sistema.</h2>
             <p>
-              QEN non è solo un’etichetta di compliance. È un modo per modellare vincoli, verifiche,
+              QEN non è solo un'etichetta di compliance. È un modo per modellare vincoli, verifiche,
               tracce e criteri decisionali come componenti computabili e osservabili.
             </p>
           </div>
         </div>
 
-        <div class="card framework-card">
+        <div class="card framework-card reveal reveal-delay-1">
           <div class="formula">QEN = (I, C, P, V, T)</div>
           <ul class="framework-list">
             <li><strong>I</strong> — Input space</li>
@@ -440,40 +428,75 @@
       </div>
     </section>
 
+    <!-- ─── CTA ─── -->
     <section id="contact" class="section cta-section">
-      <div class="container cta-box">
-        <div>
-          <div class="kicker">Pilot Program</div>
-          <h2>Per aziende che vogliono compliance AI come infrastruttura, non solo documentazione.</h2>
-          <p>
-            Cognitive Logic è pensata per chi vuole trasformare la governance AI in una capacità
-            strutturale, riusabile e leggibile nel tempo.
-          </p>
-        </div>
+      <div class="container reveal">
+        <div class="cta-box">
+          <div>
+            <div class="kicker">Pilot Program</div>
+            <h2>Per aziende che vogliono compliance AI come infrastruttura, non solo documentazione.</h2>
+            <p>
+              Cognitive Logic è pensata per chi vuole trasformare la governance AI in una capacità
+              strutturale, riusabile e leggibile nel tempo.
+            </p>
+          </div>
 
-        <div class="cta-actions">
-          <a href="mailto:info@cognitivelogic.it" class="btn btn-primary">Contattaci</a>
-          <a href="#copilot" class="btn btn-secondary">Riapri il Copilot</a>
+          <div class="cta-actions">
+            <a href="mailto:info@cognitivelogic.it" class="btn btn-primary">Contattaci</a>
+            <a href="#copilot" class="btn btn-secondary">Riapri il Copilot</a>
+          </div>
         </div>
       </div>
     </section>
+
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
         <strong>Cognitive Logic</strong>
         <p>AI-native knowledge infrastructure for explainable governance.</p>
+        <p class="footer-copy">© 2026 Cognitive Logic. All rights reserved.</p>
       </div>
 
       <div class="footer-links">
         <a href="#architecture">Architecture</a>
         <a href="#copilot">Copilot</a>
         <a href="#framework">Framework</a>
+        <a href="mailto:info@cognitivelogic.it">Contact</a>
       </div>
     </div>
   </footer>
 
   <script src="js/app.js"></script>
+  <script>
+    // Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('main-nav');
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      toggle.classList.toggle('active', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+    nav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        nav.classList.remove('open');
+        toggle.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
