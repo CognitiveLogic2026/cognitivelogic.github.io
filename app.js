@@ -97,3 +97,5 @@ async function sendMessage() {
     statusText.textContent = "Errore di connessione o risposta non valida.";
   }
 }
+
+document.getElementById('analyze-btn').addEventListener('click', sendMessage);
