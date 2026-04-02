@@ -1,2 +1,6 @@
 /*
   Cache-Control: no-cache, no-store, must-revalidate
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://generativelanguage.googleapis.com; connect-src 'self' https://generativelanguage.googleapis.com;
+
