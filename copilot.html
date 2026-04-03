@@ -372,7 +372,7 @@
         const res = await fetch(API_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ system: text })
+          body: JSON.stringify({ description: text })
         });
         if (!res.ok) {
           const err = await res.json().catch(() => ({}));
