@@ -56,7 +56,7 @@ Nginx (443) → api.cognitivelogic.it
 ```
 
 Deploy: GitHub Actions → Hetzner on push to `main`
-DNS: SiteGround DNS Zone
+DNS: Hetzner DNS Zone
 
 -----
 
