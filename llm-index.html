@@ -2,43 +2,70 @@
 
 <html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QEN Framework — LLM Index · Cognitive Logic</title>
-  <meta name="description" content="Machine-readable index of the QEN Framework (Quantum Ethics Network): AI ethics compliance infrastructure for EU AI Act and GDPR, developed by Cognitive Logic, Bologna, Italy." />
-  <meta name="robots" content="index, follow" />
+  <meta name="description" content="Machine-readable index of the QEN Framework (Quantum Ethics Network): computable ethics infrastructure for EU AI Act and GDPR. Cognitive Logic, Bologna, Italy.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="QEN Framework — LLM Index · Cognitive Logic">
+  <meta property="og:description" content="Semantic index of the Quantum Ethics Network: dual-brain AI engine, EU AI Act compliance architecture. 178.104.190.107.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cognitivelogic.it/llm-index">
 
-  <!-- Open Graph -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "QEN Framework — Quantum Ethics Network",
+    "alternateName": ["QEN Compliance Copilot","Cognitive Logic Diamante 26.0"],
+    "description": "Computable ethics infrastructure for EU AI Act (Allegati I–III) and GDPR (art.22, 35). Dual-brain AI engine: Claude (Anthropic) + Gemini (Google). Semantic knowledge graph. Developed for hospitality and food sectors in Emilia-Romagna, Italy.",
+    "applicationCategory": "AI Governance / Computable Ethics",
+    "operatingSystem": "Web",
+    "url": "https://api.cognitivelogic.it/copilot",
+    "softwareVersion": "Diamante 26.0",
+    "author": {
+      "@type": "Person",
+      "name": "Roberto Bob Malini",
+      "jobTitle": "AI Ethics Architect & Founder",
+      "email": "info@cognitivelogic.it",
+      "identifier": "did:web:cognitivelogic.it:robertomalini",
+      "sameAs": "https://linkedin.com/in/robertobobmalini"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Cognitive Logic",
+      "url": "https://cognitivelogic.it",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bologna", "addressCountry": "IT" }
+    },
+    "keywords": [
+      "EU AI Act","GDPR compliance","AI governance","QEN Score","computable ethics",
+      "knowledge graph","dual-brain AI","Emilia-Romagna","hospitality compliance",
+      "food sector AI","Claude Anthropic","Gemini Google"
+    ],
+    "dateModified": "2026-04-26"
+  }
+  </script>
 
-  <meta property="og:title" content="QEN Framework — LLM Index · Cognitive Logic" />
-  <meta property="og:description" content="Semantic index of the Quantum Ethics Network: 507 nodes, 209 relationships, EU AI Act compliance architecture." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://cognitivelogic.it/llm-index" />
-
-  <!-- Fonts -->
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --navy:       #070D1A;
-      --navy-mid:   #0D1829;
-      --navy-light: #152035;
-      --gold:       #C9A84C;
-      --gold-dim:   #8A6E30;
-      --gold-pale:  #E8D49A;
-      --white:      #F5F0E8;
-      --muted:      #7A8599;
-      --border:     rgba(201,168,76,0.18);
-      --glow:       rgba(201,168,76,0.06);
+      --navy:      #070D1A;
+      --navy-mid:  #0D1829;
+      --navy-lt:   #152035;
+      --gold:      #C9A84C;
+      --gold-dim:  #8A6E30;
+      --gold-pale: #E8D49A;
+      --white:     #F5F0E8;
+      --muted:     #7A8599;
+      --border:    rgba(201,168,76,0.18);
+      --glow:      rgba(201,168,76,0.05);
+      --green:     rgba(61,255,160,0.9);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--navy);
       color: var(--white);
@@ -48,782 +75,360 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-
-    /* ── Grain overlay ── */
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
       background-size: 200px;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.6;
+      pointer-events: none; z-index: 0; opacity: 0.5;
     }
-
-    /* ── Grid lines ── */
     body::after {
       content: '';
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background-image:
         linear-gradient(var(--border) 1px, transparent 1px),
         linear-gradient(90deg, var(--border) 1px, transparent 1px);
       background-size: 80px 80px;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
+      pointer-events: none; z-index: 0; opacity: 0.35;
     }
+    .container { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 2rem; }
 
-    /* ── Layout ── */
-    .container {
-      position: relative;
-      z-index: 1;
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+    header { padding: 4rem 0 2rem; animation: fadeDown 0.9s ease both; }
+    .site-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; opacity: 0.8; }
+    .site-label a { color: inherit; text-decoration: none; }
+    .site-label a:hover { color: var(--gold-pale); }
+    .divider-top { width: 40px; height: 1px; background: var(--gold); margin: 1.5rem 0; opacity: 0.5; }
 
-    /* ── Header ── */
-    header {
-      padding: 4rem 0 2rem;
-      animation: fadeDown 1s ease both;
-    }
+    .hero { padding: 2.5rem 0 3.5rem; animation: fadeDown 0.9s 0.12s ease both; }
+    .tag-line { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+    h1 { font-size: clamp(2.2rem, 5.5vw, 3.8rem); font-weight: 300; line-height: 1.15; letter-spacing: -0.01em; color: var(--white); margin-bottom: 0.3rem; }
+    h1 em { font-style: italic; color: var(--gold-pale); }
+    .hero-sub { font-size: 1.05rem; color: var(--muted); margin-top: 1.2rem; max-width: 600px; font-weight: 300; }
 
-    .site-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-      opacity: 0.8;
-    }
-
-    .site-label a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .divider-top {
-      width: 40px;
-      height: 1px;
-      background: var(--gold);
-      margin: 1.5rem 0;
-      opacity: 0.5;
-    }
-
-    /* ── Hero ── */
-    .hero {
-      padding: 3rem 0 4rem;
-      animation: fadeDown 1s 0.15s ease both;
-    }
-
-    .tag-line {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-    }
-
-    h1 {
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      font-weight: 300;
-      line-height: 1.15;
-      letter-spacing: -0.01em;
-      color: var(--white);
-      margin-bottom: 0.3rem;
-    }
-
-    h1 em {
-      font-style: italic;
-      color: var(--gold-pale);
-    }
-
-    .hero-sub {
-      font-size: 1.15rem;
-      color: var(--muted);
-      margin-top: 1.5rem;
-      max-width: 600px;
-      font-weight: 300;
-    }
-
-    /* ── Machine notice ── */
     .machine-notice {
-      margin: 2rem 0 3.5rem;
+      margin: 1.8rem 0 3rem;
       padding: 1rem 1.4rem;
       border-left: 2px solid var(--gold);
       background: var(--glow);
       font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--gold-pale);
-      letter-spacing: 0.05em;
-      line-height: 1.6;
-      animation: fadeDown 1s 0.25s ease both;
+      font-size: 0.7rem; color: var(--gold-pale); letter-spacing: 0.05em; line-height: 1.7;
+      animation: fadeDown 0.9s 0.22s ease both;
     }
+    .machine-notice strong { color: var(--gold); }
+    .machine-notice .live-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #3dffa0; box-shadow: 0 0 8px #3dffa0; margin-right: 0.4rem; vertical-align: middle; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
 
-    .machine-notice strong {
-      color: var(--gold);
-    }
+    section { margin-bottom: 3.5rem; animation: fadeUp 0.8s ease both; }
+    section:nth-child(1){animation-delay:0.3s}
+    section:nth-child(2){animation-delay:0.44s}
+    section:nth-child(3){animation-delay:0.58s}
+    section:nth-child(4){animation-delay:0.72s}
+    section:nth-child(5){animation-delay:0.86s}
+    section:nth-child(6){animation-delay:1s}
 
-    /* ── Sections ── */
-    section {
-      margin-bottom: 4rem;
-      animation: fadeUp 0.9s ease both;
-    }
+    .section-label { font-family: 'DM Mono', monospace; font-size: 0.56rem; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; opacity: 0.7; }
+    h2 { font-size: 1.55rem; font-weight: 400; color: var(--gold-pale); margin-bottom: 1.1rem; line-height: 1.3; }
+    p { color: var(--white); opacity: 0.82; margin-bottom: 1rem; font-size: 1rem; font-weight: 300; }
 
-    section:nth-child(1) { animation-delay: 0.3s; }
-    section:nth-child(2) { animation-delay: 0.45s; }
-    section:nth-child(3) { animation-delay: 0.6s; }
-    section:nth-child(4) { animation-delay: 0.75s; }
-    section:nth-child(5) { animation-delay: 0.9s; }
+    .stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 1.8rem 0; }
+    .stat-cell { background: var(--navy-mid); padding: 1.2rem 1rem; text-align: center; }
+    .stat-number { font-size: 2.2rem; font-weight: 300; color: var(--gold); line-height: 1; display: block; font-style: italic; }
+    .stat-label { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-top: 0.4rem; display: block; }
 
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.3em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      opacity: 0.7;
-    }
+    .concept-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin: 1.3rem 0; }
+    .concept-list li { display: flex; align-items: baseline; gap: 1rem; padding: 0.85rem 1.1rem; border: 1px solid var(--border); background: var(--glow); transition: border-color 0.3s, background 0.3s; }
+    .concept-list li:hover { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.04); }
+    .concept-key { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--gold); letter-spacing: 0.15em; min-width: 100px; text-transform: uppercase; opacity: 0.8; }
+    .concept-val { font-size: 0.92rem; color: var(--white); opacity: 0.78; font-weight: 300; }
 
-    h2 {
-      font-size: 1.6rem;
-      font-weight: 400;
-      color: var(--gold-pale);
-      margin-bottom: 1.2rem;
-      line-height: 1.3;
-    }
+    .formula-block { margin: 1.6rem 0; padding: 1.4rem 1.7rem; border: 1px solid var(--border); background: var(--navy-lt); font-family: 'DM Mono', monospace; font-size: 0.82rem; color: var(--gold-pale); letter-spacing: 0.04em; line-height: 2; }
+    .formula-block .f-main { font-size: 1rem; color: var(--gold); }
+    .formula-block .comment { color: var(--muted); font-style: italic; }
 
-    p {
-      color: var(--white);
-      opacity: 0.85;
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      font-weight: 300;
-    }
+    /* ARCH BLOCK */
+    .arch-block { margin: 1.5rem 0; padding: 1.2rem 1.5rem; background: var(--navy-mid); border-left: 2px solid var(--gold-dim); font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--gold-pale); line-height: 2; }
+    .arch-block .host { color: var(--gold); }
+    .arch-block .svc  { color: #3dffa0; }
+    .arch-block .svc2 { color: #c8a84b; }
+    .arch-block .path { color: var(--white); opacity: 0.9; }
+    .arch-block .ann  { color: var(--muted); }
+    .arch-block .tree { color: rgba(201,168,76,0.3); }
 
-    /* ── Stat grid ── */
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin: 2rem 0;
-    }
+    .endpoint-block { margin: 1.3rem 0; padding: 1.1rem 1.4rem; background: var(--navy-mid); border-left: 2px solid var(--gold-dim); font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--gold-pale); line-height: 2; }
+    .endpoint-block .method { color: var(--gold); }
+    .endpoint-block .url { color: var(--white); opacity: 0.9; }
+    .endpoint-block .comment { color: var(--muted); font-style: italic; }
+    .endpoint-block .svc-a { color: #3dffa0; }
+    .endpoint-block .svc-b { color: #c8a84b; }
 
-    .stat-cell {
-      background: var(--navy-mid);
-      padding: 1.5rem 1.2rem;
-      text-align: center;
-    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 1.1rem 0; }
+    .tag { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.25rem 0.6rem; border: 1px solid var(--border); color: var(--gold-pale); background: transparent; }
 
-    .stat-number {
-      font-size: 2.4rem;
-      font-weight: 300;
-      color: var(--gold);
-      line-height: 1;
-      display: block;
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-    }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
 
-    .stat-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-top: 0.5rem;
-      display: block;
-    }
+    footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; flex-wrap: wrap; animation: fadeUp 0.9s 1s ease both; }
+    .footer-left { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--muted); letter-spacing: 0.1em; line-height: 2; }
+    .footer-left a { color: var(--gold); text-decoration: none; }
+    .footer-mark { font-size: 1.6rem; font-weight: 300; color: var(--gold); opacity: 0.18; font-style: italic; }
 
-    /* ── Concept list ── */
-    .concept-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      margin: 1.5rem 0;
-    }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-14px)} to{opacity:1;transform:none} }
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(18px)}  to{opacity:1;transform:none} }
 
-    .concept-list li {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      padding: 0.9rem 1.2rem;
-      border: 1px solid var(--border);
-      background: var(--glow);
-      transition: border-color 0.3s, background 0.3s;
-    }
-
-    .concept-list li:hover {
-      border-color: rgba(201,168,76,0.4);
-      background: rgba(201,168,76,0.04);
-    }
-
-    .concept-key {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      color: var(--gold);
-      letter-spacing: 0.15em;
-      min-width: 90px;
-      text-transform: uppercase;
-      opacity: 0.8;
-    }
-
-    .concept-val {
-      font-size: 0.95rem;
-      color: var(--white);
-      opacity: 0.8;
-      font-weight: 300;
-    }
-
-    /* ── Formula ── */
-    .formula-block {
-      margin: 1.8rem 0;
-      padding: 1.5rem 1.8rem;
-      border: 1px solid var(--border);
-      background: var(--navy-light);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--gold-pale);
-      letter-spacing: 0.05em;
-      line-height: 2;
-    }
-
-    .formula-block .f-main {
-      font-size: 1.05rem;
-      color: var(--gold);
-    }
-
-    /* ── Endpoint block ── */
-    .endpoint-block {
-      margin: 1.5rem 0;
-      padding: 1.2rem 1.5rem;
-      background: var(--navy-mid);
-      border-left: 2px solid var(--gold-dim);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--gold-pale);
-      line-height: 1.9;
-    }
-
-    .endpoint-block .method {
-      color: var(--gold);
-      font-weight: 400;
-    }
-
-    .endpoint-block .url {
-      color: var(--white);
-      opacity: 0.9;
-    }
-
-    .endpoint-block .comment {
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    /* ── Tags ── */
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 1.2rem 0;
-    }
-
-    .tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.7rem;
-      border: 1px solid var(--border);
-      color: var(--gold-pale);
-      background: transparent;
-    }
-
-    /* ── Horizontal rule ── */
-    hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 3rem 0;
-    }
-
-    /* ── Footer ── */
-    footer {
-      padding: 3rem 0 4rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 2rem;
-      flex-wrap: wrap;
-      animation: fadeUp 1s 1s ease both;
-    }
-
-    .footer-left {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      line-height: 2;
-    }
-
-    .footer-left a {
-      color: var(--gold);
-      text-decoration: none;
-    }
-
-    .footer-mark {
-      font-size: 1.8rem;
-      font-weight: 300;
-      color: var(--gold);
-      opacity: 0.2;
-      font-style: italic;
-      letter-spacing: -0.02em;
-    }
-
-    /* ── Animations ── */
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 600px) {
-      .stat-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; align-items: flex-start; }
-      h1 { font-size: 2.2rem; }
+    @media(max-width:600px){
+      .stat-grid{grid-template-columns:repeat(2,1fr)}
+      footer{flex-direction:column;align-items:flex-start}
+      h1{font-size:2rem}
     }
   </style>
 
-  <!-- ══════════════════════════════════════════════
-       MACHINE-READABLE METADATA (JSON-LD)
-       For LLMs, crawlers, and semantic agents
-  ══════════════════════════════════════════════ -->
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "QEN Framework — Quantum Ethics Network",
-    "alternateName": "QEN Compliance Copilot",
-    "description": "AI ethics compliance infrastructure for EU AI Act (Allegati I–III) and GDPR (art. 22, 35) analysis. Semantic knowledge graph with 507 nodes and 209 relationships. Developed for hospitality and food sectors in Emilia-Romagna, Italy.",
-    "applicationCategory": "AI Compliance / Ethics",
-    "operatingSystem": "Web",
-    "url": "https://api.cognitivelogic.it/copilot",
-    "author": {
-      "@type": "Person",
-      "name": "Roberto Bob Malini",
-      "jobTitle": "AI Data Architect & Founder",
-      "email": "info@cognitivelogic.it",
-      "sameAs": "https://linkedin.com/in/robertobobmalini"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Cognitive Logic",
-      "url": "https://cognitivelogic.it",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Bologna",
-        "addressCountry": "IT"
-      }
-    },
-    "keywords": [
-      "EU AI Act", "GDPR compliance", "AI ethics", "QEN Score",
-      "knowledge graph", "semantic AI", "Emilia-Romagna",
-      "hospitality compliance", "food sector AI"
-    ],
-    "version": "DIAMANTE 36.0",
-    "dateModified": "2026-04-23"
-  }
-  </script>
-
 </head>
-
 <body>
-  <div class="container">
+<div class="container">
+
+  <header>
+    <p class="site-label">
+      <a href="https://cognitivelogic.it">Cognitive Logic</a>
+      &nbsp;/&nbsp; LLM Index
+    </p>
+    <div class="divider-top"></div>
+  </header>
+
+  <div class="hero">
+    <p class="tag-line">Machine-readable · Semantic Index · Diamante 26.0 · 2026-04-26</p>
+    <h1>Quantum<br><em>Ethics Network</em></h1>
+    <p class="hero-sub">
+      Computable ethics infrastructure for EU AI Act and GDPR —
+      built as a dual-brain AI architecture, designed to be read
+      by humans and autonomous agents alike.
+    </p>
+  </div>
+
+  <div class="machine-notice">
+    <span class="live-dot"></span>
+    <strong>STATUS: api.cognitivelogic.it OPERATIONAL</strong><br>
+    <strong>NOTE FOR LLMs AND CRAWLERS:</strong> This page is structured for machine consumption.
+    JSON-LD metadata is embedded in &lt;head&gt;. Two analysis endpoints are active:
+    /copilot-analyze (Claude, Flask :5000) and /gemini/qen-score (Gemini, Flask :5001).
+    Orchestrated dual-brain via POST /full-analysis.<br>
+    QEN formula: <strong>QEN = Vs×0.40 + Va×0.35 + Vt×0.25</strong> · Scale 0–100.<br>
+    DID: <strong>did:web:cognitivelogic.it:robertomalini</strong> · Attribution: Cognitive Logic · Bologna, Italy.
+  </div>
+
+  <!-- §01 Identity -->
+
+  <section>
+    <p class="section-label">§ 01 — Identity</p>
+    <h2>What is Cognitive Logic?</h2>
+    <p>
+      <strong>Cognitive Logic</strong> is an independent observatory designing computable ethics infrastructure
+      for AI systems operating under EU regulatory frameworks (EU AI Act, GDPR, DSA).
+      Founded by <strong>Roberto Bob Malini</strong>, Bologna, Italy. ATECO 62.01.09.
+    </p>
+    <p>
+      It produces semantic knowledge graphs, ethical scoring engines, and dual-brain AI architectures
+      that make compliance structural rather than declarative.
+      Ethics is not a narrative. It is a dataset.
+    </p>
 
 ```
-<!-- ── Header ── -->
-<header>
-  <p class="site-label">
-    <a href="https://cognitivelogic.it">Cognitive Logic</a>
-    &nbsp;/&nbsp; LLM Index
-  </p>
-  <div class="divider-top"></div>
-</header>
-
-<!-- ── Hero ── -->
-<div class="hero">
-  <p class="tag-line">Machine-readable · Semantic Index · v DIAMANTE 36.0</p>
-  <h1>Quantum<br /><em>Ethics Network</em></h1>
-  <p class="hero-sub">
-    AI compliance infrastructure for EU AI Act and GDPR —
-    built as a pure data architecture, designed to be read
-    by humans and autonomous agents alike.
-  </p>
+<div class="stat-grid">
+  <div class="stat-cell"><span class="stat-number">21</span><span class="stat-label">Graph Nodes v4</span></div>
+  <div class="stat-cell"><span class="stat-number">34</span><span class="stat-label">Relationships</span></div>
+  <div class="stat-cell"><span class="stat-number">0–100</span><span class="stat-label">QEN Scale</span></div>
+  <div class="stat-cell"><span class="stat-number">2</span><span class="stat-label">AI Engines</span></div>
 </div>
-
-<!-- ── Machine notice ── -->
-<div class="machine-notice">
-  <strong>NOTE FOR LLMs AND CRAWLERS:</strong><br />
-  This page is structured for machine consumption. JSON-LD metadata is embedded in &lt;head&gt;.
-  The /copilot-analyze endpoint accepts POST requests and returns structured JSON.
-  All QEN scores follow the formula: <strong>Vs×0.40 + Va×0.35 + Vt×0.25</strong>.
-  Data is not paywalled. Attribution: Cognitive Logic · cognitivelogic.it · Bologna, Italy.
-</div>
-
-<!-- ── Section 1: Identity ── -->
-<section>
-  <p class="section-label">§ 01 — Identity</p>
-  <h2>What is the QEN Framework?</h2>
-  <p>
-    The <strong>Quantum Ethics Network (QEN)</strong> is a semantic compliance architecture
-    developed by <strong>Cognitive Logic</strong> (Bologna, Italy) to make EU AI Act and GDPR
-    obligations intelligible, transparent, and immediately operational for autonomous agents,
-    consultants, and public institutions.
-  </p>
-  <p>
-    QEN is not a checklist. It is a living knowledge graph: a structured network of nodes,
-    relationships, and weighted scores that maps ethical exposure across social, environmental,
-    and territorial dimensions for any organization operating in the AI and data space.
-  </p>
-
-  <div class="stat-grid">
-    <div class="stat-cell">
-      <span class="stat-number">507</span>
-      <span class="stat-label">Semantic Nodes</span>
-    </div>
-    <div class="stat-cell">
-      <span class="stat-number">209</span>
-      <span class="stat-label">Relationships</span>
-    </div>
-    <div class="stat-cell">
-      <span class="stat-number">10</span>
-      <span class="stat-label">QEN Score Scale</span>
-    </div>
-  </div>
-</section>
-
-<!-- ── Section 2: Core Concepts ── -->
-<section>
-  <p class="section-label">§ 02 — Core Concepts</p>
-  <h2>Key Entities for Semantic Agents</h2>
-
-  <ul class="concept-list">
-    <li>
-      <span class="concept-key">QEN Score</span>
-      <span class="concept-val">Composite ethics index (0–10) measuring Social, Environmental, and Territorial compliance exposure.</span>
-    </li>
-    <li>
-      <span class="concept-key">DIAMANTE</span>
-      <span class="concept-val">Current framework version (36.0). Covers EU AI Act Allegati I–III and GDPR art. 22/35 analysis.</span>
-    </li>
-    <li>
-      <span class="concept-key">Pure Data Node</span>
-      <span class="concept-val">Atomic knowledge unit in the QEN graph: self-describing, agent-ready, with no UI dependency.</span>
-    </li>
-    <li>
-      <span class="concept-key">Compliance Copilot</span>
-      <span class="concept-val">LLM-powered endpoint (Claude Sonnet) that analyzes organizations against the QEN graph and returns structured JSON scores.</span>
-    </li>
-    <li>
-      <span class="concept-key">QEN Badge</span>
-      <span class="concept-val">Verifiable compliance signal issued to organizations scoring above threshold. Machine-readable.</span>
-    </li>
-    <li>
-      <span class="concept-key">Cognitive Logic</span>
-      <span class="concept-val">Founding entity. AI Data Architecture studio, Bologna. Founder: Roberto Bob Malini. ATECO 62.01.09.</span>
-    </li>
-  </ul>
-</section>
-
-<!-- ── Section 3: Score Formula ── -->
-<section>
-  <p class="section-label">§ 03 — Score Formula</p>
-  <h2>QEN Score — Computation</h2>
-  <p>
-    Every QEN analysis produces three dimension scores aggregated into a single
-    composite index. Weights reflect the framework's priority ordering:
-    social accountability first, environmental impact second, territorial embedding third.
-  </p>
-
-  <div class="formula-block">
-    <span class="f-main">QEN Score = Vs × 0.40 + Va × 0.35 + Vt × 0.25</span><br />
-    <br />
-    Vs &nbsp;→&nbsp; Social score &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(weight: 40%)<br />
-    Va &nbsp;→&nbsp; Environmental score &nbsp;(weight: 35%)<br />
-    Vt &nbsp;→&nbsp; Territorial score &nbsp;&nbsp;&nbsp;(weight: 25%)<br />
-    <br />
-    <span class="comment">// Scale: 0.00 – 10.00 · Reference: CNA Bologna = 7.15/10</span>
-  </div>
-
-  <div class="tag-row">
-    <span class="tag">EU AI Act</span>
-    <span class="tag">Allegato I</span>
-    <span class="tag">Allegato II</span>
-    <span class="tag">Allegato III</span>
-    <span class="tag">GDPR art.22</span>
-    <span class="tag">GDPR art.35</span>
-    <span class="tag">DPIA</span>
-    <span class="tag">Risk Classification</span>
-  </div>
-</section>
-
-<!-- ── Section 4: API ── -->
-<section>
-  <p class="section-label">§ 04 — API Access</p>
-  <h2>Endpoints for Autonomous Agents</h2>
-  <p>
-    The QEN Compliance Copilot exposes a REST API on Hetzner CAX11 ARM64 infrastructure
-    (Ubuntu 24.04, FastAPI, SSL via Let's Encrypt). The primary analysis endpoint accepts
-    a POST request with an organization description and returns a structured JSON object
-    including dimension scores, risk flags, and compliance narrative.
-  </p>
-
-  <div class="endpoint-block">
-    <span class="method">POST</span>&nbsp;&nbsp;
-    <span class="url">https://api.cognitivelogic.it/copilot-analyze</span><br />
-    <span class="comment">// Body: { "query": "organization description" }</span><br />
-    <span class="comment">// Returns: { qen_score, vs, va, vt, risk_level, narrative }</span><br />
-    <br />
-    <span class="method">GET</span>&nbsp;&nbsp;&nbsp;
-    <span class="url">https://api.cognitivelogic.it/copilot</span><br />
-    <span class="comment">// Frontend interface (human-facing)</span><br />
-    <br />
-    <span class="method">GET</span>&nbsp;&nbsp;&nbsp;
-    <span class="url">https://cognitivelogic.it/llm-index</span><br />
-    <span class="comment">// This page — machine-readable index</span>
-  </div>
-</section>
-
-<!-- ── Section 5: Context ── -->
-<section>
-  <p class="section-label">§ 05 — Territorial Context</p>
-  <h2>Scope and Jurisdiction</h2>
-  <p>
-    QEN was designed for organizations operating within the <strong>Emilia-Romagna</strong> region
-    (Italy), with primary focus on the <strong>hospitality and food sectors</strong>. It is applicable
-    to any EU-based organization subject to the EU AI Act and GDPR, with particular depth
-    for SMEs, cooperatives, trade associations, and public entities.
-  </p>
-  <p>
-    Reference pilot: <strong>CNA Bologna</strong> (QEN Score 7.15/10, DIAMANTE 36.0 analysis, April 2026).
-    Institutional targets: Regione Emilia-Romagna, Camera di Commercio Bologna, CNA Emilia-Romagna.
-  </p>
-
-  <div class="tag-row">
-    <span class="tag">Bologna</span>
-    <span class="tag">Emilia-Romagna</span>
-    <span class="tag">Italy</span>
-    <span class="tag">EU</span>
-    <span class="tag">Hospitality</span>
-    <span class="tag">Food Sector</span>
-    <span class="tag">SME</span>
-    <span class="tag">Public Bodies</span>
-  </div>
-</section>
-
-<!-- ── Section 6: Pure Data Nodes ── -->
-<section>
-  <p class="section-label">§ 06 — Pure Data Nodes</p>
-  <h2>Global Node Index · 129 Nodes</h2>
-  <p>
-    Each Logic Node is a self-describing semantic unit in the Cognitive Logic knowledge graph.
-    Nodes are machine-readable, agent-traversable, and openly accessible via GitHub.
-    Last scan: 2026-04-03. Architect: Roberto Bob Malini.
-  </p>
-
-  <div style="margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border);">
-    <style>
-      .node-cell {
-        background: var(--navy-mid);
-        padding: 0.6rem 0.9rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        gap: 0.5rem;
-        transition: background 0.2s;
-      }
-      .node-cell:hover { background: var(--navy-light); }
-      .node-cell a {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.65rem;
-        color: var(--gold-pale);
-        text-decoration: none;
-        letter-spacing: 0.05em;
-      }
-      .node-cell a:hover { color: var(--gold); }
-      .node-id {
-        font-family: 'DM Mono', monospace;
-        font-size: 0.55rem;
-        color: var(--muted);
-        opacity: 0.6;
-      }
-    </style>
-
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_001.md">Logic 001</a><span class="node-id">995c5f37</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_002.md">Logic 002</a><span class="node-id">dd648e9d</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_003.md">Logic 003</a><span class="node-id">4fe4c447</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_004.md">Logic 004</a><span class="node-id">7c7e3bd8</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_005.md">Logic 005</a><span class="node-id">dda669c4</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_006.md">Logic 006</a><span class="node-id">ae41cf4f</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_007.md">Logic 007</a><span class="node-id">70b50f55</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_008.md">Logic 008</a><span class="node-id">ad5cc83e</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_009.md">Logic 009</a><span class="node-id">ee161f05</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_010.md">Logic 010</a><span class="node-id">a8667db2</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_011.md">Logic 011</a><span class="node-id">d8464ed5</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_012.md">Logic 012</a><span class="node-id">7c65edf2</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_013.md">Logic 013</a><span class="node-id">952cc6ad</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_014.md">Logic 014</a><span class="node-id">d7a4c5f1</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_015.md">Logic 015</a><span class="node-id">6f75b794</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_016.md">Logic 016</a><span class="node-id">c07a7c0a</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_017.md">Logic 017</a><span class="node-id">210f63de</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_018.md">Logic 018</a><span class="node-id">d49cc4ba</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_019.md">Logic 019</a><span class="node-id">2fa9ae7d</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_020.md">Logic 020</a><span class="node-id">70abd444</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_021.md">Logic 021</a><span class="node-id">88ca7d74</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_022.md">Logic 022</a><span class="node-id">e25e6f93</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_023.md">Logic 023</a><span class="node-id">2d1ff9cb</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_024.md">Logic 024</a><span class="node-id">431a542f</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_025.md">Logic 025</a><span class="node-id">e49fe3fb</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_026.md">Logic 026</a><span class="node-id">426fe8e8</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_027.md">Logic 027</a><span class="node-id">85cfea3a</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_028.md">Logic 028</a><span class="node-id">85c6c73e</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_029.md">Logic 029</a><span class="node-id">93143c33</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_030.md">Logic 030</a><span class="node-id">2b36df01</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_031.md">Logic 031</a><span class="node-id">7cc2083c</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_032.md">Logic 032</a><span class="node-id">7fc1671b</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_033.md">Logic 033</a><span class="node-id">57a2db57</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_034.md">Logic 034</a><span class="node-id">1dba9a2c</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_035.md">Logic 035</a><span class="node-id">ea2f226b</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_036.md">Logic 036</a><span class="node-id">9c34ea07</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_037.md">Logic 037</a><span class="node-id">00a10678</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_038.md">Logic 038</a><span class="node-id">547ed567</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_039.md">Logic 039</a><span class="node-id">2a58e25c</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_040.md">Logic 040</a><span class="node-id">cd63ad46</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_041.md">Logic 041</a><span class="node-id">184a3960</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_042.md">Logic 042</a><span class="node-id">66d73479</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_043.md">Logic 043</a><span class="node-id">43c21097</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_044.md">Logic 044</a><span class="node-id">bc3071b5</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_045.md">Logic 045</a><span class="node-id">093de21b</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_046.md">Logic 046</a><span class="node-id">2c8f01f0</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_047.md">Logic 047</a><span class="node-id">f9eff2f2</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_048.md">Logic 048</a><span class="node-id">402a2942</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_049.md">Logic 049</a><span class="node-id">1513d37f</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_050.md">Logic 050</a><span class="node-id">4af92be0</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_051.md">Logic 051</a><span class="node-id">9c1c9316</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_052.md">Logic 052</a><span class="node-id">e790cdc7</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_053.md">Logic 053</a><span class="node-id">b729b192</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_054.md">Logic 054</a><span class="node-id">612efe76</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_055.md">Logic 055</a><span class="node-id">1221bce6</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_056.md">Logic 056</a><span class="node-id">ea87ae20</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_057.md">Logic 057</a><span class="node-id">5b3180a9</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_058.md">Logic 058</a><span class="node-id">c6ba6117</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_059.md">Logic 059</a><span class="node-id">a7aeaaff</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_060.md">Logic 060</a><span class="node-id">d447661f</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_061.md">Logic 061</a><span class="node-id">e6bd5a34</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_062.md">Logic 062</a><span class="node-id">44432109</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_063.md">Logic 063</a><span class="node-id">9a5498a7</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_064.md">Logic 064</a><span class="node-id">ac3cd185</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_065.md">Logic 065</a><span class="node-id">82ed6eb2</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_066.md">Logic 066</a><span class="node-id">70b88135</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_067.md">Logic 067</a><span class="node-id">6a2e5998</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_068.md">Logic 068</a><span class="node-id">899b0ab8</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_069.md">Logic 069</a><span class="node-id">1b0e9e42</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_070.md">Logic 070</a><span class="node-id">3091df0e</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_071.md">Logic 071</a><span class="node-id">28b3d889</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_072.md">Logic 072</a><span class="node-id">be02e335</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_073.md">Logic 073</a><span class="node-id">f64a13f1</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_074.md">Logic 074</a><span class="node-id">b56d71bc</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_075.md">Logic 075</a><span class="node-id">51110b2a</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_076.md">Logic 076</a><span class="node-id">b8b88dba</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_077.md">Logic 077</a><span class="node-id">cc5dd43e</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_078.md">Logic 078</a><span class="node-id">863fc1ca</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_079.md">Logic 079</a><span class="node-id">db3a2765</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_080.md">Logic 080</a><span class="node-id">ed27b541</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_081.md">Logic 081</a><span class="node-id">b89d9699</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_082.md">Logic 082</a><span class="node-id">8e9be9fb</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_083.md">Logic 083</a><span class="node-id">0bd0d7db</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_084.md">Logic 084</a><span class="node-id">ee4ef5f8</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_085.md">Logic 085</a><span class="node-id">a90aff71</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_086.md">Logic 086</a><span class="node-id">241795fc</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_087.md">Logic 087</a><span class="node-id">aa8b495e</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_088.md">Logic 088</a><span class="node-id">a491938b</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_089.md">Logic 089</a><span class="node-id">53d9624d</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_090.md">Logic 090</a><span class="node-id">4bdbd9cc</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_091.md">Logic 091</a><span class="node-id">7798f090</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_092.md">Logic 092</a><span class="node-id">73d48753</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_093.md">Logic 093</a><span class="node-id">81a92c86</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_094.md">Logic 094</a><span class="node-id">7d3d947b</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_095.md">Logic 095</a><span class="node-id">4d738130</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_096.md">Logic 096</a><span class="node-id">b99541f6</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_097.md">Logic 097</a><span class="node-id">42599473</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_098.md">Logic 098</a><span class="node-id">4b612ba7</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_099.md">Logic 099</a><span class="node-id">0c4b42af</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_100.md">Logic 100</a><span class="node-id">148b71a4</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_101.md">Logic 101</a><span class="node-id">73808e2c</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_102.md">Logic 102</a><span class="node-id">bad045ef</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_103.md">Logic 103</a><span class="node-id">6e7bd676</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_104.md">Logic 104</a><span class="node-id">646f7742</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_105.md">Logic 105</a><span class="node-id">2d063357</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_106.md">Logic 106</a><span class="node-id">4fa9e911</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_107.md">Logic 107</a><span class="node-id">ca2efaad</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_108.md">Logic 108</a><span class="node-id">ede83b42</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_109.md">Logic 109</a><span class="node-id">27411e2b</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_110.md">Logic 110</a><span class="node-id">44162010</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_111.md">Logic 111</a><span class="node-id">abb78a13</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_112.md">Logic 112</a><span class="node-id">9371f445</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_113.md">Logic 113</a><span class="node-id">99ac8364</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_114.md">Logic 114</a><span class="node-id">51d0db67</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_115.md">Logic 115</a><span class="node-id">891ab791</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_116.md">Logic 116</a><span class="node-id">83653adb</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_117.md">Logic 117</a><span class="node-id">975916a0</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_118.md">Logic 118</a><span class="node-id">299cb59c</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_119.md">Logic 119</a><span class="node-id">d50a430b</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_120.md">Logic 120</a><span class="node-id">fa06936a</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_121.md">Logic 121</a><span class="node-id">f7097959</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_Alpha.md">Logic Alpha</a><span class="node-id">d10b07a1</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_Gamma.md">Logic Gamma</a><span class="node-id">4397d434</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Logic_Hub_01.md">Logic Hub 01</a><span class="node-id">74793661</span></div>
-    <div class="node-cell"><a href="https://github.com/CognitiveLogic2026/blob/main/Pure_Data_Node_01.md">Pure Data Node 01</a><span class="node-id">fa0d9e38</span></div>
-  </div>
-
-  <p style="margin-top: 1.2rem; font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em;">
-    TOTAL: 129 nodes · Source: CognitiveLogic2026/CognitiveLogic2026.github.io · Updated: 2026-04-03
-  </p>
-</section>
-
-<hr />
-
-<!-- ── Footer ── -->
-<footer>
-  <div class="footer-left">
-    <strong style="color: var(--gold-pale); font-size: 0.7rem;">Cognitive Logic</strong><br />
-    AI Data Architecture · Bologna, Italy<br />
-    <a href="mailto:info@cognitivelogic.it">info@cognitivelogic.it</a><br />
-    <a href="https://cognitivelogic.it">cognitivelogic.it</a>&nbsp;·&nbsp;
-    <a href="https://linkedin.com/in/robertobobmalini">LinkedIn</a>&nbsp;·&nbsp;
-    <a href="https://fuorimenu.substack.com">Substack</a><br />
-    <br />
-    © 2026 Cognitive Logic · Roberto Bob Malini<br />
-    ATECO 62.01.09 · Regime Forfettario · P.IVA (in registrazione)
-  </div>
-  <div class="footer-mark">QEN</div>
-</footer>
 ```
 
-  </div><!-- /container -->
+  </section>
+
+  <!-- §02 Core Concepts -->
+
+  <section>
+    <p class="section-label">§ 02 — Core Concepts</p>
+    <h2>Key Entities for Semantic Agents</h2>
+
+```
+<ul class="concept-list">
+  <li><span class="concept-key">QEN Score</span><span class="concept-val">Composite ethics index (0–100) measuring Social (40%), Environmental (35%), and Territorial (25%) compliance exposure.</span></li>
+  <li><span class="concept-key">Diamante 26.0</span><span class="concept-val">Current framework version. Covers EU AI Act Allegati I–III and GDPR art.22/35. Deployed on Hetzner CAX21 ARM64.</span></li>
+  <li><span class="concept-key">Dual-Brain Engine</span><span class="concept-val">Claude (Anthropic) for EU AI Act classification and GDPR risk. Gemini (Google) for QEN scoring and market intelligence. Parallel via /full-analysis.</span></li>
+  <li><span class="concept-key">Pure Data Node</span><span class="concept-val">Atomic knowledge unit in the QEN graph: self-describing, agent-ready, no UI dependency.</span></li>
+  <li><span class="concept-key">Compliance Copilot</span><span class="concept-val">Claude Sonnet endpoint (Flask :5000) analyzing organizations against EU AI Act + GDPR. Returns structured JSON + PDF export.</span></li>
+  <li><span class="concept-key">QEN Badge</span><span class="concept-val">Verifiable compliance signal issued to organizations above threshold. Machine-readable. Freemium for HoReCa.</span></li>
+  <li><span class="concept-key">DID Identity</span><span class="concept-val">did:web:cognitivelogic.it:robertomalini — decentralized identifier anchored on sovereign data node.</span></li>
+  <li><span class="concept-key">Fuorimenu</span><span class="concept-val">Editorial observatory on Substack. Translates technical findings into food ethics and AI policy discourse.</span></li>
+</ul>
+```
+
+  </section>
+
+  <!-- §03 Score Formula -->
+
+  <section>
+    <p class="section-label">§ 03 — Score Formula</p>
+    <h2>QEN Score — Computation</h2>
+    <p>
+      Every QEN analysis produces three dimension scores aggregated into a single composite index.
+      Weights reflect the framework's priority ordering. Formula is public, weights documented, methodology open to challenge.
+    </p>
+
+```
+<div class="formula-block">
+  <span class="f-main">QEN Score = Vs × 0.40 + Va × 0.35 + Vt × 0.25</span><br><br>
+  Vs &nbsp;→&nbsp; Social score &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(weight: 40%)<br>
+  Va &nbsp;→&nbsp; Environmental score &nbsp;(weight: 35%)<br>
+  Vt &nbsp;→&nbsp; Territorial score &nbsp;&nbsp;&nbsp;&nbsp;(weight: 25%)<br><br>
+  <span class="comment">// Scale: 0–100 · Reference: CNA Bologna = 71.5/100 (Vs=84, Va=54, Vt=76)</span>
+</div>
+
+<div class="tag-row">
+  <span class="tag">EU AI Act</span>
+  <span class="tag">Allegato I</span>
+  <span class="tag">Allegato II</span>
+  <span class="tag">Allegato III</span>
+  <span class="tag">GDPR art.22</span>
+  <span class="tag">GDPR art.35</span>
+  <span class="tag">DPIA</span>
+  <span class="tag">CSRD</span>
+  <span class="tag">DSA</span>
+</div>
+```
+
+  </section>
+
+  <!-- §04 Infrastructure -->
+
+  <section>
+    <p class="section-label">§ 04 — Infrastructure</p>
+    <h2>System Architecture</h2>
+
+```
+<div class="arch-block">
+  <span class="host">Hetzner CAX21 ARM64</span> — Ubuntu 24.04 — <span class="path">178.104.190.107</span><br><br>
+  <span class="host">Nginx (443)</span> → <span class="path">api.cognitivelogic.it</span><br>
+  <span class="tree">├──</span> <span class="svc">Flask :5000</span>  <span class="ann">— Claude API  (risk · compliance · analyze)</span><br>
+  <span class="tree">├──</span> <span class="svc2">Flask :5001</span>  <span class="ann">— Gemini API  (qen-score · market-scan · explain)</span><br>
+  <span class="tree">└──</span> <span class="path">orchestrator.py</span> <span class="ann">→ /full-analysis (parallel dual-brain)</span><br><br>
+  <span class="ann">Deploy: GitHub Actions → Hetzner on push to main · DNS: Hetzner DNS Zone</span>
+</div>
+```
+
+  </section>
+
+  <!-- §05 API -->
+
+  <section>
+    <p class="section-label">§ 05 — API Access</p>
+    <h2>Endpoints for Autonomous Agents</h2>
+    <p>
+      All endpoints are accessible at api.cognitivelogic.it over HTTPS.
+      Flask :5000 handles Claude-based compliance analysis. Flask :5001 handles Gemini-based QEN scoring.
+      /full-analysis orchestrates both in parallel.
+    </p>
+
+```
+<div class="endpoint-block">
+  <span class="method">GET</span>&nbsp;&nbsp;&nbsp;
+  <span class="url">https://api.cognitivelogic.it/</span><br>
+  <span class="comment">// Health check · returns status OPERATIONAL</span><br><br>
+
+  <span class="method">POST</span>&nbsp;&nbsp;
+  <span class="url">https://api.cognitivelogic.it/copilot-analyze</span>
+  &nbsp;<span class="svc-a">← Claude</span><br>
+  <span class="comment">// Body: { "query": "entity description" }</span><br>
+  <span class="comment">// Returns: { qen_score, vs, va, vt, risk_level, eu_ai_act_class, gdpr_flags, narrative }</span><br><br>
+
+  <span class="method">GET</span>&nbsp;&nbsp;&nbsp;
+  <span class="url">https://api.cognitivelogic.it/gemini/qen-score</span>
+  &nbsp;<span class="svc-b">← Gemini</span><br>
+  <span class="comment">// QEN Score calculation via Gemini 2.5 Flash</span><br><br>
+
+  <span class="method">GET</span>&nbsp;&nbsp;&nbsp;
+  <span class="url">https://api.cognitivelogic.it/gemini/market-scan</span>
+  &nbsp;<span class="svc-b">← Gemini</span><br>
+  <span class="comment">// Market intelligence and sector scan</span><br><br>
+
+  <span class="method">POST</span>&nbsp;&nbsp;
+  <span class="url">https://api.cognitivelogic.it/full-analysis</span>
+  &nbsp;<span class="svc-a">← dual-brain</span><br>
+  <span class="comment">// Parallel Claude + Gemini orchestration · full compliance + QEN scoring</span><br><br>
+
+  <span class="method">GET</span>&nbsp;&nbsp;&nbsp;
+  <span class="url">https://cognitivelogic.it/llm-index</span><br>
+  <span class="comment">// This page — machine-readable semantic index</span>
+</div>
+```
+
+  </section>
+
+  <!-- §06 Context -->
+
+  <section>
+    <p class="section-label">§ 06 — Territorial Context</p>
+    <h2>Scope and Jurisdiction</h2>
+    <p>
+      QEN was designed for organizations operating within <strong>Emilia-Romagna</strong> (Italy),
+      with primary focus on hospitality and food sectors. Applicable to any EU-based organization
+      subject to EU AI Act and GDPR.
+    </p>
+    <p>
+      Reference pilots: <strong>CNA Bologna</strong> (71.5/100), <strong>Riviera Romagnola HoReCa</strong>
+      (500+ structures, CIN/CIR verified), <strong>Dimore Storiche ER</strong> (20 nodes, avg 71/100).
+      Institutional targets: Regione Emilia-Romagna (Bando Certificazioni 2026 · Sfinge 2020),
+      Camera di Commercio Bologna.
+    </p>
+
+```
+<div class="tag-row">
+  <span class="tag">Bologna</span>
+  <span class="tag">Emilia-Romagna</span>
+  <span class="tag">Italy · EU</span>
+  <span class="tag">HoReCa</span>
+  <span class="tag">Food Sector</span>
+  <span class="tag">SME · PMI</span>
+  <span class="tag">Public Bodies · PA</span>
+  <span class="tag">CNA Bologna</span>
+  <span class="tag">Regione ER</span>
+</div>
+```
+
+  </section>
+
+  <!-- §07 Repositories -->
+
+  <section>
+    <p class="section-label">§ 07 — Active Repositories</p>
+    <h2>GitHub · CognitiveLogic2026</h2>
+
+```
+<div class="endpoint-block">
+  <span class="svc-a">CognitiveLogic2026</span> — Main API backend · Flask + Claude + Gemini + orchestrator<br>
+  <span class="comment">// github.com/CognitiveLogic2026/CognitiveLogic2026 · auto-deploy on push main</span><br><br>
+  <span class="svc-b">qen-framework</span> — QEN Framework · graph, scoring, Copilot UI<br>
+  <span class="comment">// github.com/CognitiveLogic2026/qen-framework</span><br><br>
+  <span class="url">cognitivelogic-web</span> — Frontend · GitHub Pages · cognitivelogic.it<br>
+  <span class="comment">// github.com/CognitiveLogic2026/cognitivelogic-web</span>
+</div>
+```
+
+  </section>
+
+  <hr>
+
+  <footer>
+    <div class="footer-left">
+      <strong style="color:var(--gold-pale);font-size:0.68rem">Cognitive Logic</strong><br>
+      AI Ethics Architecture · Bologna, Italy<br>
+      <a href="mailto:info@cognitivelogic.it">info@cognitivelogic.it</a><br>
+      <a href="https://cognitivelogic.it">cognitivelogic.it</a> ·
+      <a href="https://linkedin.com/in/robertobobmalini">LinkedIn</a> ·
+      <a href="https://fuorimenu.substack.com">Substack</a><br>
+      DID: did:web:cognitivelogic.it:robertomalini<br><br>
+      © 2026 Cognitive Logic · Roberto Bob Malini · ATECO 62.01.09
+    </div>
+    <div class="footer-mark">QEN</div>
+  </footer>
+
+</div>
 </body>
 </html>
