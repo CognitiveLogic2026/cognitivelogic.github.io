@@ -1,0 +1,22 @@
+name: Sync Fuorimenu RSS
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch RSS e genera JSON
+        run: python3 sync_rss.py
+
+      - name: Commit se cambiato
+        run: |
+          git config user.name "fuorimenu-bot"
+          git config user.email "bot@cognitivelogic.it"
+          git add data/fuorimenu.json
+          git diff --cached --quiet || (git commit -m "chore: sync Fuorimenu RSS" && git push)
