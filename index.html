@@ -635,20 +635,29 @@
   <h2>Ristorazione &amp;<br>Etica Computabile</h2>
   <p class="sdesc">Traduce findings tecnici in discorso su food ethics, accountability istituzionale e AI policy.</p>
 
-  <div class="ed">
-    <div class="ed-tag">Ultimo articolo · Aprile 2026</div>
-    <div class="ed-title">Casa Artusi e l'Etica Naturale: come si misura ciò che non ha prezzo?</div>
-    <div class="ed-quote">
-      Il riconoscimento UNESCO è un'opportunità straordinaria. Ma porta con sé un rischio preciso:
-      l'etica diventa brand. L'etica naturale di Artusi era misurabile perché era semplice.
-      Quella semplicità oggi va tradotta in numeri, processi, trasparenza.
-    </div>
-    <div class="ed-meta">
-      <span>Roberto Bob Malini · Fuorimenu</span>
-      <span>Forlimpopoli, 2026</span>
-      <a href="https://fuorimenu.substack.com/p/casa-artusi-e-letica-naturale-come?r=61doo2" target="_blank" rel="noopener">→ Leggi su Substack</a>
-    </div>
-  </div>
+  <div id="fuorimenu-feed"></div>
+  <script>
+    fetch('/data/fuorimenu.json')
+      .then(r => r.json())
+      .then(d => {
+        const feed = document.getElementById('fuorimenu-feed');
+        feed.innerHTML = d.articoli.map(a => `
+          <div class="ed">
+            <div class="ed-tag">${a.tag} · ${a.data}</div>
+            <div class="ed-title">${a.titolo}</div>
+            <div class="ed-quote">${a.estratto}</div>
+            <div class="ed-meta">
+              <span>Roberto Bob Malini · Fuorimenu</span>
+              <a href="${a.url}" target="_blank" rel="noopener">→ Leggi su Substack</a>
+            </div>
+          </div>
+        `).join('');
+      })
+      .catch(() => {
+        document.getElementById('fuorimenu-feed').innerHTML =
+          '<div class="ed"><div class="ed-title">Fuorimenu — <a href="https://fuorimenu.substack.com" target="_blank">fuorimenu.substack.com</a></div></div>';
+      });
+  </script>
 
   <div class="did-block">
     Founder DID: <span>did:web:cognitivelogic.it:robertomalini</span> · Decentralized identifier on sovereign data node
