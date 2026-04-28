@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Crea directory data
+        run: mkdir -p data
+
       - name: Fetch RSS e genera JSON
         run: python3 sync_rss.py
 
