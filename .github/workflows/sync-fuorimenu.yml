@@ -5,11 +5,16 @@ on:
     - cron: '0 */6 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Crea directory data
         run: mkdir -p data
@@ -22,4 +27,5 @@ jobs:
           git config user.name "fuorimenu-bot"
           git config user.email "bot@cognitivelogic.it"
           git add data/fuorimenu.json
-          git diff --cached --quiet || (git commit -m "chore: sync Fuorimenu RSS" && git push https://x-access-token:${{ secrets.FUORIMENU_PAT }}@github.com/CognitiveLogic2026/CognitiveLogic2026.github.io.git)
+          git diff --cached --quiet || git commit -m "chore: sync Fuorimenu RSS"
+          git push
