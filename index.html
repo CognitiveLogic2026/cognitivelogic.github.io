@@ -372,7 +372,7 @@
       <div class="layer-desc">
         Quantifiable Ethical Nodes. Semantic graph + numerical ethics scoring.
         Formula: QEN = (Vs × 0.40) + (Va × 0.35) + (Vt × 0.25).
-        21 nodi · 35 relazioni (v4).
+        130 nodi · 209 relazioni (v5).
       </div>
       <span class="layer-tag tag-green">● Live</span>
     </div>
@@ -439,8 +439,8 @@
   </p>
 
   <div class="metrics">
-    <div class="metric"><div class="mv">21</div><div class="ml">Nodi Graph v4</div></div>
-    <div class="metric"><div class="mv">35</div><div class="ml">Relazioni Attive</div></div>
+    <div class="metric"><div class="mv">130</div><div class="ml">Nodi Graph v5</div></div>
+    <div class="metric"><div class="mv">209</div><div class="ml">Relazioni Attive</div></div>
     <div class="metric"><div class="mv">0–100</div><div class="ml">Scala QEN</div></div>
     <div class="metric"><div class="mv">77.75</div><div class="ml">CNA Bologna</div></div>
     <div class="metric"><div class="mv">3</div><div class="ml">Dimensioni ESG</div></div>
@@ -530,10 +530,15 @@
       <span class="ep-desc">Validazione nodo QEN · JSON-LD</span>
     </div>
     <div class="ep">
-      <span class="ep-m get">GET</span>
-      <span class="ep-path">/gemini/qen-score  <span class="ep-svc">Flask :5001 · Gemini</span></span>
+      <span class="ep-m post">POST</span>
+      <span class="ep-path">/gemini/qen-score  <span class="ep-svc">Flask :5000 · Claude</span></span>
       <span class="ep-desc">QEN Score calculation</span>
     </div>
+    <a class="ep" href="https://api.cognitivelogic.it/pilots" target="_blank" rel="noopener">
+      <span class="ep-m get">GET</span>
+      <span class="ep-path">/pilots  <span class="ep-svc">Flask :5000</span></span>
+      <span class="ep-desc">Registro analisi · pilots.json</span>
+    </a>
     <div class="ep">
       <span class="ep-m get">GET</span>
       <span class="ep-path">/gemini/market-scan  <span class="ep-svc">Flask :5001 · Gemini</span></span>
