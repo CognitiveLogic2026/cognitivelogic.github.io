@@ -1,24 +1,33 @@
-import urllib.request, xml.etree.ElementTree as ET, json, re
+import urllib.request, xml.etree.ElementTree as ET, json, re, os
 
-url = "https://fuorimenu.substack.com/feed"
+# Proxy RSS pubblici che aggirano il blocco Substack
+PROXIES = [
+    "https://api.rss2json.com/v1/api.json?rss_url=https://fuorimenu.substack.com/feed",
+    "https://feedproxy.google.com/fuorimenu",
+]
+
+# Tentativo via rss2json (JSON diretto, no XML)
+url = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ffuorimenu.substack.com%2Ffeed&api_key=&count=10"
+
 req = urllib.request.Request(url, headers={
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    "Accept": "application/rss+xml, application/xml, text/xml, */*",
-    "Accept-Language": "it-IT,it;q=0.9,en;q=0.8",
-    "Cache-Control": "no-cache"
+    "User-Agent": "Mozilla/5.0"
 })
-with urllib.request.urlopen(req) as r:
-    tree = ET.parse(r)
+
+with urllib.request.urlopen(req, timeout=15) as r:
+    data = json.loads(r.read())
 
 articoli = []
-for item in tree.findall('.//item')[:10]:
-    title = item.findtext('title', '').strip()
-    link  = item.findtext('link', '').strip()
-    date  = item.findtext('pubDate', '').strip()[:16]
-    desc  = item.findtext('description', '')
-    clean = re.sub('<[^>]+>', '', desc).strip()[:280]
-    articoli.append({"titolo": title, "url": link, "data": date, "estratto": clean, "tag": "Fuorimenu"})
+for item in data.get("items", []):
+    desc = re.sub('<[^>]+>', '', item.get("description", "")).strip()[:280]
+    articoli.append({
+        "titolo": item.get("title", "").strip(),
+        "url": item.get("link", "").strip(),
+        "data": item.get("pubDate", "")[:16],
+        "estratto": desc,
+        "tag": "Fuorimenu"
+    })
 
+os.makedirs("data", exist_ok=True)
 with open('data/fuorimenu.json', 'w') as f:
     json.dump({"articoli": articoli}, f, ensure_ascii=False, indent=2)
 print(f"OK — {len(articoli)} articoli scritti")
