@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="it">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Colt Fragranza — Proximity Commerce</title>
+  <title>Coltinfragranza — Logistica Sociale Bologna</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     :root{--noir:#08080F;--noir-lt:#0F0F1E;--amber:#C97A2A;--amber-lt:#E09A50;--amber-glow:rgba(201,122,42,.15);--cream:#F0EBE0;--muted:#7A7060;--border:rgba(201,122,42,.2);}
@@ -14,99 +15,103 @@
     .cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(201,122,42,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .18s ease-out,opacity .2s;}
     a,button{cursor:none;}
 
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2.5rem;background:rgba(8,8,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--cream);letter-spacing:.18em;text-transform:uppercase;}
-    .nav-logo em{color:var(--amber);font-style:italic;}
-    .nav-tag{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
-    .nav-badge{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--border);color:var(--amber);padding:.28em .7em;}
+```
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2.5rem;background:rgba(8,8,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--cream);letter-spacing:.18em;text-transform:uppercase;}
+.nav-logo em{color:var(--amber);font-style:italic;}
+.nav-tag{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
+.nav-badge{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--border);color:var(--amber);padding:.28em .7em;}
 
-    .hero{min-height:100vh;position:relative;display:grid;grid-template-columns:1fr 420px;align-items:center;padding:0 3.5rem;padding-top:60px;overflow:hidden;}
-    .hero-glow{position:absolute;top:50%;left:30%;width:600px;height:600px;background:radial-gradient(circle,rgba(201,122,42,.12) 0%,transparent 65%);transform:translate(-50%,-50%);pointer-events:none;}
-    .hero-glow2{position:absolute;bottom:-100px;right:10%;width:400px;height:400px;background:radial-gradient(circle,rgba(201,122,42,.07) 0%,transparent 65%);pointer-events:none;}
-    .hero-left{position:relative;z-index:2;}
-    .eyebrow{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber);margin-bottom:1.5rem;opacity:.8;}
-    .hero-left h1{font-size:clamp(3rem,5.5vw,5.5rem);font-weight:300;line-height:1.05;color:var(--cream);margin-bottom:.6rem;}
-    .hero-left h1 em{color:var(--amber);font-style:italic;font-weight:300;}
-    .hero-left h1 strong{font-weight:600;display:block;}
-    .hero-sub{font-size:1.15rem;font-weight:300;color:rgba(240,235,224,.5);line-height:1.8;max-width:440px;margin:1.5rem 0 3rem;}
-    .btn-amber{display:inline-block;background:transparent;color:var(--amber);font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;padding:.85em 2em;border:1px solid var(--border);text-decoration:none;transition:background .25s,color .25s;}
-    .btn-amber:hover{background:var(--amber);color:var(--noir);}
+.hero{min-height:100vh;position:relative;display:grid;grid-template-columns:1fr 420px;align-items:center;padding:0 3.5rem;padding-top:60px;overflow:hidden;}
+.hero-glow{position:absolute;top:50%;left:30%;width:600px;height:600px;background:radial-gradient(circle,rgba(201,122,42,.12) 0%,transparent 65%);transform:translate(-50%,-50%);pointer-events:none;}
+.hero-glow2{position:absolute;bottom:-100px;right:10%;width:400px;height:400px;background:radial-gradient(circle,rgba(201,122,42,.07) 0%,transparent 65%);pointer-events:none;}
+.hero-left{position:relative;z-index:2;}
+.eyebrow{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber);margin-bottom:1.5rem;opacity:.8;}
+.hero-left h1{font-size:clamp(3rem,5.5vw,5.5rem);font-weight:300;line-height:1.05;color:var(--cream);margin-bottom:.6rem;}
+.hero-left h1 em{color:var(--amber);font-style:italic;font-weight:300;}
+.hero-left h1 strong{font-weight:600;display:block;}
+.hero-sub{font-size:1.15rem;font-weight:300;color:rgba(240,235,224,.5);line-height:1.8;max-width:440px;margin:1.5rem 0 3rem;}
+.btn-wrap{display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap;}
+.btn-amber{display:inline-block;background:transparent;color:var(--amber);font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;padding:.85em 2em;border:1px solid var(--border);text-decoration:none;transition:background .25s,color .25s;}
+.btn-amber:hover{background:var(--amber);color:var(--noir);}
+.btn-copilot{display:inline-block;background:rgba(201,122,42,.08);color:rgba(201,122,42,.6);font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;padding:.85em 2em;border:1px solid rgba(201,122,42,.15);text-decoration:none;transition:all .25s;}
+.btn-copilot:hover{background:rgba(201,122,42,.15);color:var(--amber);}
 
-    .qen-vert{position:relative;z-index:2;background:rgba(201,122,42,.04);border:1px solid var(--border);padding:2.8rem 2rem;display:flex;flex-direction:column;gap:0;}
-    .qv-header{margin-bottom:2.5rem;}
-    .qv-lbl{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.4rem;}
-    .qv-title{font-size:1.5rem;font-weight:300;color:var(--cream);font-style:italic;}
-    .qv-dims{display:flex;flex-direction:column;gap:1.8rem;margin-bottom:2.5rem;}
-    .qv-dim-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.6rem;}
-    .qv-dim-name{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,235,224,.6);}
-    .qv-dim-val{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--amber-lt);}
-    .qv-track{height:6px;background:rgba(201,122,42,.1);border-radius:3px;overflow:hidden;}
-    .qv-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--amber),var(--amber-lt));width:0;transition:width 1.3s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px rgba(201,122,42,.4);}
-    .qv-total{border-top:1px solid var(--border);padding-top:1.8rem;text-align:center;}
-    .qv-total-lbl{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.5rem;}
-    .qv-total-num{font-size:3.5rem;font-weight:300;color:var(--amber);line-height:1;font-style:italic;}
-    .qv-total-num span{font-size:1rem;color:var(--muted);font-style:normal;}
-    .qv-formula{margin-top:1rem;font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.07em;color:rgba(240,235,224,.2);text-align:center;line-height:1.7;}
+.qen-vert{position:relative;z-index:2;background:rgba(201,122,42,.04);border:1px solid var(--border);padding:2.8rem 2rem;display:flex;flex-direction:column;gap:0;}
+.qv-header{margin-bottom:2.5rem;}
+.qv-lbl{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.4rem;}
+.qv-title{font-size:1.5rem;font-weight:300;color:var(--cream);font-style:italic;}
+.qv-dims{display:flex;flex-direction:column;gap:1.8rem;margin-bottom:2.5rem;}
+.qv-dim-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.6rem;}
+.qv-dim-name{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,235,224,.6);}
+.qv-dim-val{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--amber-lt);}
+.qv-track{height:6px;background:rgba(201,122,42,.1);border-radius:3px;overflow:hidden;}
+.qv-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--amber),var(--amber-lt));width:0;transition:width 1.3s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px rgba(201,122,42,.4);}
+.qv-total{border-top:1px solid var(--border);padding-top:1.8rem;text-align:center;}
+.qv-total-lbl{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.5rem;}
+.qv-total-num{font-size:3.5rem;font-weight:300;color:var(--amber);line-height:1;font-style:italic;}
+.qv-total-num span{font-size:1rem;color:var(--muted);font-style:normal;}
+.qv-formula{margin-top:1rem;font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.07em;color:rgba(240,235,224,.2);text-align:center;line-height:1.7;}
 
-    .info{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);}
-    .info-block{padding:3.5rem 2.8rem;border-right:1px solid var(--border);position:relative;overflow:hidden;}
-    .info-block:last-child{border-right:none;}
-    .info-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 80%,rgba(201,122,42,.04) 0%,transparent 70%);pointer-events:none;}
-    .ib-n{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.18em;color:rgba(201,122,42,.3);margin-bottom:1.5rem;display:block;}
-    .ib-title{font-size:1.5rem;font-weight:300;color:var(--cream);margin-bottom:.6rem;font-style:italic;}
-    .ib-text{font-size:.88rem;font-weight:300;color:rgba(240,235,224,.5);line-height:1.8;}
+.info{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);}
+.info-block{padding:3.5rem 2.8rem;border-right:1px solid var(--border);position:relative;overflow:hidden;}
+.info-block:last-child{border-right:none;}
+.info-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 80%,rgba(201,122,42,.04) 0%,transparent 70%);pointer-events:none;}
+.ib-n{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.18em;color:rgba(201,122,42,.3);margin-bottom:1.5rem;display:block;}
+.ib-title{font-size:1.5rem;font-weight:300;color:var(--cream);margin-bottom:.6rem;font-style:italic;}
+.ib-text{font-size:.88rem;font-weight:300;color:rgba(240,235,224,.5);line-height:1.8;}
 
-    .story{padding:6rem 3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;border-top:1px solid var(--border);}
-    .story-left{border-left:1px solid var(--border);padding-left:2.5rem;}
-    .story-left blockquote{font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:300;font-style:italic;color:var(--cream);line-height:1.35;margin-bottom:1.5rem;}
-    .story-left blockquote em{color:var(--amber);}
-    .story-attr{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
-    .story-right{display:flex;flex-direction:column;gap:1rem;}
-    .story-stat{border-bottom:1px solid var(--border);padding-bottom:1rem;}
-    .story-stat:last-child{border-bottom:none;}
-    .ss-val{font-size:2.5rem;font-weight:300;color:var(--amber-lt);line-height:1;font-style:italic;}
-    .ss-lbl{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.story{padding:6rem 3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;border-top:1px solid var(--border);}
+.story-left{border-left:1px solid var(--border);padding-left:2.5rem;}
+.story-left blockquote{font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:300;font-style:italic;color:var(--cream);line-height:1.35;margin-bottom:1.5rem;}
+.story-left blockquote em{color:var(--amber);}
+.story-attr{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+.story-right{display:flex;flex-direction:column;gap:1rem;}
+.story-stat{border-bottom:1px solid var(--border);padding-bottom:1rem;}
+.story-stat:last-child{border-bottom:none;}
+.ss-val{font-size:2.5rem;font-weight:300;color:var(--amber-lt);line-height:1;font-style:italic;}
+.ss-lbl{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
 
-    /* GENESI */
-    .genesi{padding:6rem 3.5rem;border-top:1px solid var(--border);background:var(--noir-lt);}
-    .genesi-header{max-width:680px;margin-bottom:3.5rem;}
-    .gen-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:1rem;opacity:.8;}
-    .gen-title{font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:var(--cream);line-height:1.15;margin-bottom:1rem;}
-    .gen-title em{color:var(--amber);font-style:italic;}
-    .gen-sub{font-size:.9rem;font-weight:300;color:rgba(240,235,224,.5);line-height:1.8;}
-    .genesi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
-    .gen-card{background:var(--noir);padding:2rem 1.8rem;}
-    .gen-card-n{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,122,42,.4);display:block;margin-bottom:.6rem;}
-    .gen-card-title{font-size:1.1rem;font-weight:300;color:var(--amber-lt);margin-bottom:.7rem;font-style:italic;}
-    .gen-card-text{font-size:.82rem;font-weight:300;color:rgba(240,235,224,.45);line-height:1.8;}
+.genesi{padding:6rem 3.5rem;border-top:1px solid var(--border);background:var(--noir-lt);}
+.genesi-header{max-width:680px;margin-bottom:3.5rem;}
+.gen-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:1rem;opacity:.8;}
+.gen-title{font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:var(--cream);line-height:1.15;margin-bottom:1rem;}
+.gen-title em{color:var(--amber);font-style:italic;}
+.gen-sub{font-size:.9rem;font-weight:300;color:rgba(240,235,224,.5);line-height:1.8;}
+.genesi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.gen-card{background:var(--noir);padding:2rem 1.8rem;}
+.gen-card-n{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,122,42,.4);display:block;margin-bottom:.6rem;}
+.gen-card-title{font-size:1.1rem;font-weight:300;color:var(--amber-lt);margin-bottom:.7rem;font-style:italic;}
+.gen-card-text{font-size:.82rem;font-weight:300;color:rgba(240,235,224,.45);line-height:1.8;}
 
-    /* ULTIMO MIGLIO */
-    .miglio{padding:6rem 3.5rem;border-top:1px solid var(--border);}
-    .miglio-header{max-width:680px;margin-bottom:3.5rem;}
-    .miglio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:2.5rem;}
-    .mig-block{background:var(--noir-lt);padding:2rem 1.8rem;}
-    .mig-ico{font-size:1rem;color:rgba(201,122,42,.3);margin-bottom:.8rem;}
-    .mig-title{font-size:1rem;font-weight:300;color:var(--amber-lt);margin-bottom:.6rem;font-style:italic;}
-    .mig-text{font-size:.82rem;font-weight:300;color:rgba(240,235,224,.45);line-height:1.8;}
-    .miglio-quote{border-left:2px solid var(--border);padding:1.2rem 2rem;font-size:1.1rem;font-style:italic;font-weight:300;color:rgba(240,235,224,.4);}
+.miglio{padding:6rem 3.5rem;border-top:1px solid var(--border);}
+.miglio-header{max-width:680px;margin-bottom:3.5rem;}
+.miglio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:2.5rem;}
+.mig-block{background:var(--noir-lt);padding:2rem 1.8rem;}
+.mig-ico{font-size:1rem;color:rgba(201,122,42,.3);margin-bottom:.8rem;}
+.mig-title{font-size:1rem;font-weight:300;color:var(--amber-lt);margin-bottom:.6rem;font-style:italic;}
+.mig-text{font-size:.82rem;font-weight:300;color:rgba(240,235,224,.45);line-height:1.8;}
+.miglio-quote{border-left:2px solid var(--border);padding:1.2rem 2rem;font-size:1.1rem;font-style:italic;font-weight:300;color:rgba(240,235,224,.4);}
 
-    footer{background:var(--noir-lt);padding:2.2rem 3rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
-    .fl{font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(240,235,224,.6);letter-spacing:.12em;text-transform:uppercase;}
-    .fl em{color:var(--amber);font-style:italic;}
-    .fc{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
-    .fq{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.1em;color:var(--amber);opacity:.6;}
+footer{background:var(--noir-lt);padding:2.2rem 3rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
+.fl{font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(240,235,224,.6);letter-spacing:.12em;text-transform:uppercase;}
+.fl em{color:var(--amber);font-style:italic;}
+.fc{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.fq{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.1em;color:var(--amber);opacity:.6;}
 
-    @media(max-width:1000px){
-      nav{padding:1rem;}
-      .hero{grid-template-columns:1fr;padding:1.5rem 1.5rem;padding-top:80px;gap:2.5rem;}
-      .info{grid-template-columns:1fr;}
-      .info-block{border-right:none;border-bottom:1px solid var(--border);}
-      .story{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem;}
-      .genesi-grid{grid-template-columns:1fr;}
-      .miglio-grid{grid-template-columns:1fr;}
-      .genesi,.miglio{padding:3rem 1.5rem;}
-      footer{flex-direction:column;gap:1rem;text-align:center;}
-    }
+@media(max-width:1000px){
+  nav{padding:1rem;}
+  .hero{grid-template-columns:1fr;padding:1.5rem 1.5rem;padding-top:80px;gap:2.5rem;}
+  .info{grid-template-columns:1fr;}
+  .info-block{border-right:none;border-bottom:1px solid var(--border);}
+  .story{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem;}
+  .genesi-grid{grid-template-columns:1fr;}
+  .miglio-grid{grid-template-columns:1fr;}
+  .genesi,.miglio{padding:3rem 1.5rem;}
+  footer{flex-direction:column;gap:1rem;text-align:center;}
+}
+```
+
   </style>
 </head>
 <body>
@@ -115,24 +120,26 @@
 <div class="cursor-ring" id="cur-ring"></div>
 
 <nav>
-  <div class="nav-logo">Colt <em>Fragranza</em></div>
-  <div class="nav-tag">Proximity Commerce · Bologna</div>
+  <div class="nav-logo"><em>Coltinfragranza</em></div>
+  <div class="nav-tag">Logistica Sociale · Bologna</div>
   <div class="nav-badge">QEN Verified</div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
   <div class="hero-glow2"></div>
   <div class="hero-left">
-    <div class="eyebrow">Fondato 2020 · Bologna · Cognitive Logic</div>
+    <div class="eyebrow">Fondato 2020 · Bologna · Lighthouse Living Lab</div>
     <h1><em>Sentire</em><br><strong>il territorio.</strong></h1>
-    <p class="hero-sub">Colt Fragranza nasce nel lockdown del 2020 come atto di prossimità. Profumi artigianali, radici bolognesi, un'etica misurabile. Ogni flacone porta uno score QEN — perché la trasparenza è il lusso più raro.</p>
-    <a href="https://cognitivelogic.it" class="btn-amber">Scopri la collezione →</a>
+    <p class="hero-sub">Coltinfragranza nasce nel lockdown del 2020 come risposta resiliente all'emergenza pandemica. Logistica sociale, welfare territoriale, inclusione attiva. Ogni consegna è un contatto di cura — l'ultimo miglio dove la logica incontra la dignità.</p>
+    <div class="btn-wrap">
+      <a href="https://cognitivelogic.it" class="btn-amber">Scopri il modello →</a>
+      <a href="https://api.cognitivelogic.it/copilot?q=Analizza+Coltinfragranza+logistica+sociale+welfare+territoriale+Bologna+2020+Lighthouse+Living+Lab+QEN+score+81.2+Vs75+Va82+Vt90+suggerisci+come+scalare+il+modello" class="btn-copilot" target="_blank">Analizza con il Copilot →</a>
+    </div>
   </div>
   <div class="qen-vert" id="qvp">
     <div class="qv-header">
-      <span class="qv-lbl">QEN Score · Colt Fragranza</span>
+      <span class="qv-lbl">QEN Score · Coltinfragranza</span>
       <div class="qv-title">Quantum Ethics<br>Network</div>
     </div>
     <div class="qv-dims">
@@ -157,39 +164,37 @@
   </div>
 </section>
 
-<!-- INFO -->
 <section class="info">
   <div class="info-block">
     <span class="ib-n">01 · Origine</span>
-    <div class="ib-title">Nato nel lockdown</div>
-    <p class="ib-text">2020: Bologna si ferma. Colt Fragranza nasce come risposta artigianale — profumi che narrano il quartiere, le pietre, i mercati. La prossimità come filosofia di business.</p>
+    <div class="ib-title">Lighthouse Living Lab</div>
+    <p class="ib-text">2020: Bologna si ferma. Coltinfragranza nasce come braccio operativo del Comune — ponte logistico tra Assessorato al Welfare (Barigazzi) e Assessorato al Commercio (Aitini). Applicando la Carta di Bologna per il Lavoro Digitale (Lombardo).</p>
   </div>
   <div class="info-block">
-    <span class="ib-n">02 · Materia</span>
-    <div class="ib-title">Filiera corta</div>
-    <p class="ib-text">Materie prime da fornitori entro 300km. Laboratorio nel centro storico di Bologna. Ogni ingrediente tracciato nel Knowledge Graph QEN — impatto ambientale calcolato, non dichiarato.</p>
+    <span class="ib-n">02 · Paradigma</span>
+    <div class="ib-title">Ultimo miglio cognitivo</div>
+    <p class="ib-text">Nella logistica tradizionale l'ultimo miglio è il tratto più costoso. Per Coltinfragranza è lo spazio dove si genera il massimo valore sociale. Micro-Hub di quartiere, Logistica dei Portici, Sensori Umani per le fragilità invisibili ai radar digitali.</p>
   </div>
   <div class="info-block">
-    <span class="ib-n">03 · Dati</span>
+    <span class="ib-n">03 · Inclusione</span>
     <div class="ib-title">Score aperto</div>
-    <p class="ib-text">Il QEN di Colt Fragranza è pubblico. Non è marketing: è obbligo di coerenza. Se il numero scende, la bottega cambia. La trasparenza non è opzionale.</p>
+    <p class="ib-text">Il soggetto fragile diventa agente attivo. Ogni lavoratore integrato genera risparmio sociale e nuova ricchezza per il territorio. Il QEN di Coltinfragranza misura questo impatto — pubblico, verificabile, non negoziabile.</p>
   </div>
 </section>
 
-<!-- STORY -->
 <section class="story">
   <div class="story-left">
-    <blockquote>«La fragranza è <em>memoria</em> compressa. Il dato è la stessa cosa: odore di territorio, densificato in un numero.»</blockquote>
+    <blockquote>«L'ultimo miglio <em>umano</em>: dove la logica incontra la dignità.»</blockquote>
     <div class="story-attr">Roberto Malini · Fondatore · Cognitive Logic</div>
   </div>
   <div class="story-right">
     <div class="story-stat"><div class="ss-val">2020</div><div class="ss-lbl">Anno di fondazione · lockdown Bologna</div></div>
-    <div class="story-stat"><div class="ss-val">300km</div><div class="ss-lbl">Raggio massimo filiera materie prime</div></div>
+    <div class="story-stat"><div class="ss-val">300km</div><div class="ss-lbl">Raggio massimo filiera — fornitori locali verificati</div></div>
+    <div class="story-stat"><div class="ss-val">Vt 90</div><div class="ss-lbl">Punteggio territoriale · il più alto tra i progetti QEN</div></div>
     <div class="story-stat"><div class="ss-val">QEN</div><div class="ss-lbl">Score pubblico · metodologia aperta · Cognitive Logic</div></div>
   </div>
 </section>
 
-<!-- GENESI BOLOGNA 2020 -->
 <section class="genesi">
   <div class="genesi-header">
     <span class="gen-label">La Genesi · Bologna 2020</span>
@@ -215,7 +220,6 @@
   </div>
 </section>
 
-<!-- ULTIMO MIGLIO COGNITIVO -->
 <section class="miglio">
   <div class="miglio-header">
     <span class="gen-label">Il Paradigma</span>
@@ -244,13 +248,11 @@
       <p class="mig-text">Da Utente a Protagonista: il soggetto fragile diventa agente attivo. L'inclusione non è un costo, è un investimento — ogni lavoratore integrato genera risparmio sociale e nuova ricchezza.</p>
     </div>
   </div>
-  <div class="miglio-quote">
-    «L'ultimo miglio umano: dove la logica incontra la dignità.»
-  </div>
+  <div class="miglio-quote">«Oltre la logistica, verso l'umanità: riconnettere Bologna, un passo alla volta.»</div>
 </section>
 
 <footer>
-  <div class="fl">Colt <em>Fragranza</em></div>
+  <div class="fl"><em>Coltinfragranza</em></div>
   <div class="fc">Bologna · Italia · 2026</div>
   <div class="fq">QEN Framework · cognitivelogic.it</div>
 </footer>
@@ -279,5 +281,6 @@
   const obs=new IntersectionObserver(e=>{if(e[0].isIntersecting){runColt();obs.disconnect();}},{threshold:.3});
   obs.observe(document.getElementById('qvp'));
 </script>
+
 </body>
 </html>
