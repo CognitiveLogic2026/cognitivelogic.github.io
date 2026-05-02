@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QEN Methodology v1.0 · Cognitive Logic</title>
+  <meta name="description" content="Methodological foundation of the QEN Score weighting coefficients. Quantum Ethics Network Framework by Cognitive Logic — Roberto Malini, Bologna 2026.">
+  <meta name="author" content="Roberto Malini — Cognitive Logic">
+  <meta property="og:title" content="QEN Methodology v1.0 · Cognitive Logic">
+  <meta property="og:description" content="Methodological foundation of the QEN Score — ethical scoring framework for enterprises, products and projects. Social 0.40 · Environmental 0.35 · Territorial 0.25.">
+  <meta property="og:url" content="https://cognitivelogic.it/qen/methodology">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://cognitivelogic.it/qen/methodology">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f0e0c;
+      --paper: #f5f2ec;
+      --gold: #b8922a;
+      --gold-light: #d4a84b;
+      --rust: #8b3a2a;
+      --muted: #7a7469;
+      --rule: #d4cfc6;
+      --code-bg: #1a1916;
+      --code-fg: #e8e3da;
+    }
+
+```
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+header {
+  border-bottom: 1px solid var(--rule);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  z-index: 100;
+}
+
+.wordmark {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.doc-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+/* ── HERO ── */
+.hero {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 5rem 2rem 3rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.doc-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 300;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.meta-row span strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ── ABSTRACT BAND ── */
+.abstract-band {
+  background: var(--ink);
+  color: var(--code-fg);
+  padding: 3rem 2rem;
+}
+
+.abstract-inner {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.abstract-band .section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  display: block;
+  margin-bottom: 1.2rem;
+}
+
+.abstract-band p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  font-weight: 300;
+  color: #c8c3ba;
+  max-width: 640px;
+}
+
+.abstract-band p + p {
+  margin-top: 1rem;
+}
+
+/* ── FORMULA BLOCK ── */
+.formula-block {
+  max-width: 780px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+}
+
+.formula-display {
+  border: 1px solid var(--rule);
+  padding: 2.5rem;
+  text-align: center;
+  background: white;
+  position: relative;
+}
+
+.formula-display::before {
+  content: 'QEN SCORE FORMULA';
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  position: absolute;
+  top: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 0 1rem;
+}
+
+.formula-eq {
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: var(--ink);
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+}
+
+.formula-eq .coeff {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.formula-vars {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.var-item {
+  text-align: center;
+}
+
+.var-sym {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.2rem;
+  color: var(--gold);
+  font-weight: 500;
+  display: block;
+}
+
+.var-label {
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+
+/* ── MAIN CONTENT ── */
+.content {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 2rem 6rem;
+}
+
+.section {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin: 2rem 0 0.8rem;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin-bottom: 1rem;
+  font-size: 0.97rem;
+  color: #2a2824;
+  font-weight: 300;
+}
+
+/* ── COEFFICIENT CARDS ── */
+.coeff-grid {
+  display: grid;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 2rem;
+}
+
+.coeff-card {
+  background: white;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.coeff-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
+  color: var(--gold);
+  line-height: 1;
+  font-style: italic;
+}
+
+.coeff-body h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.coeff-body p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.ref-list {
+  list-style: none;
+  margin-top: 0.8rem;
+}
+
+.ref-list li {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  padding: 0.2rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--rule);
+  margin-bottom: 0.4rem;
+}
+
+.ref-list li strong {
+  color: var(--ink);
+}
+
+/* ── SUMMARY TABLE ── */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+}
+
+.summary-table th {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--ink);
+  font-weight: 400;
+}
+
+.summary-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  font-weight: 300;
+}
+
+.summary-table td:first-child {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--gold);
+}
+
+.summary-table td:nth-child(2) {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.summary-table tfoot td {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  border-top: 2px solid var(--ink);
+  border-bottom: none;
+}
+
+/* ── VERSIONING ── */
+.version-block {
+  background: white;
+  border: 1px solid var(--rule);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.version-steps {
+  list-style: none;
+  counter-reset: steps;
+  margin-top: 1rem;
+}
+
+.version-steps li {
+  counter-increment: steps;
+  padding: 0.75rem 0 0.75rem 3rem;
+  position: relative;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.version-steps li:last-child { border-bottom: none; }
+
+.version-steps li::before {
+  content: counter(steps);
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  background: var(--gold);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── REFERENCES ── */
+.ref-grid {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.ref-entry {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+
+.ref-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--gold);
+}
+
+.ref-text {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+.ref-text strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+footer a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+/* ── DOI BADGE ── */
+.doi-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--ink);
+  color: var(--code-fg);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  padding: 0.4rem 0.8rem;
+  letter-spacing: 0.05em;
+  margin-top: 1rem;
+}
+
+.doi-badge span { color: var(--gold-light); }
+
+@media (max-width: 600px) {
+  .coeff-card { grid-template-columns: 1fr; }
+  .formula-vars { gap: 1.5rem; }
+  header { padding: 1rem; }
+}
+```
+
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+
+<header>
+  <a href="https://cognitivelogic.it" class="wordmark">Cognitive Logic</a>
+  <span class="doc-meta">QEN METHODOLOGICAL NOTE · v1.0 · April 2026</span>
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+  <span class="doc-label">Position Paper · Public Use · DOI cognitivelogic.it/qen/methodology</span>
+  <h1>QEN Framework<br><em>Methodological Note</em></h1>
+  <p class="subtitle">Quantum Ethics Network Scoring System — Methodological Foundation of Weighting Coefficients</p>
+  <div class="meta-row">
+    <span><strong>Version</strong> v1.0</span>
+    <span><strong>Date</strong> April 2026</span>
+    <span><strong>Author</strong> Roberto Malini — Cognitive Logic</span>
+    <span><strong>Classification</strong> Public Use</span>
+  </div>
+  <div class="doi-badge">DOI / Citation <span>cognitivelogic.it/qen/methodology</span></div>
+</section>
+
+<!-- ABSTRACT -->
+
+<div class="abstract-band">
+  <div class="abstract-inner">
+    <span class="section-label">Abstract</span>
+    <p>This document presents the methodological foundation of the weighting coefficients used in the QEN Score — the ethical scoring framework developed by Cognitive Logic for multidimensional assessment of enterprises, products and projects according to Social, Environmental and Territorial sustainability criteria.</p>
+    <p>The QEN Score is designed to operate natively in AI-first environments. Unlike traditional ESG ratings conceived for annual reports and human analysts, each assessment is a node in a knowledge graph queryable by autonomous agents.</p>
+  </div>
+</div>
+
+<!-- FORMULA -->
+
+<div class="formula-block">
+  <div class="formula-display">
+    <div class="formula-eq">
+      QEN = (Vs <span class="coeff">× 0.40</span>) + (Va <span class="coeff">× 0.35</span>) + (Vt <span class="coeff">× 0.25</span>)
+    </div>
+    <div class="formula-vars">
+      <div class="var-item">
+        <span class="var-sym">Vs</span>
+        <div class="var-label">Social Value<br>scale 0–100</div>
+      </div>
+      <div class="var-item">
+        <span class="var-sym">Va</span>
+        <div class="var-label">Environmental Value<br>scale 0–100</div>
+      </div>
+      <div class="var-item">
+        <span class="var-sym">Vt</span>
+        <div class="var-label">Territorial Value<br>scale 0–100</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div class="content">
+
+  <!-- SECTION 1: INTRO -->
+
+  <div class="section">
+    <span class="section-label">§ 1 · Introduction</span>
+    <h2>The QEN Framework</h2>
+    <p>The QEN Score is a multidimensional ethical assessment tool designed to operate natively in AI-first environments. The framework comprises three fundamental dimensions, each weighted with a coefficient reflecting the impact hierarchy identified in the context of Italian local commerce and AI governance in the European regulatory environment.</p>
+    <p>The formula is intentionally transparent and revisable. QEN is not a black-box system. All weights are documented and open to methodological challenge.</p>
+  </div>
+
+  <!-- SECTION 3: COEFFICIENTS -->
+
+  <div class="section">
+    <span class="section-label">§ 3 · Weighting Coefficients</span>
+    <h2>Foundation of the Three Dimensions</h2>
+
+```
+<div class="coeff-grid">
+  <!-- SOCIAL -->
+  <div class="coeff-card">
+    <div class="coeff-number">0.40</div>
+    <div class="coeff-body">
+      <h3>Social Dimension — Vs</h3>
+      <p>The highest coefficient (40%) is assigned based on the <em>people primacy</em> principle that informs the entire framework architecture. Human protection is the primary obligation of any ethical system operating under EU regulation.</p>
+      <ul class="ref-list">
+        <li><strong>EU AI Act (2024/1689/EU)</strong> art. 1 and recitals 1–5: AI systems must operate to protect fundamental rights</li>
+        <li><strong>GDPR (2016/679/EU)</strong> arts. 22, 35: right not to be subject to automated decisions with significant effects</li>
+        <li><strong>MSCI ESG Research (2020)</strong> · <strong>UN PRI (2021)</strong>: social metrics are the strongest predictors of long-term ESG performance</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ENVIRONMENTAL -->
+  <div class="coeff-card">
+    <div class="coeff-number">0.35</div>
+    <div class="coeff-body">
+      <h3>Environmental Dimension — Va</h3>
+      <p>The environmental coefficient (35%) is second in weight, consistent with the European regulatory hierarchy that subordinates environmental objectives to human protection, but elevates them above territorial rootedness alone.</p>
+      <ul class="ref-list">
+        <li><strong>EU Taxonomy (Reg. 2020/852)</strong>: classification of sustainable economic activities places environmental metrics as the second pillar</li>
+        <li><strong>GRI 300 Standards</strong>: de facto international standard for environmental reporting</li>
+        <li><strong>European Green Deal</strong>: defines environmental transition as the EU's central strategic axis</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TERRITORIAL -->
+  <div class="coeff-card">
+    <div class="coeff-number">0.25</div>
+    <div class="coeff-body">
+      <h3>Territorial Dimension — Vt</h3>
+      <p>The territorial coefficient (25%) is the lowest of the three not because local rootedness is less important in absolute terms, but because the territorial dimension is already partially captured by the Social and Environmental dimensions — avoiding double-counting.</p>
+      <ul class="ref-list">
+        <li><strong>Third Sector Code (IT)</strong>: regulatory recognition of proximity and community embeddedness</li>
+        <li><strong>OECD Proximity (2022)</strong>: "Enhancing Rural Innovation through Proximity Commerce"</li>
+        <li>Framework scalability: QEN is designed to apply also to non-local contexts (AI governance, supply chains)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- SECTION 4: SUMMARY TABLE -->
+
+  <div class="section">
+    <span class="section-label">§ 4 · Summary Table</span>
+    <h2>Coefficient Overview</h2>
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Coeff.</th>
+          <th>Regulatory Basis</th>
+          <th>Justification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Social</td>
+          <td>0.40</td>
+          <td>EU AI Act art.1 · GDPR art.22/35 · MSCI Social 2020</td>
+          <td>People protection primacy</td>
+        </tr>
+        <tr>
+          <td>Environmental</td>
+          <td>0.35</td>
+          <td>EU Taxonomy 2020/852 · GRI 300 · European Green Deal</td>
+          <td>Second ESG pillar</td>
+        </tr>
+        <tr>
+          <td>Territorial</td>
+          <td>0.25</td>
+          <td>Third Sector Code · OECD Proximity 2022</td>
+          <td>Local specificity, no double-count</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td>1.00</td>
+          <td colspan="2">Scale 0–100 per dimension · Resulting QEN Score: 0–100</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- SECTION 5: VERSIONING -->
+
+  <div class="section">
+    <span class="section-label">§ 5 · Versioning & Revision</span>
+    <h2>Open Revision Process</h2>
+    <p>The QEN Framework adopts a semantic versioning model (MAJOR.MINOR). The coefficients in this document constitute version v1.0 and are declared open to peer revision on the basis of documented empirical evidence. Cognitive Logic welcomes methodological contributions from academic institutions, research bodies and European standardisation organisations.</p>
+    <div class="version-block">
+      <p style="font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:var(--muted);">REVISION PROCESS</p>
+      <ol class="version-steps">
+        <li>Public proposal at <strong>cognitivelogic.it/qen/methodology</strong></li>
+        <li>30-day open comment period</li>
+        <li>Integration into the next MINOR version with documented changelog</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- SECTION 6: REFERENCES -->
+
+  <div class="section">
+    <span class="section-label">§ 6 · References</span>
+    <h2>Bibliography</h2>
+    <div class="ref-grid">
+      <div class="ref-entry"><span class="ref-num">[1]</span><span class="ref-text"><strong>EU AI Act</strong> — Regolamento (UE) 2024/1689 del Parlamento Europeo e del Consiglio</span></div>
+      <div class="ref-entry"><span class="ref-num">[2]</span><span class="ref-text"><strong>GDPR</strong> — Regolamento (UE) 2016/679, artt. 22, 35</span></div>
+      <div class="ref-entry"><span class="ref-num">[3]</span><span class="ref-text"><strong>EU Taxonomy</strong> — Regolamento (UE) 2020/852 sulla tassonomia della finanza sostenibile</span></div>
+      <div class="ref-entry"><span class="ref-num">[4]</span><span class="ref-text"><strong>GRI Standards 300</strong> — Environmental Topics (2016, updated 2022)</span></div>
+      <div class="ref-entry"><span class="ref-num">[5]</span><span class="ref-text"><strong>MSCI ESG Research</strong> — "Social Factors in ESG Ratings" (2020)</span></div>
+      <div class="ref-entry"><span class="ref-num">[6]</span><span class="ref-text"><strong>UN PRI</strong> — "ESG Integration in Listed Equity" (2021)</span></div>
+      <div class="ref-entry"><span class="ref-num">[7]</span><span class="ref-text"><strong>OECD</strong> — "Enhancing Rural Innovation through Proximity Commerce" (2022)</span></div>
+      <div class="ref-entry"><span class="ref-num">[8]</span><span class="ref-text"><strong>Cognitive Logic</strong> — QEN Knowledge Graph v2.0, 130 nodes · 209 edges (2026)</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+  <span>© 2026 Cognitive Logic · Roberto Malini · Bologna, Italia</span>
+  <span><a href="mailto:info@cognitivelogic.it">info@cognitivelogic.it</a> · <a href="https://cognitivelogic.it">cognitivelogic.it</a></span>
+  <span>QEN Methodological Note v1.0 · April 2026</span>
+</footer>
+
+</body>
+</html>
