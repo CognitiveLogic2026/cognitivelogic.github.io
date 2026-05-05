@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QEN Onboarding — Mappatura Etica Naturale | CognitiveLogic</title>
+<meta name="description" content="Scarica il protocollo ufficiale per l'audit dell'Etica Naturale. Un documento tecnico che definisce i parametri di Ingestion & Mapping per la certificazione scientifica della filiera HoReCa tramite Intelligenza Artificiale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #00e5a0;
+    --green-dim: rgba(0,229,160,0.12);
+    --green-mid: rgba(0,229,160,0.35);
+    --navy: #060d1a;
+    --navy-2: #0a1628;
+    --navy-3: #0f1f38;
+    --navy-4: #162847;
+    --text: #e8eef7;
+    --text-dim: #6b8aad;
+    --border: rgba(0,229,160,0.18);
+    --error: #ff4d6d;
+    --warning: #ffb830;
+  }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+background: var(–navy);
+color: var(–text);
+font-family: ‘IBM Plex Mono’, monospace;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* Background grid */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background-image:
+linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+background-size: 40px 40px;
+pointer-events: none;
+z-index: 0;
+}
+
+/* Glow orb */
+body::after {
+content: ‘’;
+position: fixed;
+top: -200px;
+right: -200px;
+width: 600px;
+height: 600px;
+background: radial-gradient(circle, rgba(0,229,160,0.06) 0%, transparent 70%);
+pointer-events: none;
+z-index: 0;
+}
+
+/* ─── HEADER ─── */
+header {
+position: relative;
+z-index: 10;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 1.5rem 3rem;
+border-bottom: 1px solid var(–border);
+background: rgba(6,13,26,0.85);
+backdrop-filter: blur(12px);
+}
+
+.logo {
+font-family: ‘Syne’, sans-serif;
+font-weight: 800;
+font-size: 1.1rem;
+letter-spacing: 0.08em;
+color: var(–text);
+text-decoration: none;
+}
+.logo span { color: var(–green); }
+
+.header-tag {
+font-size: 0.65rem;
+letter-spacing: 0.15em;
+color: var(–green);
+text-transform: uppercase;
+border: 1px solid var(–border);
+padding: 0.3rem 0.8rem;
+border-radius: 2px;
+}
+
+/* ─── HERO ─── */
+.hero {
+position: relative;
+z-index: 1;
+padding: 5rem 3rem 3rem;
+max-width: 900px;
+margin: 0 auto;
+text-align: center;
+}
+
+.hero-eyebrow {
+font-size: 0.65rem;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(–green);
+margin-bottom: 1.5rem;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 1rem;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+content: ‘’;
+height: 1px;
+width: 60px;
+background: var(–green-mid);
+}
+
+.hero h1 {
+font-family: ‘Syne’, sans-serif;
+font-weight: 800;
+font-size: clamp(2rem, 5vw, 3.2rem);
+line-height: 1.1;
+letter-spacing: -0.02em;
+margin-bottom: 1.5rem;
+color: var(–text);
+}
+.hero h1 em {
+font-style: normal;
+color: var(–green);
+}
+
+.hero-sub {
+font-size: 0.85rem;
+line-height: 1.8;
+color: var(–text-dim);
+max-width: 600px;
+margin: 0 auto 3rem;
+}
+
+/* ─── PROGRESS BAR ─── */
+.progress-wrap {
+position: relative;
+z-index: 1;
+max-width: 800px;
+margin: 0 auto 3rem;
+padding: 0 3rem;
+}
+
+.progress-steps {
+display: flex;
+align-items: center;
+gap: 0;
+}
+
+.step-node {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 0.5rem;
+flex: 1;
+position: relative;
+cursor: pointer;
+}
+
+.step-node::after {
+content: ‘’;
+position: absolute;
+top: 16px;
+left: 50%;
+width: 100%;
+height: 1px;
+background: var(–border);
+z-index: -1;
+transition: background 0.4s;
+}
+.step-node:last-child::after { display: none; }
+.step-node.completed::after { background: var(–green-mid); }
+
+.step-dot {
+width: 32px;
+height: 32px;
+border-radius: 50%;
+border: 1px solid var(–border);
+background: var(–navy-2);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 0.65rem;
+color: var(–text-dim);
+transition: all 0.3s;
+position: relative;
+z-index: 1;
+}
+.step-node.active .step-dot {
+border-color: var(–green);
+background: var(–green-dim);
+color: var(–green);
+box-shadow: 0 0 16px rgba(0,229,160,0.3);
+}
+.step-node.completed .step-dot {
+border-color: var(–green);
+background: var(–green);
+color: var(–navy);
+font-weight: 700;
+}
+
+.step-label {
+font-size: 0.6rem;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(–text-dim);
+text-align: center;
+white-space: nowrap;
+transition: color 0.3s;
+}
+.step-node.active .step-label { color: var(–green); }
+.step-node.completed .step-label { color: var(–text-dim); }
+
+/* ─── WIZARD CONTAINER ─── */
+.wizard {
+position: relative;
+z-index: 1;
+max-width: 800px;
+margin: 0 auto;
+padding: 0 3rem 5rem;
+}
+
+.step-panel {
+display: none;
+animation: fadeSlideIn 0.4s ease;
+}
+.step-panel.active { display: block; }
+
+@keyframes fadeSlideIn {
+from { opacity: 0; transform: translateY(12px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+.panel-header {
+margin-bottom: 2rem;
+padding-bottom: 1.5rem;
+border-bottom: 1px solid var(–border);
+}
+
+.panel-number {
+font-size: 0.6rem;
+letter-spacing: 0.2em;
+color: var(–green);
+text-transform: uppercase;
+margin-bottom: 0.5rem;
+}
+
+.panel-title {
+font-family: ‘Syne’, sans-serif;
+font-weight: 700;
+font-size: 1.4rem;
+color: var(–text);
+margin-bottom: 0.5rem;
+}
+
+.panel-desc {
+font-size: 0.75rem;
+line-height: 1.7;
+color: var(–text-dim);
+}
+
+/* ─── FORM ELEMENTS ─── */
+.field-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1rem;
+margin-bottom: 1rem;
+}
+.field-grid.single { grid-template-columns: 1fr; }
+.field-grid.triple { grid-template-columns: 1fr 1fr 1fr; }
+
+.field {
+display: flex;
+flex-direction: column;
+gap: 0.4rem;
+}
+
+label {
+font-size: 0.65rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(–text-dim);
+}
+label .req { color: var(–green); }
+
+input[type=“text”],
+input[type=“email”],
+input[type=“number”],
+input[type=“url”],
+select,
+textarea {
+background: var(–navy-2);
+border: 1px solid var(–border);
+color: var(–text);
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 0.8rem;
+padding: 0.75rem 1rem;
+border-radius: 3px;
+outline: none;
+transition: border-color 0.2s, box-shadow 0.2s;
+width: 100%;
+-webkit-appearance: none;
+}
+input:focus, select:focus, textarea:focus {
+border-color: var(–green);
+box-shadow: 0 0 0 3px rgba(0,229,160,0.1);
+}
+input::placeholder, textarea::placeholder { color: var(–text-dim); opacity: 0.5; }
+select option { background: var(–navy-3); }
+textarea { resize: vertical; min-height: 80px; }
+
+/* checkbox group */
+.checkbox-group {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 0.5rem;
+margin-top: 0.25rem;
+}
+
+.checkbox-item {
+display: flex;
+align-items: center;
+gap: 0.6rem;
+padding: 0.6rem 0.75rem;
+border: 1px solid var(–border);
+border-radius: 3px;
+cursor: pointer;
+transition: all 0.2s;
+background: var(–navy-2);
+}
+.checkbox-item:hover { border-color: var(–green-mid); background: var(–green-dim); }
+.checkbox-item input[type=“checkbox”] { display: none; }
+.checkbox-item.checked {
+border-color: var(–green);
+background: var(–green-dim);
+}
+.check-box {
+width: 14px; height: 14px;
+border: 1px solid var(–border);
+border-radius: 2px;
+background: var(–navy-3);
+display: flex; align-items: center; justify-content: center;
+flex-shrink: 0;
+transition: all 0.2s;
+font-size: 0.6rem;
+color: var(–navy);
+}
+.checkbox-item.checked .check-box {
+background: var(–green);
+border-color: var(–green);
+}
+.check-label {
+font-size: 0.72rem;
+color: var(–text);
+line-height: 1.3;
+}
+
+/* range slider */
+.range-wrap {
+display: flex;
+flex-direction: column;
+gap: 0.4rem;
+}
+.range-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.range-val {
+font-size: 0.75rem;
+color: var(–green);
+font-weight: 500;
+}
+input[type=“range”] {
+-webkit-appearance: none;
+width: 100%;
+height: 3px;
+background: var(–navy-4);
+border: none;
+outline: none;
+padding: 0;
+box-shadow: none;
+}
+input[type=“range”]::-webkit-slider-thumb {
+-webkit-appearance: none;
+width: 16px;
+height: 16px;
+border-radius: 50%;
+background: var(–green);
+cursor: pointer;
+box-shadow: 0 0 8px rgba(0,229,160,0.5);
+}
+
+/* file upload */
+.file-drop {
+border: 1px dashed var(–border);
+border-radius: 3px;
+padding: 2rem;
+text-align: center;
+cursor: pointer;
+transition: all 0.2s;
+background: var(–navy-2);
+position: relative;
+}
+.file-drop:hover, .file-drop.drag-over {
+border-color: var(–green);
+background: var(–green-dim);
+}
+.file-drop input[type=“file”] {
+position: absolute;
+inset: 0;
+opacity: 0;
+cursor: pointer;
+width: 100%;
+height: 100%;
+}
+.file-icon {
+font-size: 1.5rem;
+margin-bottom: 0.5rem;
+color: var(–green);
+}
+.file-drop-text {
+font-size: 0.72rem;
+color: var(–text-dim);
+line-height: 1.6;
+}
+.file-list {
+margin-top: 0.75rem;
+display: flex;
+flex-direction: column;
+gap: 0.4rem;
+}
+.file-tag {
+font-size: 0.65rem;
+background: var(–green-dim);
+border: 1px solid var(–border);
+color: var(–green);
+padding: 0.3rem 0.75rem;
+border-radius: 2px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.file-tag button {
+background: none;
+border: none;
+color: var(–text-dim);
+cursor: pointer;
+font-size: 0.8rem;
+padding: 0;
+line-height: 1;
+}
+
+/* info box */
+.info-box {
+background: var(–navy-2);
+border: 1px solid var(–border);
+border-left: 3px solid var(–green);
+padding: 1rem 1.25rem;
+border-radius: 0 3px 3px 0;
+font-size: 0.72rem;
+line-height: 1.7;
+color: var(–text-dim);
+margin: 1.5rem 0;
+}
+.info-box strong { color: var(–green); font-weight: 500; }
+
+/* section divider */
+.section-divider {
+display: flex;
+align-items: center;
+gap: 1rem;
+margin: 1.5rem 0 1rem;
+font-size: 0.6rem;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(–text-dim);
+}
+.section-divider::before, .section-divider::after {
+content: ‘’;
+flex: 1;
+height: 1px;
+background: var(–border);
+}
+
+/* ─── NAVIGATION BUTTONS ─── */
+.nav-row {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 2.5rem;
+padding-top: 2rem;
+border-top: 1px solid var(–border);
+}
+
+.btn {
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 0.72rem;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+padding: 0.8rem 2rem;
+border-radius: 3px;
+cursor: pointer;
+transition: all 0.2s;
+border: 1px solid transparent;
+text-decoration: none;
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.btn-primary {
+background: var(–green);
+color: var(–navy);
+font-weight: 600;
+border-color: var(–green);
+}
+.btn-primary:hover {
+background: #00ffc4;
+box-shadow: 0 0 20px rgba(0,229,160,0.4);
+}
+
+.btn-ghost {
+background: transparent;
+color: var(–text-dim);
+border-color: var(–border);
+}
+.btn-ghost:hover {
+color: var(–text);
+border-color: var(–text-dim);
+}
+
+/* ─── REVIEW PANEL ─── */
+.review-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1rem;
+margin-bottom: 2rem;
+}
+
+.review-card {
+background: var(–navy-2);
+border: 1px solid var(–border);
+border-radius: 4px;
+padding: 1.25rem;
+position: relative;
+overflow: hidden;
+}
+.review-card::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0;
+width: 3px; height: 100%;
+background: var(–green);
+}
+.review-card-title {
+font-size: 0.6rem;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(–green);
+margin-bottom: 0.75rem;
+}
+.review-item {
+display: flex;
+flex-direction: column;
+gap: 0.15rem;
+margin-bottom: 0.5rem;
+}
+.review-key {
+font-size: 0.6rem;
+color: var(–text-dim);
+text-transform: uppercase;
+letter-spacing: 0.08em;
+}
+.review-value {
+font-size: 0.78rem;
+color: var(–text);
+}
+.review-value.empty { color: var(–text-dim); font-style: italic; }
+
+/* score preview */
+.score-preview {
+background: var(–navy-2);
+border: 1px solid var(–green);
+border-radius: 4px;
+padding: 2rem;
+text-align: center;
+margin-bottom: 2rem;
+position: relative;
+overflow: hidden;
+}
+.score-preview::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+background: radial-gradient(circle at center, rgba(0,229,160,0.05) 0%, transparent 70%);
+}
+.score-label {
+font-size: 0.6rem;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(–text-dim);
+margin-bottom: 0.5rem;
+}
+.score-value {
+font-family: ‘Syne’, sans-serif;
+font-weight: 800;
+font-size: 3.5rem;
+color: var(–green);
+line-height: 1;
+margin-bottom: 0.25rem;
+text-shadow: 0 0 30px rgba(0,229,160,0.4);
+}
+.score-sub {
+font-size: 0.7rem;
+color: var(–text-dim);
+}
+
+/* ─── SUCCESS STATE ─── */
+.success-panel {
+display: none;
+text-align: center;
+padding: 4rem 2rem;
+animation: fadeSlideIn 0.5s ease;
+}
+.success-panel.active { display: block; }
+.success-icon {
+width: 80px; height: 80px;
+border-radius: 50%;
+background: var(–green-dim);
+border: 2px solid var(–green);
+display: flex;
+align-items: center;
+justify-content: center;
+margin: 0 auto 2rem;
+font-size: 2rem;
+box-shadow: 0 0 40px rgba(0,229,160,0.3);
+}
+.success-title {
+font-family: ‘Syne’, sans-serif;
+font-weight: 800;
+font-size: 2rem;
+color: var(–text);
+margin-bottom: 1rem;
+}
+.success-title em { color: var(–green); font-style: normal; }
+.success-text {
+font-size: 0.8rem;
+line-height: 1.8;
+color: var(–text-dim);
+max-width: 500px;
+margin: 0 auto 2.5rem;
+}
+.next-steps {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 1rem;
+max-width: 600px;
+margin: 0 auto 3rem;
+text-align: left;
+}
+.next-step {
+background: var(–navy-2);
+border: 1px solid var(–border);
+border-radius: 4px;
+padding: 1.25rem;
+}
+.next-step-num {
+font-size: 0.6rem;
+color: var(–green);
+letter-spacing: 0.15em;
+margin-bottom: 0.5rem;
+}
+.next-step-text {
+font-size: 0.72rem;
+color: var(–text-dim);
+line-height: 1.5;
+}
+
+/* ─── PRIVACY NOTE ─── */
+.privacy-note {
+text-align: center;
+font-size: 0.62rem;
+color: var(–text-dim);
+padding: 1.5rem 3rem;
+border-top: 1px solid var(–border);
+position: relative;
+z-index: 1;
+max-width: 800px;
+margin: 0 auto;
+line-height: 1.7;
+}
+.privacy-note a { color: var(–green); text-decoration: none; }
+
+/* error state */
+.field-error {
+font-size: 0.62rem;
+color: var(–error);
+margin-top: 0.2rem;
+display: none;
+}
+.field.has-error input,
+.field.has-error select,
+.field.has-error textarea {
+border-color: var(–error);
+}
+.field.has-error .field-error { display: block; }
+
+/* loading spinner */
+.spinner {
+display: inline-block;
+width: 14px; height: 14px;
+border: 2px solid var(–navy);
+border-top-color: transparent;
+border-radius: 50%;
+animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* responsive */
+@media (max-width: 640px) {
+header { padding: 1rem 1.5rem; }
+.hero, .wizard, .progress-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+.field-grid, .field-grid.triple { grid-template-columns: 1fr; }
+.review-grid { grid-template-columns: 1fr; }
+.next-steps { grid-template-columns: 1fr; }
+.checkbox-group { grid-template-columns: 1fr; }
+.step-label { display: none; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- HEADER -->
+
+<header>
+  <a href="index.html" class="logo">Cognitive<span>Logic</span></a>
+  <span class="header-tag">QEN · Onboarding HoReCa</span>
+</header>
+
+<!-- HERO -->
+
+<div class="hero">
+  <div class="hero-eyebrow">Protocollo Certificato · Fase 1</div>
+  <h1>Mappatura<br><em>Etica Naturale</em></h1>
+  <p class="hero-sub">
+    Compila il protocollo di raccolta dati per avviare la certificazione scientifica della tua filiera.
+    Il motore AI di QEN trasformerà le tue informazioni operative in un <strong style="color:var(--text)">Peso Scientifico certificabile</strong>.
+  </p>
+</div>
+
+<!-- PROGRESS -->
+
+<div class="progress-wrap">
+  <div class="progress-steps">
+    <div class="step-node active" data-step="1" onclick="goToStep(1)">
+      <div class="step-dot">01</div>
+      <span class="step-label">Anagrafica</span>
+    </div>
+    <div class="step-node" data-step="2" onclick="goToStep(2)">
+      <div class="step-dot">02</div>
+      <span class="step-label">Sostenibilità</span>
+    </div>
+    <div class="step-node" data-step="3" onclick="goToStep(3)">
+      <div class="step-dot">03</div>
+      <span class="step-label">Filiera</span>
+    </div>
+    <div class="step-node" data-step="4" onclick="goToStep(4)">
+      <div class="step-dot">04</div>
+      <span class="step-label">Capitale Umano</span>
+    </div>
+    <div class="step-node" data-step="5" onclick="goToStep(5)">
+      <div class="step-dot">05</div>
+      <span class="step-label">Revisione</span>
+    </div>
+  </div>
+</div>
+
+<!-- WIZARD -->
+
+<div class="wizard">
+
+  <!-- ── STEP 1: ANAGRAFICA ── -->
+
+  <div class="step-panel active" id="step-1">
+    <div class="panel-header">
+      <div class="panel-number">Step 01 / 05</div>
+      <div class="panel-title">Anagrafica Aziendale</div>
+      <div class="panel-desc">Identifica la tua struttura. Questi dati costituiscono il nodo principale del tuo profilo QEN.</div>
+    </div>
+
+```
+<div class="field-grid">
+  <div class="field" id="f-ragione">
+    <label>Ragione Sociale <span class="req">*</span></label>
+    <input type="text" id="ragione_sociale" placeholder="es. Trattoria Da Mario S.r.l." oninput="saveField('ragione_sociale', this.value)">
+    <span class="field-error">Campo obbligatorio</span>
+  </div>
+  <div class="field" id="f-tipologia">
+    <label>Tipologia <span class="req">*</span></label>
+    <select id="tipologia" onchange="saveField('tipologia', this.value)">
+      <option value="">— seleziona —</option>
+      <option>Ristorante</option>
+      <option>Hotel & Ristorazione</option>
+      <option>Bar / Caffetteria</option>
+      <option>Catering</option>
+      <option>Pizzeria</option>
+      <option>Agrituristico</option>
+      <option>Dark Kitchen</option>
+      <option>Food & Beverage (GDO)</option>
+      <option>Altro HoReCa</option>
+    </select>
+    <span class="field-error">Campo obbligatorio</span>
+  </div>
+</div>
+
+<div class="field-grid">
+  <div class="field">
+    <label>Città</label>
+    <input type="text" id="citta" placeholder="es. Bologna" oninput="saveField('citta', this.value)">
+  </div>
+  <div class="field">
+    <label>Provincia</label>
+    <input type="text" id="provincia" placeholder="BO" maxlength="2" oninput="saveField('provincia', this.value.toUpperCase()); this.value = this.value.toUpperCase()">
+  </div>
+</div>
+
+<div class="field-grid">
+  <div class="field">
+    <label>Email Referente <span class="req">*</span></label>
+    <input type="email" id="email" placeholder="info@esempio.it" oninput="saveField('email', this.value)">
+    <span class="field-error">Email non valida</span>
+  </div>
+  <div class="field">
+    <label>Sito Web</label>
+    <input type="url" id="sito_web" placeholder="https://www.esempio.it" oninput="saveField('sito_web', this.value)">
+  </div>
+</div>
+
+<div class="section-divider">Struttura operativa</div>
+
+<div class="field-grid triple">
+  <div class="field">
+    <label>N° dipendenti</label>
+    <input type="number" id="n_dipendenti" placeholder="es. 12" min="1" oninput="saveField('n_dipendenti', this.value)">
+  </div>
+  <div class="field">
+    <label>N° coperti / camere</label>
+    <input type="number" id="n_coperti" placeholder="es. 60" min="1" oninput="saveField('n_coperti', this.value)">
+  </div>
+  <div class="field">
+    <label>Anno fondazione</label>
+    <input type="number" id="anno_fond" placeholder="es. 2005" min="1900" max="2025" oninput="saveField('anno_fond', this.value)">
+  </div>
+</div>
+
+<div class="info-box">
+  <strong>Perché questi dati?</strong> L'anagrafica definisce il nodo identitario nel grafo QEN.
+  Dimensioni e tipologia influenzano le ponderazioni dei vettori V_s, V_a e V_t nel calcolo del tuo QEN Score.
+</div>
+
+<div class="nav-row">
+  <span></span>
+  <button class="btn btn-primary" onclick="nextStep(1)">Avanti — Sostenibilità →</button>
+</div>
+```
+
+  </div>
+
+  <!-- ── STEP 2: SOSTENIBILITÀ ── -->
+
+  <div class="step-panel" id="step-2">
+    <div class="panel-header">
+      <div class="panel-number">Step 02 / 05</div>
+      <div class="panel-title">Sostenibilità & Bio-Circolarità</div>
+      <div class="panel-desc">Mappa l'impatto ambientale e la capacità rigenerativa della tua struttura. Contribuisce al Vettore Ambientale (V_a × 0.35).</div>
+    </div>
+
+```
+<div class="section-divider">Consumi energetici annui</div>
+
+<div class="field-grid triple">
+  <div class="field">
+    <label>Energia elettrica (kWh)</label>
+    <input type="number" id="energia_kwh" placeholder="es. 45000" oninput="saveField('energia_kwh', this.value)">
+  </div>
+  <div class="field">
+    <label>Gas (m³)</label>
+    <input type="number" id="gas_m3" placeholder="es. 3200" oninput="saveField('gas_m3', this.value)">
+  </div>
+  <div class="field">
+    <label>Acqua (m³)</label>
+    <input type="number" id="acqua_m3" placeholder="es. 800" oninput="saveField('acqua_m3', this.value)">
+  </div>
+</div>
+
+<div class="field-grid">
+  <div class="field">
+    <label>Fonte energia prevalente</label>
+    <select id="fonte_energia" onchange="saveField('fonte_energia', this.value)">
+      <option value="">— seleziona —</option>
+      <option>Rete elettrica standard</option>
+      <option>Pannelli fotovoltaici (parziale)</option>
+      <option>100% rinnovabile certificata</option>
+      <option>Cogenerazione</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>% riduzione consumi ultimi 3 anni</label>
+    <div class="range-wrap">
+      <div class="range-header">
+        <span style="font-size:0.65rem;color:var(--text-dim)">0%</span>
+        <span class="range-val" id="riduzione_val">0%</span>
+        <span style="font-size:0.65rem;color:var(--text-dim)">50%+</span>
+      </div>
+      <input type="range" id="riduzione_consumi" min="0" max="50" value="0"
+        oninput="document.getElementById('riduzione_val').textContent=this.value+'%'; saveField('riduzione_consumi', this.value)">
+    </div>
+  </div>
+</div>
+
+<div class="section-divider">Gestione scarti & circolarità</div>
+
+<div class="field">
+  <label>Protocolli attivi di gestione scarti</label>
+  <div class="checkbox-group" id="protocolli_scarti">
+    <div class="checkbox-item" onclick="toggleCheck(this, 'protocolli_scarti')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Raccolta differenziata organico</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'protocolli_scarti')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Compostaggio interno</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'protocolli_scarti')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Recupero eccedenze alimentari (es. Too Good To Go)</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'protocolli_scarti')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Packaging riciclabile / compostabile</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'protocolli_scarti')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Logistica di ritorno vuoti/imballaggi</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'protocolli_scarti')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Eliminazione plastica monouso</span>
+    </div>
+  </div>
+</div>
+
+<div class="field-grid" style="margin-top:1rem">
+  <div class="field">
+    <label>% recupero organico stimato</label>
+    <div class="range-wrap">
+      <div class="range-header">
+        <span style="font-size:0.65rem;color:var(--text-dim)">0%</span>
+        <span class="range-val" id="org_val">0%</span>
+        <span style="font-size:0.65rem;color:var(--text-dim)">100%</span>
+      </div>
+      <input type="range" id="recupero_organico" min="0" max="100" value="0"
+        oninput="document.getElementById('org_val').textContent=this.value+'%'; saveField('recupero_organico', this.value)">
+    </div>
+  </div>
+  <div class="field">
+    <label>% recupero imballaggi stimato</label>
+    <div class="range-wrap">
+      <div class="range-header">
+        <span style="font-size:0.65rem;color:var(--text-dim)">0%</span>
+        <span class="range-val" id="imb_val">0%</span>
+        <span style="font-size:0.65rem;color:var(--text-dim)">100%</span>
+      </div>
+      <input type="range" id="recupero_imballaggi" min="0" max="100" value="0"
+        oninput="document.getElementById('imb_val').textContent=this.value+'%'; saveField('recupero_imballaggi', this.value)">
+    </div>
+  </div>
+</div>
+
+<div class="field" style="margin-top:1rem">
+  <label>Documenti ambientali (opzionale)</label>
+  <div class="file-drop" id="drop-env" ondragover="dragOver(event,'drop-env')" ondragleave="dragLeave('drop-env')" ondrop="fileDrop(event,'drop-env','env-files')">
+    <input type="file" multiple accept=".pdf,.xlsx,.csv,.jpg,.png" onchange="fileSelect(this,'env-files')">
+    <div class="file-icon">📄</div>
+    <div class="file-drop-text">Trascina o clicca per caricare report energetici, certificazioni ambientali</div>
+  </div>
+  <div class="file-list" id="env-files"></div>
+</div>
+
+<div class="nav-row">
+  <button class="btn btn-ghost" onclick="prevStep(2)">← Indietro</button>
+  <button class="btn btn-primary" onclick="nextStep(2)">Avanti — Filiera →</button>
+</div>
+```
+
+  </div>
+
+  <!-- ── STEP 3: FILIERA ── -->
+
+  <div class="step-panel" id="step-3">
+    <div class="panel-header">
+      <div class="panel-number">Step 03 / 05</div>
+      <div class="panel-title">Integrità della Filiera & Prossimità</div>
+      <div class="panel-desc">Mappa il valore territoriale e la trasparenza dei partner. Contribuisce al Vettore Territoriale (V_t × 0.25).</div>
+    </div>
+
+```
+<div class="section-divider">Anagrafica fornitori principali</div>
+
+<div id="fornitori-list">
+  <!-- fornitori aggiunti dinamicamente -->
+</div>
+<button class="btn btn-ghost" onclick="addFornitore()" style="margin-bottom:1.5rem; font-size:0.68rem">
+  + Aggiungi Fornitore
+</button>
+
+<div class="section-divider">Certificazioni prodotti acquistati</div>
+
+<div class="field">
+  <label>Certificazioni attive nella filiera</label>
+  <div class="checkbox-group" id="certificazioni">
+    <div class="checkbox-item" onclick="toggleCheck(this, 'certificazioni')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Biologico (EU Bio / NOP)</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'certificazioni')">
+      <div class="check-box">✓</div>
+      <span class="check-label">DOP / IGP / STG</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'certificazioni')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Fairtrade / Commercio Equo</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'certificazioni')">
+      <div class="check-box">✓</div>
+      <span class="check-label">MSC / ASC (prodotti ittici)</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'certificazioni')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Rainforest Alliance (caffè)</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'certificazioni')">
+      <div class="check-box">✓</div>
+      <span class="check-label">ISO 14001 / ISO 22000</span>
+    </div>
+  </div>
+</div>
+
+<div class="field-grid" style="margin-top:1.5rem">
+  <div class="field">
+    <label>% acquisti da fornitori locali (≤ 100km)</label>
+    <div class="range-wrap">
+      <div class="range-header">
+        <span style="font-size:0.65rem;color:var(--text-dim)">0%</span>
+        <span class="range-val" id="loc_val">0%</span>
+        <span style="font-size:0.65rem;color:var(--text-dim)">100%</span>
+      </div>
+      <input type="range" id="pct_locali" min="0" max="100" value="0"
+        oninput="document.getElementById('loc_val').textContent=this.value+'%'; saveField('pct_locali', this.value)">
+    </div>
+  </div>
+  <div class="field">
+    <label>Tracciabilità materie prime critiche</label>
+    <select id="tracciabilita" onchange="saveField('tracciabilita', this.value)">
+      <option value="">— seleziona livello —</option>
+      <option value="0">Assente</option>
+      <option value="1">Documentazione cartacea</option>
+      <option value="2">DDT digitali / sistema gestionale</option>
+      <option value="3">Tracciabilità blockchain o certificata</option>
+    </select>
+  </div>
+</div>
+
+<div class="field" style="margin-top:1rem">
+  <label>Documentazione filiera (opzionale)</label>
+  <div class="file-drop" id="drop-fil" ondragover="dragOver(event,'drop-fil')" ondragleave="dragLeave('drop-fil')" ondrop="fileDrop(event,'drop-fil','fil-files')">
+    <input type="file" multiple accept=".pdf,.xlsx,.csv" onchange="fileSelect(this,'fil-files')">
+    <div class="file-icon">📋</div>
+    <div class="file-drop-text">Certificazioni, DDT, schede fornitori, contratti di origine</div>
+  </div>
+  <div class="file-list" id="fil-files"></div>
+</div>
+
+<div class="nav-row">
+  <button class="btn btn-ghost" onclick="prevStep(3)">← Indietro</button>
+  <button class="btn btn-primary" onclick="nextStep(3)">Avanti — Capitale Umano →</button>
+</div>
+```
+
+  </div>
+
+  <!-- ── STEP 4: CAPITALE UMANO ── -->
+
+  <div class="step-panel" id="step-4">
+    <div class="panel-header">
+      <div class="panel-number">Step 04 / 05</div>
+      <div class="panel-title">Capitale Umano & Benessere</div>
+      <div class="panel-desc">Mappa l'equità sociale e l'impatto sulle persone. Contribuisce al Vettore Sociale (V_s × 0.40).</div>
+    </div>
+
+```
+<div class="section-divider">Parametri HR</div>
+
+<div class="field-grid">
+  <div class="field">
+    <label>Tasso di turnover annuo (%)</label>
+    <div class="range-wrap">
+      <div class="range-header">
+        <span style="font-size:0.65rem;color:var(--text-dim)">0%</span>
+        <span class="range-val" id="turn_val">0%</span>
+        <span style="font-size:0.65rem;color:var(--text-dim)">100%</span>
+      </div>
+      <input type="range" id="turnover" min="0" max="100" value="0"
+        oninput="document.getElementById('turn_val').textContent=this.value+'%'; saveField('turnover', this.value)">
+    </div>
+  </div>
+  <div class="field">
+    <label>Durata media contratti (mesi)</label>
+    <input type="number" id="durata_contratti" placeholder="es. 18" min="1" oninput="saveField('durata_contratti', this.value)">
+  </div>
+</div>
+
+<div class="field-grid">
+  <div class="field">
+    <label>Ore formazione erogate / anno</label>
+    <input type="number" id="ore_formazione" placeholder="es. 40" min="0" oninput="saveField('ore_formazione', this.value)">
+  </div>
+  <div class="field">
+    <label>Contratto collettivo applicato (CCNL)</label>
+    <select id="ccnl" onchange="saveField('ccnl', this.value)">
+      <option value="">— seleziona —</option>
+      <option>CCNL Turismo/Ristorazione (Confcommercio)</option>
+      <option>CCNL Alberghi e Turismo (CISL/UIL)</option>
+      <option>CCNL Artigianato (CNA/Confartigianato)</option>
+      <option>Contratto individuale / non sindacalizzato</option>
+      <option>Altro</option>
+    </select>
+  </div>
+</div>
+
+<div class="section-divider">Welfare & Inclusione</div>
+
+<div class="field">
+  <label>Iniziative welfare oltre i minimi di legge</label>
+  <div class="checkbox-group" id="welfare">
+    <div class="checkbox-item" onclick="toggleCheck(this, 'welfare')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Buoni pasto / mensa aziendale</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'welfare')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Flessibilità oraria / smart working</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'welfare')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Integrativo sanitario</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'welfare')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Programmi di crescita interna</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'welfare')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Politiche antidiscriminazione formalizzate</span>
+    </div>
+    <div class="checkbox-item" onclick="toggleCheck(this, 'welfare')">
+      <div class="check-box">✓</div>
+      <span class="check-label">Assunzione categorie protette</span>
+    </div>
+  </div>
+</div>
+
+<div class="field-grid" style="margin-top:1.5rem">
+  <div class="field">
+    <label>Gap salariale stimato M/F (%)</label>
+    <div class="range-wrap">
+      <div class="range-header">
+        <span style="font-size:0.65rem;color:var(--text-dim)">0%</span>
+        <span class="range-val" id="gap_val">0%</span>
+        <span style="font-size:0.65rem;color:var(--text-dim)">40%</span>
+      </div>
+      <input type="range" id="gap_salariale" min="0" max="40" value="0"
+        oninput="document.getElementById('gap_val').textContent=this.value+'%'; saveField('gap_salariale', this.value)">
+    </div>
+  </div>
+  <div class="field">
+    <label>Note aggiuntive sul capitale umano</label>
+    <textarea id="note_hr" rows="3" placeholder="Descrivi eventuali politiche HR distintive..." oninput="saveField('note_hr', this.value)"></textarea>
+  </div>
+</div>
+
+<div class="nav-row">
+  <button class="btn btn-ghost" onclick="prevStep(4)">← Indietro</button>
+  <button class="btn btn-primary" onclick="nextStep(4)">Avanti — Revisione →</button>
+</div>
+```
+
+  </div>
+
+  <!-- ── STEP 5: REVISIONE ── -->
+
+  <div class="step-panel" id="step-5">
+    <div class="panel-header">
+      <div class="panel-number">Step 05 / 05</div>
+      <div class="panel-title">Revisione & Invio</div>
+      <div class="panel-desc">Verifica i dati raccolti e invia al motore QEN per l'analisi di Fase 1.</div>
+    </div>
+
+```
+<div class="score-preview">
+  <div class="score-label">QEN Score Preliminare</div>
+  <div class="score-value" id="preview-score">—</div>
+  <div class="score-sub">Il punteggio definitivo sarà calcolato dopo la verifica documentale</div>
+</div>
+
+<div class="review-grid" id="review-content">
+  <!-- populated by JS -->
+</div>
+
+<div class="info-box">
+  <strong>Privacy & Sicurezza:</strong> Tutti i dati sono trasmessi con crittografia TLS 1.3 e utilizzati esclusivamente per l'alimentazione del motore AI di mappatura etica QEN, in conformità con GDPR art. 6(1)(b) e art. 13. I dati non vengono condivisi con terze parti senza consenso esplicito.
+</div>
+
+<div class="field" style="margin-bottom:1.5rem">
+  <div class="checkbox-item" onclick="togglePrivacy(this)" id="privacy-check" style="max-width:100%">
+    <div class="check-box">✓</div>
+    <span class="check-label">Dichiaro di aver letto l'informativa privacy e autorizzo il trattamento dei dati per le finalità indicate</span>
+  </div>
+</div>
+
+<div class="nav-row">
+  <button class="btn btn-ghost" onclick="prevStep(5)">← Indietro</button>
+  <button class="btn btn-primary" id="submit-btn" onclick="submitForm()" disabled style="opacity:0.5;cursor:not-allowed">
+    Avvia Analisi QEN →
+  </button>
+</div>
+```
+
+  </div>
+
+  <!-- ── SUCCESS ── -->
+
+  <div class="success-panel" id="success">
+    <div class="success-icon">✓</div>
+    <div class="success-title">Dati ricevuti.<br><em>Analisi avviata.</em></div>
+    <p class="success-text">
+      Il motore QEN ha ricevuto il tuo protocollo e avviato la Fase 1: Ingestion & Mapping.
+      Riceverai un report preliminare con il tuo <strong style="color:var(--text)">QEN Score certificato</strong> entro 48 ore all'indirizzo indicato.
+    </p>
+    <div class="next-steps">
+      <div class="next-step">
+        <div class="next-step-num">01 · Immediatamente</div>
+        <div class="next-step-text">Email di conferma con riepilogo dati inviati</div>
+      </div>
+      <div class="next-step">
+        <div class="next-step-num">02 · Entro 48h</div>
+        <div class="next-step-text">Report QEN Score preliminare con analisi dei 3 vettori</div>
+      </div>
+      <div class="next-step">
+        <div class="next-step-num">03 · Entro 7gg</div>
+        <div class="next-step-text">Proposta di certificazione scientifica completa della filiera</div>
+      </div>
+    </div>
+    <a href="index.html" class="btn btn-ghost">← Torna alla Home</a>
+  </div>
+
+</div><!-- /wizard -->
+
+<!-- PRIVACY NOTE -->
+
+<div class="privacy-note">
+  I dati raccolti sono trattati da CognitiveLogic (info@cognitivelogic.it) secondo i più alti standard di crittografia,
+  esclusivamente per l'alimentazione del motore AI di mappatura etica QEN.<br>
+  <a href="#">Informativa Privacy</a> · <a href="#">Termini di Servizio</a> · <a href="https://cognitivelogic.it">cognitivelogic.it</a>
+</div>
+
+<script>
+  // ─── STATE ───
+  const state = {};
+  let privacyAccepted = false;
+  let currentStep = 1;
+  const totalSteps = 5;
+  let fornitoreCount = 0;
+
+  // ─── PERSISTENCE ───
+  function saveField(key, val) {
+    state[key] = val;
+    if (currentStep === 5) buildReview();
+  }
+
+  // ─── NAVIGATION ───
+  function nextStep(from) {
+    if (!validateStep(from)) return;
+    setStep(from + 1);
+  }
+
+  function prevStep(from) {
+    setStep(from - 1);
+  }
+
+  function goToStep(n) {
+    if (n > currentStep) return; // can't skip forward
+    setStep(n);
+  }
+
+  function setStep(n) {
+    document.getElementById('step-' + currentStep).classList.remove('active');
+    document.querySelectorAll('.step-node').forEach((node, i) => {
+      node.classList.remove('active');
+      if (i + 1 < n) node.classList.add('completed');
+      else if (i + 1 === n) { node.classList.add('active'); node.classList.remove('completed'); }
+    });
+    currentStep = n;
+    document.getElementById('step-' + n).classList.add('active');
+    if (n === 5) buildReview();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ─── VALIDATION ───
+  function validateStep(step) {
+    let valid = true;
+    if (step === 1) {
+      valid = required('ragione_sociale', 'f-ragione') && valid;
+      valid = required('tipologia', 'f-tipologia') && valid;
+      valid = validEmail('email') && valid;
+    }
+    return valid;
+  }
+
+  function required(id, fieldId) {
+    const el = document.getElementById(id);
+    const f = document.getElementById(fieldId);
+    if (!el || !el.value.trim()) {
+      if (f) f.classList.add('has-error');
+      return false;
+    }
+    if (f) f.classList.remove('has-error');
+    return true;
+  }
+
+  function validEmail(id) {
+    const el = document.getElementById(id);
+    const f = el?.closest('.field');
+    if (!el || !el.value) return true; // optional
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);
+    if (!ok && f) f.classList.add('has-error');
+    else if (f) f.classList.remove('has-error');
+    return ok;
+  }
+
+  // ─── CHECKBOXES ───
+  function toggleCheck(el, groupId) {
+    el.classList.toggle('checked');
+    const values = [];
+    document.getElementById(groupId)?.querySelectorAll('.checkbox-item.checked .check-label').forEach(l => values.push(l.textContent));
+    saveField(groupId, values);
+  }
+
+  function togglePrivacy(el) {
+    el.classList.toggle('checked');
+    privacyAccepted = el.classList.contains('checked');
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = !privacyAccepted;
+    btn.style.opacity = privacyAccepted ? '1' : '0.5';
+    btn.style.cursor = privacyAccepted ? 'pointer' : 'not-allowed';
+  }
+
+  // ─── FILE HANDLING ───
+  function dragOver(e, id) { e.preventDefault(); document.getElementById(id).classList.add('drag-over'); }
+  function dragLeave(id) { document.getElementById(id).classList.remove('drag-over'); }
+  function fileDrop(e, dropId, listId) {
+    e.preventDefault();
+    dragLeave(dropId);
+    addFiles(e.dataTransfer.files, listId);
+  }
+  function fileSelect(input, listId) { addFiles(input.files, listId); }
+
+  function addFiles(files, listId) {
+    const list = document.getElementById(listId);
+    Array.from(files).forEach(f => {
+      const tag = document.createElement('div');
+      tag.className = 'file-tag';
+      tag.innerHTML = `<span>📎 ${f.name} <span style="color:var(--text-dim);font-size:0.6rem">(${(f.size/1024).toFixed(0)} KB)</span></span>
+        <button onclick="this.parentElement.remove()">✕</button>`;
+      list.appendChild(tag);
+    });
+  }
+
+  // ─── FORNITORI ───
+  function addFornitore() {
+    fornitoreCount++;
+    const n = fornitoreCount;
+    const wrap = document.createElement('div');
+    wrap.className = 'field-grid';
+    wrap.id = 'forn-' + n;
+    wrap.style.cssText = 'border:1px solid var(--border);border-radius:4px;padding:1rem;margin-bottom:1rem;grid-template-columns:2fr 1.5fr 1fr auto;gap:0.75rem;align-items:end';
+    wrap.innerHTML = `
+      <div class="field">
+        <label>Ragione Sociale Fornitore</label>
+        <input type="text" placeholder="es. Cooperativa Agricola Valle Bura" oninput="saveFornitore(${n},'nome',this.value)">
+      </div>
+      <div class="field">
+        <label>Sede / Città</label>
+        <input type="text" placeholder="es. Imola (BO)" oninput="saveFornitore(${n},'sede',this.value)">
+      </div>
+      <div class="field">
+        <label>Categoria</label>
+        <select onchange="saveFornitore(${n},'cat',this.value)">
+          <option value="">—</option>
+          <option>Carne</option>
+          <option>Pesce</option>
+          <option>Frutta & Verdura</option>
+          <option>Latticini</option>
+          <option>Caffè & Bevande</option>
+          <option>Vino & Birra</option>
+          <option>Cereali & Legumi</option>
+          <option>Packaging</option>
+          <option>Altro</option>
+        </select>
+      </div>
+      <button class="btn btn-ghost" onclick="document.getElementById('forn-${n}').remove()" style="padding:0.5rem 0.75rem;font-size:0.9rem;border-color:var(--error);color:var(--error)">✕</button>
+    `;
+    document.getElementById('fornitori-list').appendChild(wrap);
+  }
+
+  function saveFornitore(n, key, val) {
+    if (!state.fornitori) state.fornitori = {};
+    if (!state.fornitori[n]) state.fornitori[n] = {};
+    state.fornitori[n][key] = val;
+  }
+
+  // ─── REVIEW ───
+  function buildReview() {
+    const s = state;
+    const cont = document.getElementById('review-content');
+
+    cont.innerHTML = `
+      <div class="review-card">
+        <div class="review-card-title">Anagrafica</div>
+        ${rv('Ragione Sociale', s.ragione_sociale)}
+        ${rv('Tipologia', s.tipologia)}
+        ${rv('Città', s.citta && s.provincia ? s.citta + ' (' + s.provincia + ')' : (s.citta || ''))}
+        ${rv('Email', s.email)}
+        ${rv('Dipendenti', s.n_dipendenti)}
+      </div>
+      <div class="review-card">
+        <div class="review-card-title">Sostenibilità V_a</div>
+        ${rv('Energia', s.energia_kwh ? s.energia_kwh + ' kWh/anno' : null)}
+        ${rv('Gas', s.gas_m3 ? s.gas_m3 + ' m³/anno' : null)}
+        ${rv('Fonte energia', s.fonte_energia)}
+        ${rv('Riduzione consumi', s.riduzione_consumi ? s.riduzione_consumi + '%' : '0%')}
+        ${rv('Recupero organico', (s.recupero_organico || 0) + '%')}
+      </div>
+      <div class="review-card">
+        <div class="review-card-title">Filiera V_t</div>
+        ${rv('Acquisti locali ≤100km', (s.pct_locali || 0) + '%')}
+        ${rv('Tracciabilità', ['Assente','Cartacea','Digitale','Certificata'][s.tracciabilita]||'—')}
+        ${rv('Certificazioni', s.certificazioni?.length ? s.certificazioni.length + ' attive' : 'Nessuna')}
+        ${rv('Fornitori mappati', state.fornitori ? Object.keys(state.fornitori).length + ' inseriti' : '0')}
+      </div>
+      <div class="review-card">
+        <div class="review-card-title">Capitale Umano V_s</div>
+        ${rv('Turnover', (s.turnover || 0) + '%')}
+        ${rv('Durata contratti', s.durata_contratti ? s.durata_contratti + ' mesi' : null)}
+        ${rv('Ore formazione', s.ore_formazione ? s.ore_formazione + ' h/anno' : null)}
+        ${rv('Welfare attivo', s.welfare?.length ? s.welfare.length + ' iniziative' : 'Nessuna')}
+        ${rv('Gap salariale M/F', (s.gap_salariale || 0) + '%')}
+      </div>
+    `;
+
+    // Preliminary score
+    document.getElementById('preview-score').textContent = calcPreviewScore().toFixed(2) + ' / 10';
+  }
+
+  function rv(key, val) {
+    const empty = !val || val === '0%' || val === '0';
+    return `<div class="review-item">
+      <span class="review-key">${key}</span>
+      <span class="review-value${empty ? ' empty' : ''}">${val || '—'}</span>
+    </div>`;
+  }
+
+  function calcPreviewScore() {
+    const s = state;
+    // V_a: environmental
+    let va = 0;
+    va += Math.min((parseInt(s.riduzione_consumi)||0) / 50, 1) * 3;
+    va += Math.min((parseInt(s.recupero_organico)||0) / 100, 1) * 2;
+    va += Math.min((parseInt(s.recupero_imballaggi)||0) / 100, 1) * 2;
+    const nProt = s.protocolli_scarti?.length || 0;
+    va += Math.min(nProt / 6, 1) * 3;
+    const Va = Math.min(va / 10 * 10, 10);
+
+    // V_t: territorial
+    let vt = 0;
+    vt += Math.min((parseInt(s.pct_locali)||0) / 100, 1) * 4;
+    vt += Math.min((parseInt(s.tracciabilita)||0) / 3, 1) * 3;
+    const nCert = s.certificazioni?.length || 0;
+    vt += Math.min(nCert / 6, 1) * 3;
+    const Vt = Math.min(vt / 10 * 10, 10);
+
+    // V_s: social
+    let vs = 0;
+    const turnInv = 1 - Math.min((parseInt(s.turnover)||0) / 100, 1);
+    vs += turnInv * 3;
+    const gapInv = 1 - Math.min((parseInt(s.gap_salariale)||0) / 40, 1);
+    vs += gapInv * 2;
+    const nWelf = s.welfare?.length || 0;
+    vs += Math.min(nWelf / 6, 1) * 3;
+    const hForm = Math.min((parseInt(s.ore_formazione)||0) / 80, 1);
+    vs += hForm * 2;
+    const Vs = Math.min(vs / 10 * 10, 10);
+
+    // QEN formula
+    return Vs * 0.40 + Va * 0.35 + Vt * 0.25;
+  }
+
+  // ─── SUBMIT ───
+  function submitForm() {
+    const btn = document.getElementById('submit-btn');
+    btn.innerHTML = '<span class="spinner"></span> Invio in corso...';
+    btn.disabled = true;
+
+    // Build payload
+    const payload = {
+      ...state,
+      qen_score_preview: calcPreviewScore().toFixed(2),
+      submitted_at: new Date().toISOString(),
+      source: 'onboarding.html'
+    };
+
+    // Send to Copilot endpoint
+    fetch('https://api.cognitivelogic.it/copilot-analyze', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        system_description: JSON.stringify(payload)
+      })
+    })
+    .catch(() => {}) // graceful fallback
+    .finally(() => {
+      setTimeout(() => {
+        document.getElementById('step-5').classList.remove('active');
+        document.getElementById('success').classList.add('active');
+        document.querySelectorAll('.step-node').forEach(n => n.classList.add('completed'));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 800);
+    });
+  }
+
+  // ─── INIT ───
+  // Add first fornitore slot by default
+  addFornitore();
+</script>
+
+</body>
+</html>
