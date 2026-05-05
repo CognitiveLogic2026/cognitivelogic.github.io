@@ -5,28 +5,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QEN Onboarding — Mappatura Etica Naturale | CognitiveLogic</title>
-<meta name="description" content="Scarica il protocollo ufficiale per l'audit dell'Etica Naturale. Un documento tecnico che definisce i parametri di Ingestion & Mapping per la certificazione scientifica della filiera HoReCa tramite Intelligenza Artificiale.">
+<meta name="description" content="Avvia la certificazione scientifica della tua filiera con il framework QEN di Cognitive Logic.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --green: #00e5a0;
-    --green-dim: rgba(0,229,160,0.12);
-    --green-mid: rgba(0,229,160,0.35);
-    --navy: #060d1a;
-    --navy-2: #0a1628;
-    --navy-3: #0f1f38;
-    --navy-4: #162847;
-    --text: #e8eef7;
-    --text-dim: #6b8aad;
-    --border: rgba(0,229,160,0.18);
-    --error: #ff4d6d;
-    --warning: #ffb830;
-  }
+:root {
+  --green: #00e5a0;
+  --green-dim: rgba(0,229,160,0.12);
+  --green-mid: rgba(0,229,160,0.35);
+  --navy: #060d1a;
+  --navy-2: #0a1628;
+  --navy-3: #0f1f38;
+  --navy-4: #162847;
+  --text: #e8eef7;
+  --text-dim: #6b8aad;
+  --border: rgba(0,229,160,0.18);
+  --error: #ff4d6d;
+  --warning: #ffb830;
+}
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
 
 body {
@@ -37,7 +36,6 @@ min-height: 100vh;
 overflow-x: hidden;
 }
 
-/* Background grid */
 body::before {
 content: ‘’;
 position: fixed;
@@ -50,7 +48,6 @@ pointer-events: none;
 z-index: 0;
 }
 
-/* Glow orb */
 body::after {
 content: ‘’;
 position: fixed;
@@ -63,7 +60,7 @@ pointer-events: none;
 z-index: 0;
 }
 
-/* ─── HEADER ─── */
+/* HEADER */
 header {
 position: relative;
 z-index: 10;
@@ -86,6 +83,19 @@ text-decoration: none;
 }
 .logo span { color: var(–green); }
 
+/* PIANO BADGE — mostrato se arriva da pricing */
+.plan-badge {
+display: none;
+font-size: 0.65rem;
+letter-spacing: 0.12em;
+color: var(–navy);
+background: var(–green);
+padding: 0.3rem 0.9rem;
+border-radius: 2px;
+font-weight: 600;
+}
+.plan-badge.visible { display: inline-block; }
+
 .header-tag {
 font-size: 0.65rem;
 letter-spacing: 0.15em;
@@ -96,7 +106,7 @@ padding: 0.3rem 0.8rem;
 border-radius: 2px;
 }
 
-/* ─── HERO ─── */
+/* HERO */
 .hero {
 position: relative;
 z-index: 1;
@@ -124,6 +134,22 @@ width: 60px;
 background: var(–green-mid);
 }
 
+/* PIANO SELEZIONATO banner */
+.plan-selected-banner {
+display: none;
+background: var(–green-dim);
+border: 1px solid var(–green);
+border-radius: 4px;
+padding: 1rem 1.5rem;
+margin: 0 auto 2rem;
+max-width: 600px;
+font-size: 0.75rem;
+color: var(–text);
+line-height: 1.6;
+}
+.plan-selected-banner.visible { display: block; }
+.plan-selected-banner strong { color: var(–green); }
+
 .hero h1 {
 font-family: ‘Syne’, sans-serif;
 font-weight: 800;
@@ -133,10 +159,7 @@ letter-spacing: -0.02em;
 margin-bottom: 1.5rem;
 color: var(–text);
 }
-.hero h1 em {
-font-style: normal;
-color: var(–green);
-}
+.hero h1 em { font-style: normal; color: var(–green); }
 
 .hero-sub {
 font-size: 0.85rem;
@@ -146,7 +169,7 @@ max-width: 600px;
 margin: 0 auto 3rem;
 }
 
-/* ─── PROGRESS BAR ─── */
+/* PROGRESS */
 .progress-wrap {
 position: relative;
 z-index: 1;
@@ -158,7 +181,6 @@ padding: 0 3rem;
 .progress-steps {
 display: flex;
 align-items: center;
-gap: 0;
 }
 
 .step-node {
@@ -225,7 +247,7 @@ transition: color 0.3s;
 .step-node.active .step-label { color: var(–green); }
 .step-node.completed .step-label { color: var(–text-dim); }
 
-/* ─── WIZARD CONTAINER ─── */
+/* WIZARD */
 .wizard {
 position: relative;
 z-index: 1;
@@ -273,7 +295,7 @@ line-height: 1.7;
 color: var(–text-dim);
 }
 
-/* ─── FORM ELEMENTS ─── */
+/* FORM ELEMENTS */
 .field-grid {
 display: grid;
 grid-template-columns: 1fr 1fr;
@@ -323,7 +345,6 @@ input::placeholder, textarea::placeholder { color: var(–text-dim); opacity: 0.
 select option { background: var(–navy-3); }
 textarea { resize: vertical; min-height: 80px; }
 
-/* checkbox group */
 .checkbox-group {
 display: grid;
 grid-template-columns: 1fr 1fr;
@@ -369,22 +390,10 @@ color: var(–text);
 line-height: 1.3;
 }
 
-/* range slider */
-.range-wrap {
-display: flex;
-flex-direction: column;
-gap: 0.4rem;
-}
-.range-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-.range-val {
-font-size: 0.75rem;
-color: var(–green);
-font-weight: 500;
-}
+.range-wrap { display: flex; flex-direction: column; gap: 0.4rem; }
+.range-header { display: flex; justify-content: space-between; align-items: center; }
+.range-val { font-size: 0.75rem; color: var(–green); font-weight: 500; }
+
 input[type=“range”] {
 -webkit-appearance: none;
 width: 100%;
@@ -405,7 +414,6 @@ cursor: pointer;
 box-shadow: 0 0 8px rgba(0,229,160,0.5);
 }
 
-/* file upload */
 .file-drop {
 border: 1px dashed var(–border);
 border-radius: 3px;
@@ -428,22 +436,9 @@ cursor: pointer;
 width: 100%;
 height: 100%;
 }
-.file-icon {
-font-size: 1.5rem;
-margin-bottom: 0.5rem;
-color: var(–green);
-}
-.file-drop-text {
-font-size: 0.72rem;
-color: var(–text-dim);
-line-height: 1.6;
-}
-.file-list {
-margin-top: 0.75rem;
-display: flex;
-flex-direction: column;
-gap: 0.4rem;
-}
+.file-icon { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(–green); }
+.file-drop-text { font-size: 0.72rem; color: var(–text-dim); line-height: 1.6; }
+.file-list { margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.4rem; }
 .file-tag {
 font-size: 0.65rem;
 background: var(–green-dim);
@@ -465,7 +460,6 @@ padding: 0;
 line-height: 1;
 }
 
-/* info box */
 .info-box {
 background: var(–navy-2);
 border: 1px solid var(–border);
@@ -479,7 +473,6 @@ margin: 1.5rem 0;
 }
 .info-box strong { color: var(–green); font-weight: 500; }
 
-/* section divider */
 .section-divider {
 display: flex;
 align-items: center;
@@ -497,7 +490,7 @@ height: 1px;
 background: var(–border);
 }
 
-/* ─── NAVIGATION BUTTONS ─── */
+/* NAVIGATION */
 .nav-row {
 display: flex;
 justify-content: space-between;
@@ -544,7 +537,7 @@ color: var(–text);
 border-color: var(–text-dim);
 }
 
-/* ─── REVIEW PANEL ─── */
+/* REVIEW */
 .review-grid {
 display: grid;
 grid-template-columns: 1fr 1fr;
@@ -574,25 +567,25 @@ text-transform: uppercase;
 color: var(–green);
 margin-bottom: 0.75rem;
 }
-.review-item {
-display: flex;
-flex-direction: column;
-gap: 0.15rem;
-margin-bottom: 0.5rem;
-}
-.review-key {
-font-size: 0.6rem;
-color: var(–text-dim);
-text-transform: uppercase;
-letter-spacing: 0.08em;
-}
-.review-value {
-font-size: 0.78rem;
-color: var(–text);
-}
+.review-item { display: flex; flex-direction: column; gap: 0.15rem; margin-bottom: 0.5rem; }
+.review-key { font-size: 0.6rem; color: var(–text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+.review-value { font-size: 0.78rem; color: var(–text); }
 .review-value.empty { color: var(–text-dim); font-style: italic; }
 
-/* score preview */
+/* PIANO nella review */
+.plan-review-row {
+background: var(–green-dim);
+border: 1px solid var(–green);
+border-radius: 4px;
+padding: 1rem 1.25rem;
+margin-bottom: 1rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.plan-review-label { font-size: 0.6rem; color: var(–text-dim); text-transform: uppercase; letter-spacing: 0.1em; }
+.plan-review-value { font-size: 0.85rem; color: var(–green); font-family: ‘Syne’, sans-serif; font-weight: 700; }
+
 .score-preview {
 background: var(–navy-2);
 border: 1px solid var(–green);
@@ -609,13 +602,7 @@ position: absolute;
 inset: 0;
 background: radial-gradient(circle at center, rgba(0,229,160,0.05) 0%, transparent 70%);
 }
-.score-label {
-font-size: 0.6rem;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(–text-dim);
-margin-bottom: 0.5rem;
-}
+.score-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(–text-dim); margin-bottom: 0.5rem; }
 .score-value {
 font-family: ‘Syne’, sans-serif;
 font-weight: 800;
@@ -625,12 +612,9 @@ line-height: 1;
 margin-bottom: 0.25rem;
 text-shadow: 0 0 30px rgba(0,229,160,0.4);
 }
-.score-sub {
-font-size: 0.7rem;
-color: var(–text-dim);
-}
+.score-sub { font-size: 0.7rem; color: var(–text-dim); }
 
-/* ─── SUCCESS STATE ─── */
+/* SUCCESS */
 .success-panel {
 display: none;
 text-align: center;
@@ -679,19 +663,9 @@ border: 1px solid var(–border);
 border-radius: 4px;
 padding: 1.25rem;
 }
-.next-step-num {
-font-size: 0.6rem;
-color: var(–green);
-letter-spacing: 0.15em;
-margin-bottom: 0.5rem;
-}
-.next-step-text {
-font-size: 0.72rem;
-color: var(–text-dim);
-line-height: 1.5;
-}
+.next-step-num { font-size: 0.6rem; color: var(–green); letter-spacing: 0.15em; margin-bottom: 0.5rem; }
+.next-step-text { font-size: 0.72rem; color: var(–text-dim); line-height: 1.5; }
 
-/* ─── PRIVACY NOTE ─── */
 .privacy-note {
 text-align: center;
 font-size: 0.62rem;
@@ -706,21 +680,10 @@ line-height: 1.7;
 }
 .privacy-note a { color: var(–green); text-decoration: none; }
 
-/* error state */
-.field-error {
-font-size: 0.62rem;
-color: var(–error);
-margin-top: 0.2rem;
-display: none;
-}
-.field.has-error input,
-.field.has-error select,
-.field.has-error textarea {
-border-color: var(–error);
-}
+.field-error { font-size: 0.62rem; color: var(–error); margin-top: 0.2rem; display: none; }
+.field.has-error input, .field.has-error select, .field.has-error textarea { border-color: var(–error); }
 .field.has-error .field-error { display: block; }
 
-/* loading spinner */
 .spinner {
 display: inline-block;
 width: 14px; height: 14px;
@@ -731,7 +694,6 @@ animation: spin 0.7s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* responsive */
 @media (max-width: 640px) {
 header { padding: 1rem 1.5rem; }
 .hero, .wizard, .progress-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
@@ -746,25 +708,25 @@ header { padding: 1rem 1.5rem; }
 </head>
 <body>
 
-<!-- HEADER -->
-
 <header>
-  <a href="index.html" class="logo">Cognitive<span>Logic</span></a>
-  <span class="header-tag">QEN · Onboarding HoReCa</span>
+  <a href="https://cognitivelogic.it" class="logo">Cognitive<span>Logic</span></a>
+  <span class="plan-badge" id="plan-badge"></span>
+  <span class="header-tag">QEN · Onboarding</span>
 </header>
-
-<!-- HERO -->
 
 <div class="hero">
   <div class="hero-eyebrow">Protocollo Certificato · Fase 1</div>
   <h1>Mappatura<br><em>Etica Naturale</em></h1>
+
+  <!-- Banner piano selezionato — visibile solo se arriva da pricing -->
+
+  <div class="plan-selected-banner" id="plan-banner"></div>
+
   <p class="hero-sub">
     Compila il protocollo di raccolta dati per avviare la certificazione scientifica della tua filiera.
     Il motore AI di QEN trasformerà le tue informazioni operative in un <strong style="color:var(--text)">Peso Scientifico certificabile</strong>.
   </p>
 </div>
-
-<!-- PROGRESS -->
 
 <div class="progress-wrap">
   <div class="progress-steps">
@@ -791,11 +753,9 @@ header { padding: 1rem 1.5rem; }
   </div>
 </div>
 
-<!-- WIZARD -->
-
 <div class="wizard">
 
-  <!-- ── STEP 1: ANAGRAFICA ── -->
+  <!-- STEP 1: ANAGRAFICA -->
 
   <div class="step-panel active" id="step-1">
     <div class="panel-header">
@@ -836,12 +796,13 @@ header { padding: 1rem 1.5rem; }
   </div>
   <div class="field">
     <label>Provincia</label>
-    <input type="text" id="provincia" placeholder="BO" maxlength="2" oninput="saveField('provincia', this.value.toUpperCase()); this.value = this.value.toUpperCase()">
+    <input type="text" id="provincia" placeholder="BO" maxlength="2"
+      oninput="saveField('provincia', this.value.toUpperCase()); this.value = this.value.toUpperCase()">
   </div>
 </div>
 
 <div class="field-grid">
-  <div class="field">
+  <div class="field" id="f-email">
     <label>Email Referente <span class="req">*</span></label>
     <input type="email" id="email" placeholder="info@esempio.it" oninput="saveField('email', this.value)">
     <span class="field-error">Email non valida</span>
@@ -865,7 +826,7 @@ header { padding: 1rem 1.5rem; }
   </div>
   <div class="field">
     <label>Anno fondazione</label>
-    <input type="number" id="anno_fond" placeholder="es. 2005" min="1900" max="2025" oninput="saveField('anno_fond', this.value)">
+    <input type="number" id="anno_fond" placeholder="es. 2005" min="1900" max="2026" oninput="saveField('anno_fond', this.value)">
   </div>
 </div>
 
@@ -882,7 +843,7 @@ header { padding: 1rem 1.5rem; }
 
   </div>
 
-  <!-- ── STEP 2: SOSTENIBILITÀ ── -->
+  <!-- STEP 2: SOSTENIBILITÀ -->
 
   <div class="step-panel" id="step-2">
     <div class="panel-header">
@@ -940,28 +901,22 @@ header { padding: 1rem 1.5rem; }
   <label>Protocolli attivi di gestione scarti</label>
   <div class="checkbox-group" id="protocolli_scarti">
     <div class="checkbox-item" onclick="toggleCheck(this, 'protocolli_scarti')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Raccolta differenziata organico</span>
+      <div class="check-box">✓</div><span class="check-label">Raccolta differenziata organico</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'protocolli_scarti')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Compostaggio interno</span>
+      <div class="check-box">✓</div><span class="check-label">Compostaggio interno</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'protocolli_scarti')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Recupero eccedenze alimentari (es. Too Good To Go)</span>
+      <div class="check-box">✓</div><span class="check-label">Recupero eccedenze alimentari (es. Too Good To Go)</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'protocolli_scarti')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Packaging riciclabile / compostabile</span>
+      <div class="check-box">✓</div><span class="check-label">Packaging riciclabile / compostabile</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'protocolli_scarti')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Logistica di ritorno vuoti/imballaggi</span>
+      <div class="check-box">✓</div><span class="check-label">Logistica di ritorno vuoti/imballaggi</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'protocolli_scarti')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Eliminazione plastica monouso</span>
+      <div class="check-box">✓</div><span class="check-label">Eliminazione plastica monouso</span>
     </div>
   </div>
 </div>
@@ -995,7 +950,9 @@ header { padding: 1rem 1.5rem; }
 
 <div class="field" style="margin-top:1rem">
   <label>Documenti ambientali (opzionale)</label>
-  <div class="file-drop" id="drop-env" ondragover="dragOver(event,'drop-env')" ondragleave="dragLeave('drop-env')" ondrop="fileDrop(event,'drop-env','env-files')">
+  <div class="file-drop" id="drop-env"
+    ondragover="dragOver(event,'drop-env')" ondragleave="dragLeave('drop-env')"
+    ondrop="fileDrop(event,'drop-env','env-files')">
     <input type="file" multiple accept=".pdf,.xlsx,.csv,.jpg,.png" onchange="fileSelect(this,'env-files')">
     <div class="file-icon">📄</div>
     <div class="file-drop-text">Trascina o clicca per caricare report energetici, certificazioni ambientali</div>
@@ -1011,7 +968,7 @@ header { padding: 1rem 1.5rem; }
 
   </div>
 
-  <!-- ── STEP 3: FILIERA ── -->
+  <!-- STEP 3: FILIERA -->
 
   <div class="step-panel" id="step-3">
     <div class="panel-header">
@@ -1022,10 +979,7 @@ header { padding: 1rem 1.5rem; }
 
 ```
 <div class="section-divider">Anagrafica fornitori principali</div>
-
-<div id="fornitori-list">
-  <!-- fornitori aggiunti dinamicamente -->
-</div>
+<div id="fornitori-list"></div>
 <button class="btn btn-ghost" onclick="addFornitore()" style="margin-bottom:1.5rem; font-size:0.68rem">
   + Aggiungi Fornitore
 </button>
@@ -1036,28 +990,22 @@ header { padding: 1rem 1.5rem; }
   <label>Certificazioni attive nella filiera</label>
   <div class="checkbox-group" id="certificazioni">
     <div class="checkbox-item" onclick="toggleCheck(this, 'certificazioni')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Biologico (EU Bio / NOP)</span>
+      <div class="check-box">✓</div><span class="check-label">Biologico (EU Bio / NOP)</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'certificazioni')">
-      <div class="check-box">✓</div>
-      <span class="check-label">DOP / IGP / STG</span>
+      <div class="check-box">✓</div><span class="check-label">DOP / IGP / STG</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'certificazioni')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Fairtrade / Commercio Equo</span>
+      <div class="check-box">✓</div><span class="check-label">Fairtrade / Commercio Equo</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'certificazioni')">
-      <div class="check-box">✓</div>
-      <span class="check-label">MSC / ASC (prodotti ittici)</span>
+      <div class="check-box">✓</div><span class="check-label">MSC / ASC (prodotti ittici)</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'certificazioni')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Rainforest Alliance (caffè)</span>
+      <div class="check-box">✓</div><span class="check-label">Rainforest Alliance (caffè)</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'certificazioni')">
-      <div class="check-box">✓</div>
-      <span class="check-label">ISO 14001 / ISO 22000</span>
+      <div class="check-box">✓</div><span class="check-label">ISO 14001 / ISO 22000</span>
     </div>
   </div>
 </div>
@@ -1089,7 +1037,9 @@ header { padding: 1rem 1.5rem; }
 
 <div class="field" style="margin-top:1rem">
   <label>Documentazione filiera (opzionale)</label>
-  <div class="file-drop" id="drop-fil" ondragover="dragOver(event,'drop-fil')" ondragleave="dragLeave('drop-fil')" ondrop="fileDrop(event,'drop-fil','fil-files')">
+  <div class="file-drop" id="drop-fil"
+    ondragover="dragOver(event,'drop-fil')" ondragleave="dragLeave('drop-fil')"
+    ondrop="fileDrop(event,'drop-fil','fil-files')">
     <input type="file" multiple accept=".pdf,.xlsx,.csv" onchange="fileSelect(this,'fil-files')">
     <div class="file-icon">📋</div>
     <div class="file-drop-text">Certificazioni, DDT, schede fornitori, contratti di origine</div>
@@ -1105,7 +1055,7 @@ header { padding: 1rem 1.5rem; }
 
   </div>
 
-  <!-- ── STEP 4: CAPITALE UMANO ── -->
+  <!-- STEP 4: CAPITALE UMANO -->
 
   <div class="step-panel" id="step-4">
     <div class="panel-header">
@@ -1160,28 +1110,22 @@ header { padding: 1rem 1.5rem; }
   <label>Iniziative welfare oltre i minimi di legge</label>
   <div class="checkbox-group" id="welfare">
     <div class="checkbox-item" onclick="toggleCheck(this, 'welfare')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Buoni pasto / mensa aziendale</span>
+      <div class="check-box">✓</div><span class="check-label">Buoni pasto / mensa aziendale</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'welfare')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Flessibilità oraria / smart working</span>
+      <div class="check-box">✓</div><span class="check-label">Flessibilità oraria / smart working</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'welfare')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Integrativo sanitario</span>
+      <div class="check-box">✓</div><span class="check-label">Integrativo sanitario</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'welfare')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Programmi di crescita interna</span>
+      <div class="check-box">✓</div><span class="check-label">Programmi di crescita interna</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'welfare')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Politiche antidiscriminazione formalizzate</span>
+      <div class="check-box">✓</div><span class="check-label">Politiche antidiscriminazione formalizzate</span>
     </div>
     <div class="checkbox-item" onclick="toggleCheck(this, 'welfare')">
-      <div class="check-box">✓</div>
-      <span class="check-label">Assunzione categorie protette</span>
+      <div class="check-box">✓</div><span class="check-label">Assunzione categorie protette</span>
     </div>
   </div>
 </div>
@@ -1201,7 +1145,8 @@ header { padding: 1rem 1.5rem; }
   </div>
   <div class="field">
     <label>Note aggiuntive sul capitale umano</label>
-    <textarea id="note_hr" rows="3" placeholder="Descrivi eventuali politiche HR distintive..." oninput="saveField('note_hr', this.value)"></textarea>
+    <textarea id="note_hr" rows="3" placeholder="Descrivi eventuali politiche HR distintive..."
+      oninput="saveField('note_hr', this.value)"></textarea>
   </div>
 </div>
 
@@ -1213,7 +1158,7 @@ header { padding: 1rem 1.5rem; }
 
   </div>
 
-  <!-- ── STEP 5: REVISIONE ── -->
+  <!-- STEP 5: REVISIONE -->
 
   <div class="step-panel" id="step-5">
     <div class="panel-header">
@@ -1229,12 +1174,18 @@ header { padding: 1rem 1.5rem; }
   <div class="score-sub">Il punteggio definitivo sarà calcolato dopo la verifica documentale</div>
 </div>
 
-<div class="review-grid" id="review-content">
-  <!-- populated by JS -->
+<!-- Piano selezionato — visibile solo se passa da pricing -->
+<div id="plan-review-row" style="display:none" class="plan-review-row">
+  <span class="plan-review-label">Piano selezionato</span>
+  <span class="plan-review-value" id="plan-review-value"></span>
 </div>
 
+<div class="review-grid" id="review-content"></div>
+
 <div class="info-box">
-  <strong>Privacy & Sicurezza:</strong> Tutti i dati sono trasmessi con crittografia TLS 1.3 e utilizzati esclusivamente per l'alimentazione del motore AI di mappatura etica QEN, in conformità con GDPR art. 6(1)(b) e art. 13. I dati non vengono condivisi con terze parti senza consenso esplicito.
+  <strong>Privacy & Sicurezza:</strong> Tutti i dati sono trasmessi con crittografia TLS 1.3 e utilizzati esclusivamente
+  per l'alimentazione del motore AI di mappatura etica QEN, in conformità con GDPR art. 6(1)(b) e art. 13.
+  I dati non vengono condivisi con terze parti senza consenso esplicito.
 </div>
 
 <div class="field" style="margin-bottom:1.5rem">
@@ -1254,14 +1205,15 @@ header { padding: 1rem 1.5rem; }
 
   </div>
 
-  <!-- ── SUCCESS ── -->
+  <!-- SUCCESS -->
 
   <div class="success-panel" id="success">
     <div class="success-icon">✓</div>
     <div class="success-title">Dati ricevuti.<br><em>Analisi avviata.</em></div>
     <p class="success-text">
       Il motore QEN ha ricevuto il tuo protocollo e avviato la Fase 1: Ingestion & Mapping.
-      Riceverai un report preliminare con il tuo <strong style="color:var(--text)">QEN Score certificato</strong> entro 48 ore all'indirizzo indicato.
+      Riceverai un report preliminare con il tuo <strong style="color:var(--text)">QEN Score certificato</strong>
+      entro 48 ore all'indirizzo indicato.
     </p>
     <div class="next-steps">
       <div class="next-step">
@@ -1277,296 +1229,321 @@ header { padding: 1rem 1.5rem; }
         <div class="next-step-text">Proposta di certificazione scientifica completa della filiera</div>
       </div>
     </div>
-    <a href="index.html" class="btn btn-ghost">← Torna alla Home</a>
+    <a href="https://cognitivelogic.it" class="btn btn-ghost">← Torna alla Home</a>
   </div>
 
 </div><!-- /wizard -->
 
-<!-- PRIVACY NOTE -->
-
 <div class="privacy-note">
   I dati raccolti sono trattati da CognitiveLogic (info@cognitivelogic.it) secondo i più alti standard di crittografia,
   esclusivamente per l'alimentazione del motore AI di mappatura etica QEN.<br>
-  <a href="#">Informativa Privacy</a> · <a href="#">Termini di Servizio</a> · <a href="https://cognitivelogic.it">cognitivelogic.it</a>
+  <a href="#">Informativa Privacy</a> · <a href="#">Termini di Servizio</a> ·
+  <a href="https://cognitivelogic.it">cognitivelogic.it</a>
 </div>
 
 <script>
-  // ─── STATE ───
-  const state = {};
-  let privacyAccepted = false;
-  let currentStep = 1;
-  const totalSteps = 5;
-  let fornitoreCount = 0;
+// ─── PIANI CONFIG ───
+const PLANS = {
+  'progetto-chiuso': {
+    label: 'AI Readiness Audit — Progetto Chiuso',
+    price: '€ 1.500',
+    desc: 'Fee fissa · Consegna entro 5 giorni lavorativi',
+    tag: 'PROGETTO CHIUSO'
+  },
+  'ricorrente-mensile': {
+    label: 'Knowledge Architecture — Ricorrente Mensile',
+    price: '€ 2.500 setup + € 800/mese',
+    desc: 'Primo report QEN entro 30 giorni',
+    tag: 'RICORRENTE MENSILE'
+  },
+  'value-based': {
+    label: 'AI Identity & Compliance — Value-Based',
+    price: 'Su richiesta',
+    desc: 'Prima call di valutazione gratuita',
+    tag: 'VALUE-BASED PRICING'
+  }
+};
 
-  // ─── PERSISTENCE ───
-  function saveField(key, val) {
-    state[key] = val;
-    if (currentStep === 5) buildReview();
+// ─── STATE ───
+const state = {};
+let privacyAccepted = false;
+let currentStep = 1;
+let fornitoreCount = 0;
+let selectedPlan = null;
+
+// ─── INIT: legge ?piano= dall'URL ───
+function initFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const piano = params.get('piano');
+  if (piano && PLANS[piano]) {
+    selectedPlan = piano;
+    const plan = PLANS[piano];
+    state.piano_selezionato = plan.label;
+    state.piano_price = plan.price;
+
+    // Badge in header
+    const badge = document.getElementById('plan-badge');
+    badge.textContent = plan.tag;
+    badge.classList.add('visible');
+
+    // Banner hero
+    const banner = document.getElementById('plan-banner');
+    banner.innerHTML = `Piano selezionato: <strong>${plan.label}</strong><br>
+      <span style="color:var(--text-dim)">${plan.price} · ${plan.desc}</span>`;
+    banner.classList.add('visible');
+  }
+}
+
+// ─── PERSISTENCE ───
+function saveField(key, val) {
+  state[key] = val;
+  if (currentStep === 5) buildReview();
+}
+
+// ─── NAVIGATION ───
+function nextStep(from) {
+  if (!validateStep(from)) return;
+  setStep(from + 1);
+}
+
+function prevStep(from) {
+  setStep(from - 1);
+}
+
+function goToStep(n) {
+  if (n > currentStep) return;
+  setStep(n);
+}
+
+function setStep(n) {
+  document.getElementById('step-' + currentStep).classList.remove('active');
+  document.querySelectorAll('.step-node').forEach((node, i) => {
+    node.classList.remove('active');
+    if (i + 1 < n) node.classList.add('completed');
+    else if (i + 1 === n) { node.classList.add('active'); node.classList.remove('completed'); }
+  });
+  currentStep = n;
+  document.getElementById('step-' + n).classList.add('active');
+  if (n === 5) buildReview();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── VALIDATION ───
+function validateStep(step) {
+  let valid = true;
+  if (step === 1) {
+    valid = required('ragione_sociale', 'f-ragione') && valid;
+    valid = required('tipologia', 'f-tipologia') && valid;
+    valid = validEmail('email') && valid;
+  }
+  return valid;
+}
+
+function required(id, fieldId) {
+  const el = document.getElementById(id);
+  const f = document.getElementById(fieldId);
+  if (!el || !el.value.trim()) { if (f) f.classList.add('has-error'); return false; }
+  if (f) f.classList.remove('has-error');
+  return true;
+}
+
+function validEmail(id) {
+  const el = document.getElementById(id);
+  const f = document.getElementById('f-email');
+  if (!el || !el.value) return true;
+  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);
+  if (!ok && f) f.classList.add('has-error');
+  else if (f) f.classList.remove('has-error');
+  return ok;
+}
+
+// ─── CHECKBOXES ───
+function toggleCheck(el, groupId) {
+  el.classList.toggle('checked');
+  const values = [];
+  document.getElementById(groupId)?.querySelectorAll('.checkbox-item.checked .check-label')
+    .forEach(l => values.push(l.textContent));
+  saveField(groupId, values);
+}
+
+function togglePrivacy(el) {
+  el.classList.toggle('checked');
+  privacyAccepted = el.classList.contains('checked');
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = !privacyAccepted;
+  btn.style.opacity = privacyAccepted ? '1' : '0.5';
+  btn.style.cursor = privacyAccepted ? 'pointer' : 'not-allowed';
+}
+
+// ─── FILE HANDLING ───
+function dragOver(e, id) { e.preventDefault(); document.getElementById(id).classList.add('drag-over'); }
+function dragLeave(id) { document.getElementById(id).classList.remove('drag-over'); }
+function fileDrop(e, dropId, listId) { e.preventDefault(); dragLeave(dropId); addFiles(e.dataTransfer.files, listId); }
+function fileSelect(input, listId) { addFiles(input.files, listId); }
+
+function addFiles(files, listId) {
+  const list = document.getElementById(listId);
+  Array.from(files).forEach(f => {
+    const tag = document.createElement('div');
+    tag.className = 'file-tag';
+    tag.innerHTML = `<span>📎 ${f.name} <span style="color:var(--text-dim);font-size:0.6rem">(${(f.size/1024).toFixed(0)} KB)</span></span>
+      <button onclick="this.parentElement.remove()">✕</button>`;
+    list.appendChild(tag);
+  });
+}
+
+// ─── FORNITORI ───
+function addFornitore() {
+  fornitoreCount++;
+  const n = fornitoreCount;
+  const wrap = document.createElement('div');
+  wrap.id = 'forn-' + n;
+  wrap.style.cssText = 'display:grid;grid-template-columns:2fr 1.5fr 1fr auto;gap:0.75rem;align-items:end;border:1px solid var(--border);border-radius:4px;padding:1rem;margin-bottom:1rem';
+  wrap.innerHTML = `
+    <div class="field">
+      <label>Ragione Sociale Fornitore</label>
+      <input type="text" placeholder="es. Cooperativa Agricola Valle Bura" oninput="saveFornitore(${n},'nome',this.value)">
+    </div>
+    <div class="field">
+      <label>Sede / Città</label>
+      <input type="text" placeholder="es. Imola (BO)" oninput="saveFornitore(${n},'sede',this.value)">
+    </div>
+    <div class="field">
+      <label>Categoria</label>
+      <select onchange="saveFornitore(${n},'cat',this.value)">
+        <option value="">—</option>
+        <option>Carne</option><option>Pesce</option><option>Frutta & Verdura</option>
+        <option>Latticini</option><option>Caffè & Bevande</option><option>Vino & Birra</option>
+        <option>Cereali & Legumi</option><option>Packaging</option><option>Altro</option>
+      </select>
+    </div>
+    <button class="btn btn-ghost" onclick="document.getElementById('forn-${n}').remove()"
+      style="padding:0.5rem 0.75rem;font-size:0.9rem;border-color:var(--error);color:var(--error)">✕</button>
+  `;
+  document.getElementById('fornitori-list').appendChild(wrap);
+}
+
+function saveFornitore(n, key, val) {
+  if (!state.fornitori) state.fornitori = {};
+  if (!state.fornitori[n]) state.fornitori[n] = {};
+  state.fornitori[n][key] = val;
+}
+
+// ─── REVIEW ───
+function buildReview() {
+  const s = state;
+
+  // Mostra piano se presente
+  if (selectedPlan && PLANS[selectedPlan]) {
+    const row = document.getElementById('plan-review-row');
+    row.style.display = 'flex';
+    document.getElementById('plan-review-value').textContent =
+      PLANS[selectedPlan].label + ' · ' + PLANS[selectedPlan].price;
   }
 
-  // ─── NAVIGATION ───
-  function nextStep(from) {
-    if (!validateStep(from)) return;
-    setStep(from + 1);
-  }
+  document.getElementById('review-content').innerHTML = `
+    <div class="review-card">
+      <div class="review-card-title">Anagrafica</div>
+      ${rv('Ragione Sociale', s.ragione_sociale)}
+      ${rv('Tipologia', s.tipologia)}
+      ${rv('Città', s.citta && s.provincia ? s.citta+' ('+s.provincia+')' : (s.citta||''))}
+      ${rv('Email', s.email)}
+      ${rv('Dipendenti', s.n_dipendenti)}
+    </div>
+    <div class="review-card">
+      <div class="review-card-title">Sostenibilità V_a</div>
+      ${rv('Energia', s.energia_kwh ? s.energia_kwh+' kWh/anno' : null)}
+      ${rv('Gas', s.gas_m3 ? s.gas_m3+' m³/anno' : null)}
+      ${rv('Fonte energia', s.fonte_energia)}
+      ${rv('Riduzione consumi', (s.riduzione_consumi||0)+'%')}
+      ${rv('Recupero organico', (s.recupero_organico||0)+'%')}
+    </div>
+    <div class="review-card">
+      <div class="review-card-title">Filiera V_t</div>
+      ${rv('Acquisti locali ≤100km', (s.pct_locali||0)+'%')}
+      ${rv('Tracciabilità', ['Assente','Cartacea','Digitale','Certificata'][s.tracciabilita]||'—')}
+      ${rv('Certificazioni', s.certificazioni?.length ? s.certificazioni.length+' attive' : 'Nessuna')}
+      ${rv('Fornitori mappati', state.fornitori ? Object.keys(state.fornitori).length+' inseriti' : '0')}
+    </div>
+    <div class="review-card">
+      <div class="review-card-title">Capitale Umano V_s</div>
+      ${rv('Turnover', (s.turnover||0)+'%')}
+      ${rv('Durata contratti', s.durata_contratti ? s.durata_contratti+' mesi' : null)}
+      ${rv('Ore formazione', s.ore_formazione ? s.ore_formazione+' h/anno' : null)}
+      ${rv('Welfare attivo', s.welfare?.length ? s.welfare.length+' iniziative' : 'Nessuna')}
+      ${rv('Gap salariale M/F', (s.gap_salariale||0)+'%')}
+    </div>
+  `;
 
-  function prevStep(from) {
-    setStep(from - 1);
-  }
+  document.getElementById('preview-score').textContent = calcPreviewScore().toFixed(0) + ' / 100';
+}
 
-  function goToStep(n) {
-    if (n > currentStep) return; // can't skip forward
-    setStep(n);
-  }
+function rv(key, val) {
+  const empty = !val || val === '0%' || val === '0';
+  return `<div class="review-item">
+    <span class="review-key">${key}</span>
+    <span class="review-value${empty?' empty':''}">${val||'—'}</span>
+  </div>`;
+}
 
-  function setStep(n) {
-    document.getElementById('step-' + currentStep).classList.remove('active');
-    document.querySelectorAll('.step-node').forEach((node, i) => {
-      node.classList.remove('active');
-      if (i + 1 < n) node.classList.add('completed');
-      else if (i + 1 === n) { node.classList.add('active'); node.classList.remove('completed'); }
-    });
-    currentStep = n;
-    document.getElementById('step-' + n).classList.add('active');
-    if (n === 5) buildReview();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+function calcPreviewScore() {
+  const s = state;
+  let va = 0;
+  va += Math.min((parseInt(s.riduzione_consumi)||0)/50,1)*30;
+  va += Math.min((parseInt(s.recupero_organico)||0)/100,1)*20;
+  va += Math.min((parseInt(s.recupero_imballaggi)||0)/100,1)*20;
+  va += Math.min((s.protocolli_scarti?.length||0)/6,1)*30;
+  const Va = Math.min(va,100);
 
-  // ─── VALIDATION ───
-  function validateStep(step) {
-    let valid = true;
-    if (step === 1) {
-      valid = required('ragione_sociale', 'f-ragione') && valid;
-      valid = required('tipologia', 'f-tipologia') && valid;
-      valid = validEmail('email') && valid;
-    }
-    return valid;
-  }
+  let vt = 0;
+  vt += Math.min((parseInt(s.pct_locali)||0)/100,1)*40;
+  vt += Math.min((parseInt(s.tracciabilita)||0)/3,1)*30;
+  vt += Math.min((s.certificazioni?.length||0)/6,1)*30;
+  const Vt = Math.min(vt,100);
 
-  function required(id, fieldId) {
-    const el = document.getElementById(id);
-    const f = document.getElementById(fieldId);
-    if (!el || !el.value.trim()) {
-      if (f) f.classList.add('has-error');
-      return false;
-    }
-    if (f) f.classList.remove('has-error');
-    return true;
-  }
+  let vs = 0;
+  vs += (1-Math.min((parseInt(s.turnover)||0)/100,1))*30;
+  vs += (1-Math.min((parseInt(s.gap_salariale)||0)/40,1))*20;
+  vs += Math.min((s.welfare?.length||0)/6,1)*30;
+  vs += Math.min((parseInt(s.ore_formazione)||0)/80,1)*20;
+  const Vs = Math.min(vs,100);
 
-  function validEmail(id) {
-    const el = document.getElementById(id);
-    const f = el?.closest('.field');
-    if (!el || !el.value) return true; // optional
-    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);
-    if (!ok && f) f.classList.add('has-error');
-    else if (f) f.classList.remove('has-error');
-    return ok;
-  }
+  return Vs*0.40 + Va*0.35 + Vt*0.25;
+}
 
-  // ─── CHECKBOXES ───
-  function toggleCheck(el, groupId) {
-    el.classList.toggle('checked');
-    const values = [];
-    document.getElementById(groupId)?.querySelectorAll('.checkbox-item.checked .check-label').forEach(l => values.push(l.textContent));
-    saveField(groupId, values);
-  }
+// ─── SUBMIT ───
+function submitForm() {
+  const btn = document.getElementById('submit-btn');
+  btn.innerHTML = '<span class="spinner"></span> Invio in corso...';
+  btn.disabled = true;
 
-  function togglePrivacy(el) {
-    el.classList.toggle('checked');
-    privacyAccepted = el.classList.contains('checked');
-    const btn = document.getElementById('submit-btn');
-    btn.disabled = !privacyAccepted;
-    btn.style.opacity = privacyAccepted ? '1' : '0.5';
-    btn.style.cursor = privacyAccepted ? 'pointer' : 'not-allowed';
-  }
+  const payload = {
+    ...state,
+    qen_score_preview: calcPreviewScore().toFixed(0),
+    piano_selezionato: selectedPlan || null,
+    submitted_at: new Date().toISOString(),
+    source: 'onboarding-github-pages'
+  };
 
-  // ─── FILE HANDLING ───
-  function dragOver(e, id) { e.preventDefault(); document.getElementById(id).classList.add('drag-over'); }
-  function dragLeave(id) { document.getElementById(id).classList.remove('drag-over'); }
-  function fileDrop(e, dropId, listId) {
-    e.preventDefault();
-    dragLeave(dropId);
-    addFiles(e.dataTransfer.files, listId);
-  }
-  function fileSelect(input, listId) { addFiles(input.files, listId); }
+  fetch('https://api.cognitivelogic.it/copilot-analyze', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ system_description: JSON.stringify(payload) })
+  })
+  .catch(() => {})
+  .finally(() => {
+    setTimeout(() => {
+      document.getElementById('step-5').classList.remove('active');
+      document.getElementById('success').classList.add('active');
+      document.querySelectorAll('.step-node').forEach(n => n.classList.add('completed'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 800);
+  });
+}
 
-  function addFiles(files, listId) {
-    const list = document.getElementById(listId);
-    Array.from(files).forEach(f => {
-      const tag = document.createElement('div');
-      tag.className = 'file-tag';
-      tag.innerHTML = `<span>📎 ${f.name} <span style="color:var(--text-dim);font-size:0.6rem">(${(f.size/1024).toFixed(0)} KB)</span></span>
-        <button onclick="this.parentElement.remove()">✕</button>`;
-      list.appendChild(tag);
-    });
-  }
-
-  // ─── FORNITORI ───
-  function addFornitore() {
-    fornitoreCount++;
-    const n = fornitoreCount;
-    const wrap = document.createElement('div');
-    wrap.className = 'field-grid';
-    wrap.id = 'forn-' + n;
-    wrap.style.cssText = 'border:1px solid var(--border);border-radius:4px;padding:1rem;margin-bottom:1rem;grid-template-columns:2fr 1.5fr 1fr auto;gap:0.75rem;align-items:end';
-    wrap.innerHTML = `
-      <div class="field">
-        <label>Ragione Sociale Fornitore</label>
-        <input type="text" placeholder="es. Cooperativa Agricola Valle Bura" oninput="saveFornitore(${n},'nome',this.value)">
-      </div>
-      <div class="field">
-        <label>Sede / Città</label>
-        <input type="text" placeholder="es. Imola (BO)" oninput="saveFornitore(${n},'sede',this.value)">
-      </div>
-      <div class="field">
-        <label>Categoria</label>
-        <select onchange="saveFornitore(${n},'cat',this.value)">
-          <option value="">—</option>
-          <option>Carne</option>
-          <option>Pesce</option>
-          <option>Frutta & Verdura</option>
-          <option>Latticini</option>
-          <option>Caffè & Bevande</option>
-          <option>Vino & Birra</option>
-          <option>Cereali & Legumi</option>
-          <option>Packaging</option>
-          <option>Altro</option>
-        </select>
-      </div>
-      <button class="btn btn-ghost" onclick="document.getElementById('forn-${n}').remove()" style="padding:0.5rem 0.75rem;font-size:0.9rem;border-color:var(--error);color:var(--error)">✕</button>
-    `;
-    document.getElementById('fornitori-list').appendChild(wrap);
-  }
-
-  function saveFornitore(n, key, val) {
-    if (!state.fornitori) state.fornitori = {};
-    if (!state.fornitori[n]) state.fornitori[n] = {};
-    state.fornitori[n][key] = val;
-  }
-
-  // ─── REVIEW ───
-  function buildReview() {
-    const s = state;
-    const cont = document.getElementById('review-content');
-
-    cont.innerHTML = `
-      <div class="review-card">
-        <div class="review-card-title">Anagrafica</div>
-        ${rv('Ragione Sociale', s.ragione_sociale)}
-        ${rv('Tipologia', s.tipologia)}
-        ${rv('Città', s.citta && s.provincia ? s.citta + ' (' + s.provincia + ')' : (s.citta || ''))}
-        ${rv('Email', s.email)}
-        ${rv('Dipendenti', s.n_dipendenti)}
-      </div>
-      <div class="review-card">
-        <div class="review-card-title">Sostenibilità V_a</div>
-        ${rv('Energia', s.energia_kwh ? s.energia_kwh + ' kWh/anno' : null)}
-        ${rv('Gas', s.gas_m3 ? s.gas_m3 + ' m³/anno' : null)}
-        ${rv('Fonte energia', s.fonte_energia)}
-        ${rv('Riduzione consumi', s.riduzione_consumi ? s.riduzione_consumi + '%' : '0%')}
-        ${rv('Recupero organico', (s.recupero_organico || 0) + '%')}
-      </div>
-      <div class="review-card">
-        <div class="review-card-title">Filiera V_t</div>
-        ${rv('Acquisti locali ≤100km', (s.pct_locali || 0) + '%')}
-        ${rv('Tracciabilità', ['Assente','Cartacea','Digitale','Certificata'][s.tracciabilita]||'—')}
-        ${rv('Certificazioni', s.certificazioni?.length ? s.certificazioni.length + ' attive' : 'Nessuna')}
-        ${rv('Fornitori mappati', state.fornitori ? Object.keys(state.fornitori).length + ' inseriti' : '0')}
-      </div>
-      <div class="review-card">
-        <div class="review-card-title">Capitale Umano V_s</div>
-        ${rv('Turnover', (s.turnover || 0) + '%')}
-        ${rv('Durata contratti', s.durata_contratti ? s.durata_contratti + ' mesi' : null)}
-        ${rv('Ore formazione', s.ore_formazione ? s.ore_formazione + ' h/anno' : null)}
-        ${rv('Welfare attivo', s.welfare?.length ? s.welfare.length + ' iniziative' : 'Nessuna')}
-        ${rv('Gap salariale M/F', (s.gap_salariale || 0) + '%')}
-      </div>
-    `;
-
-    // Preliminary score
-    document.getElementById('preview-score').textContent = calcPreviewScore().toFixed(2) + ' / 10';
-  }
-
-  function rv(key, val) {
-    const empty = !val || val === '0%' || val === '0';
-    return `<div class="review-item">
-      <span class="review-key">${key}</span>
-      <span class="review-value${empty ? ' empty' : ''}">${val || '—'}</span>
-    </div>`;
-  }
-
-  function calcPreviewScore() {
-    const s = state;
-    // V_a: environmental
-    let va = 0;
-    va += Math.min((parseInt(s.riduzione_consumi)||0) / 50, 1) * 3;
-    va += Math.min((parseInt(s.recupero_organico)||0) / 100, 1) * 2;
-    va += Math.min((parseInt(s.recupero_imballaggi)||0) / 100, 1) * 2;
-    const nProt = s.protocolli_scarti?.length || 0;
-    va += Math.min(nProt / 6, 1) * 3;
-    const Va = Math.min(va / 10 * 10, 10);
-
-    // V_t: territorial
-    let vt = 0;
-    vt += Math.min((parseInt(s.pct_locali)||0) / 100, 1) * 4;
-    vt += Math.min((parseInt(s.tracciabilita)||0) / 3, 1) * 3;
-    const nCert = s.certificazioni?.length || 0;
-    vt += Math.min(nCert / 6, 1) * 3;
-    const Vt = Math.min(vt / 10 * 10, 10);
-
-    // V_s: social
-    let vs = 0;
-    const turnInv = 1 - Math.min((parseInt(s.turnover)||0) / 100, 1);
-    vs += turnInv * 3;
-    const gapInv = 1 - Math.min((parseInt(s.gap_salariale)||0) / 40, 1);
-    vs += gapInv * 2;
-    const nWelf = s.welfare?.length || 0;
-    vs += Math.min(nWelf / 6, 1) * 3;
-    const hForm = Math.min((parseInt(s.ore_formazione)||0) / 80, 1);
-    vs += hForm * 2;
-    const Vs = Math.min(vs / 10 * 10, 10);
-
-    // QEN formula
-    return Vs * 0.40 + Va * 0.35 + Vt * 0.25;
-  }
-
-  // ─── SUBMIT ───
-  function submitForm() {
-    const btn = document.getElementById('submit-btn');
-    btn.innerHTML = '<span class="spinner"></span> Invio in corso...';
-    btn.disabled = true;
-
-    // Build payload
-    const payload = {
-      ...state,
-      qen_score_preview: calcPreviewScore().toFixed(2),
-      submitted_at: new Date().toISOString(),
-      source: 'onboarding.html'
-    };
-
-    // Send to Copilot endpoint
-    fetch('https://api.cognitivelogic.it/copilot-analyze', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        system_description: JSON.stringify(payload)
-      })
-    })
-    .catch(() => {}) // graceful fallback
-    .finally(() => {
-      setTimeout(() => {
-        document.getElementById('step-5').classList.remove('active');
-        document.getElementById('success').classList.add('active');
-        document.querySelectorAll('.step-node').forEach(n => n.classList.add('completed'));
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 800);
-    });
-  }
-
-  // ─── INIT ───
-  // Add first fornitore slot by default
-  addFornitore();
+// ─── BOOT ───
+initFromURL();
+addFornitore();
 </script>
 
 </body>
