@@ -1,0 +1,259 @@
+import os
+import json
+import re
+import anthropic
+from datetime import datetime
+from flask import Flask, request, jsonify, send_file
+
+app = Flask(__name__)
+
+GRAPH_PATH   = "/root/qen-framework/backend/public/data/graph.json"
+PILOTS_PATH  = "/root/qen-framework/backend/pilots.json"
+ANTHROPIC_CLIENT = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
+def load_pilots():
+    if not os.path.exists(PILOTS_PATH):
+        return {}
+    with open(PILOTS_PATH, "r") as f:
+        return json.load(f)
+
+def save_pilot(name, score_data):
+    pilots = load_pilots()
+    key = name.strip().lower()
+    entry = {
+        "name":      name,
+        "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "data":      score_data
+    }
+    if key in pilots:
+        pilots[key]["history"] = pilots[key].get("history", [])
+        pilots[key]["history"].append(pilots[key].get("data", {}))
+        pilots[key].update(entry)
+    else:
+        pilots[key] = entry
+    with open(PILOTS_PATH, "w") as f:
+        json.dump(pilots, f, indent=2, ensure_ascii=False)
+    return send_file("/root/CognitiveLogic2026.github.io/index.html")
+    return send_file("/root/CognitiveLogic2026.github.io/index.html")
+    return send_file("/root/CognitiveLogic2026.github.io/index.html")
+    pilots = load_pilots()
+    key = name.strip().lower()
+    return pilots.get(key)
+
+@app.route("/")
+def root_health():
+    return jsonify({"status": "OPERATIONAL", "version": "1.0.0"})
+
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({"status": "ok", "service": "CognitiveLogic QEN API", "version": "3.1"}), 200
+
+@app.route("/pilots", methods=["GET"])
+def list_pilots():
+    pilots = load_pilots()
+    summary = []
+    for key, v in pilots.items():
+        d = v.get("data", {})
+        qen = d.get("qen_score") or d.get("risk_score")
+        if qen is None and isinstance(d.get("qen"), dict):
+            qen = d["qen"].get("qen_score")
+        summary.append({
+            "name":      v.get("name"),
+            "timestamp": v.get("timestamp"),
+            "qen_score": qen,
+            "analyses":  1 + len(v.get("history", []))
+        })
+    summary.sort(key=lambda x: x["timestamp"] or "", reverse=True)
+    return jsonify({"total": len(summary), "pilots": summary}), 200
+
+@app.route("/analyze", methods=["POST"])
+def analyze():
+    provided_key = request.headers.get("X-API-Key")
+    if provided_key != os.getenv("COGNITIVE_API_KEY"):
+        return jsonify({"status": "error", "message": "Unauthorized"}), 403
+    data = request.json
+    name   = data.get("system_name", "Unknown")
+    social = data.get("social_impact", 0)
+    env    = data.get("environmental_impact", 0)
+    terr   = data.get("territorial_impact", 0)
+    qen_score = round((social * 0.40) + (env * 0.35) + (terr * 0.25), 2)
+    new_node = {"id": name, "type": "System", "qen": qen_score,
+                "status": "Analyzed", "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")}
+    try:
+        with open(GRAPH_PATH, "r") as f:
+            g = json.load(f)
+        g["nodes"][name] = new_node
+        with open(GRAPH_PATH, "w") as f:
+            json.dump(g, f, indent=2)
+    except Exception:
+        pass
+    return jsonify({"status": "success", "qen_score": qen_score, "node": new_node}), 200
+
+RISK_SYSTEM_PROMPT = (
+    "Sei un esperto di EU AI Act e GDPR."
+    " Analizza il sistema descritto sotto entrambi i profili.\n\n"
+    "Rispondi SOLO con un oggetto JSON valido, nessun testo aggiuntivo.\n\n"
+    "Schema: allegato I/II/III/Nessuno, livello_rischio Vietato/Alto/Sorveglianza/Minimo,"
+    " motivazione, gdpr_risk CRITICO/ALTO/MEDIO/BASSO, gdpr_motivazione,"
+    " articoli_rilevanti list, azioni_richieste list, qen_impact,"
+    " vs float, va float, vt float.\n\n"
+    "Allegato I=vietati art.5, II=alto rischio, III=biometria/migrazione.\n"
+    "GDPR: art.6 base giuridica, art.22 decisioni automatizzate, art.35 DPIA.\n"
+    "vs/va/vt: 0-100 impatto Sociale/Ambientale/Territoriale."
+)
+
+@app.route("/classify-risk", methods=["POST"])
+def classify_risk():
+    provided_key = request.headers.get("X-API-Key")
+    if provided_key != os.getenv("COGNITIVE_API_KEY"):
+        return jsonify({"status": "error", "message": "Unauthorized"}), 403
+    data = request.json
+    if not data or "descrizione" not in data:
+        return jsonify({"status": "error", "message": "Campo descrizione obbligatorio"}), 400
+    descrizione = data.get("descrizione", "")
+    contesto    = data.get("contesto", "")
+    settore     = data.get("settore", "")
+    user_message = "Sistema: " + descrizione + " Contesto: " + contesto + " Settore: " + settore
+    try:
+        response = ANTHROPIC_CLIENT.messages.create(
+            model="claude-sonnet-4-5",
+            max_tokens=1024,
+            system=RISK_SYSTEM_PROMPT,
+            messages=[{"role": "user", "content": user_message}]
+        )
+        raw = response.content[0].text.strip()
+        if raw.startswith("`"):
+            raw = raw.split("\n", 1)[1].rsplit("\n", 1)[0].strip().replace("`json", "").replace("```", "").strip()
+        result = json.loads(raw)
+        return jsonify({"status": "success", "sistema": descrizione[:80], "classificazione": result}), 200
+    except json.JSONDecodeError:
+        return jsonify({"status": "error", "message": "Parsing fallito", "raw": raw}), 500
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@app.route("/copilot-analyze", methods=["POST"])
+def copilot_analyze():
+    data = request.json
+    if not data or "description" not in data:
+        return jsonify({"error": "Campo description obbligatorio"}), 400
+    descrizione     = data.get("description", "")
+    entity_name     = data.get("entity_name", descrizione[:60])
+    force_reanalyze = data.get("force", False)
+    existing = check_duplicate(entity_name)
+    if existing and not force_reanalyze:
+        return jsonify({
+            "duplicate":   True,
+            "message":     "Analisi gia presente per " + entity_name + ". Usa force=true per rieseguire.",
+            "timestamp":   existing.get("timestamp"),
+            "cached_data": existing.get("data"),
+            "analyses":    1 + len(existing.get("history", []))
+        }), 200
+    user_message = "Sistema AI da classificare: " + descrizione
+    try:
+        response = ANTHROPIC_CLIENT.messages.create(
+            model="claude-sonnet-4-5",
+            max_tokens=1024,
+            system=RISK_SYSTEM_PROMPT,
+            messages=[{"role": "user", "content": user_message}]
+        )
+        raw = response.content[0].text.strip()
+        raw = raw.replace("```json", "").replace("```", "").strip()
+        m = re.search(r"\{.*\}", raw, re.DOTALL)
+        if not m:
+            return jsonify({"error": "Nessun JSON trovato", "raw": raw[:200]}), 500
+        result = json.loads(m.group())
+        allegato = result.get("allegato", "Nessuno")
+        livello  = result.get("livello_rischio", "Minimo")
+        score_map      = {"Vietato": 0.95, "Alto": 0.75, "Sorveglianza": 0.45, "Minimo": 0.15}
+        gdpr_score_map = {"CRITICO": 0.90, "ALTO": 0.70, "MEDIO": 0.45, "BASSO": 0.15}
+        gdpr_risk  = result.get("gdpr_risk", "BASSO")
+        gdpr_score = gdpr_score_map.get(gdpr_risk, 0.15)
+        ai_score   = score_map.get(livello, 0.15)
+        final_score = round(max(ai_score, gdpr_score), 2)
+        final_level = "HIGH" if final_score >= 0.70 else ("MEDIUM" if final_score >= 0.45 else "LOW")
+        vs = float(result.get("vs", 50))
+        va = float(result.get("va", 50))
+        vt = float(result.get("vt", 50))
+    return send_file("/root/CognitiveLogic2026.github.io/copilot.html")
+        output = {
+            "risk_level":        final_level,
+            "risk_score":        final_score,
+            "qen_score":         qen_score,
+            "vs":                vs,
+            "va":                va,
+            "vt":                vt,
+            "summary":           result.get("motivazione", ""),
+            "why":               result.get("gdpr_motivazione", ""),
+            "gdpr_risk":         gdpr_risk,
+            "impact":            result.get("qen_impact", ""),
+            "eu_classification": livello + " - Allegato " + allegato,
+            "gaps":              result.get("articoli_rilevanti", []),
+            "recommendations":   result.get("azioni_richieste", []),
+            "decision":          livello
+        }
+        save_pilot(entity_name, output)
+        return jsonify(output), 200
+    except json.JSONDecodeError:
+        return jsonify({"error": "Parsing fallito", "raw": raw}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route("/gemini/qen-score", methods=["POST"])
+def gemini_qen_score():
+    data   = request.get_json()
+    name   = data.get("business_name", "")
+    sector = data.get("sector", "")
+    desc   = data.get("description", "")
+    force_reanalyze = data.get("force", False)
+    existing = check_duplicate(name)
+    if existing and not force_reanalyze:
+        return jsonify({
+            "duplicate":   True,
+            "message":     "QEN Score gia presente per " + name + ". Usa force=true per rieseguire.",
+            "timestamp":   existing.get("timestamp"),
+            "cached_data": existing.get("data"),
+            "analyses":    1 + len(existing.get("history", []))
+        }), 200
+        prompt = (
+        "Analizza questa azienda e calcola il QEN Score.\n"
+        "Nome: " + name + "\nSettore: " + sector + "\nDescrizione: " + desc + "\n\n"
+        "Rispondi SOLO con JSON valido:\n"
+        '{"qen_score": 0.00, "badge": "QEN VERIFIED", '
+        '"vs": 0.00, "va": 0.00, "vt": 0.00, "sintesi": "testo"}'
+    )
+    SIMPLE_SYSTEM = (
+        "Sei un esperto QEN Score. Rispondi SOLO con JSON valido, nessun testo aggiuntivo.\n"
+        "Formula QEN: vs*0.40 + va*0.35 + vt*0.25\n"
+        "Campi obbligatori: qen_score, badge, vs, va, vt, sintesi"
+    )
+    try:
+        msg = ANTHROPIC_CLIENT.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=1024,
+            system=SIMPLE_SYSTEM,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        raw = msg.content[0].text.strip()
+        raw = raw.replace("```json", "").replace("```", "").strip()
+        m = re.search(r"\{.*\}", raw, re.DOTALL)
+        if m:
+            q = json.loads(m.group())
+            vs = float(q.get("vs", 50))
+            va = float(q.get("va", 50))
+            vt = float(q.get("vt", 50))
+            q["qen_score"] = round((vs * 0.40) + (va * 0.35) + (vt * 0.25), 2)
+            save_pilot(name, q)
+            return jsonify({"status": "success", "qen": q})
+        return jsonify({"status": "error", "error": raw[:200]}), 500
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)}), 500
+
+@app.route("/copilot", methods=["GET"])
+def copilot_ui():
+    return send_file("copilot.html")
+
+from orchestrator import register_orchestrator
+register_orchestrator(app)
+
+if __name__ == "__main__":
+    app.run(host="127.0.0.1", port=5000)
