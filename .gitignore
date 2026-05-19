@@ -212,3 +212,4 @@ js/config.js
 # Escludi eventuali file di test o log locali
 test-results/
 npm-debug.log*
+qen-bolkestein/.env*
